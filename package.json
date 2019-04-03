@@ -1,0 +1,15 @@
+{
+  "name": "react-gondola",
+  "version": "1.0.0",
+  "description": "React Native declarative navigation",
+  "main": "index.js",
+  "repository": "git@github.com:tpucci/react-gondola.git",
+  "author": "Thomas Pucci",
+  "license": "MIT",
+  "private": false,
+  "keywords": [
+    "react-native",
+    "navigation",
+    "declarative"
+  ]
+}
