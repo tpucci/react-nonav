@@ -1,5 +1,8 @@
-# Dependency directory
+# Dependencies directories
 node_modules
 
 # Example
 example
+
+# Coverage
+coverage

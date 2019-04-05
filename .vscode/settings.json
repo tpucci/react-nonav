@@ -1,0 +1,9 @@
+{
+  "prettier.eslintIntegration": true,
+  "javascript.validate.enable": false,
+  "editor.formatOnSave": true,
+  "jest.showCoverageOnLoad": true,
+  "typescript.validate.enable": true,
+  "npm.packageManager": "yarn",
+  "eslint.packageManager": "yarn"
+}
