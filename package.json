@@ -14,10 +14,10 @@
     "declarative"
   ],
   "peerDependencies": {
-    "mobx-react": "*",
     "mobx": "*",
-    "react-native": "*",
-    "react": "*"
+    "mobx-react": "*",
+    "react": "*",
+    "react-native": "*"
   },
   "scripts": {
     "test": "jest"
@@ -36,7 +36,7 @@
     "mobx-react": "^5.4.3",
     "react": "16.8.3",
     "react-native": "0.59.3",
-    "react-test-renderer": "16.8.3",
+    "react-test-renderer": "^16.8.6",
     "typescript": "^3.4.1"
   }
 }

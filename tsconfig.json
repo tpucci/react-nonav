@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "jsx": "react",
-    "strict": true,
+    "allowSyntheticDefaultImports": true,
     "declaration": true,
-    "outDir": "dist"
+    "jsx": "react",
+    "module": "commonjs",
+    "outDir": "dist",
+    "strict": true,
+    "target": "es5"
   },
   "exclude": ["node_modules", "dist", "example"]
 }
