@@ -14,8 +14,10 @@
     "declarative"
   ],
   "peerDependencies": {
-    "react": "*",
-    "react-native": "*"
+    "mobx-react": "*",
+    "mobx": "*",
+    "react-native": "*",
+    "react": "*"
   },
   "scripts": {
     "test": "jest"
@@ -24,15 +26,17 @@
     "@babel/core": "^7.4.3",
     "@babel/runtime": "^7.4.3",
     "@types/jest": "^24.0.11",
+    "@types/react": "^16.8.11",
     "@types/react-native": "^0.57.42",
     "@types/react-test-renderer": "^16.8.1",
-    "@types/react": "^16.8.11",
     "babel-jest": "^24.7.0",
     "jest": "^24.7.0",
     "metro-react-native-babel-preset": "^0.53.1",
+    "mobx": "^5.9.4",
+    "mobx-react": "^5.4.3",
+    "react": "16.8.3",
     "react-native": "0.59.3",
     "react-test-renderer": "16.8.3",
-    "react": "16.8.3",
     "typescript": "^3.4.1"
   }
 }
