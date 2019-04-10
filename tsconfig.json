@@ -1,12 +1,32 @@
 {
   "compilerOptions": {
+    "target": "esnext",
     "allowSyntheticDefaultImports": true,
-    "declaration": true,
-    "jsx": "react",
-    "module": "commonjs",
     "outDir": "dist",
+    "declaration": true,
+    "module": "commonjs",
+    "jsx": "react",
     "strict": true,
-    "target": "es5"
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": "./src",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "noEmit": true,
+    "allowJs": true,
+    "lib": ["es6"],
+    "types": ["react-native"]
   },
-  "exclude": ["node_modules", "dist", "example"]
+  "include": ["./src"],
+  "exclude": ["node_modules", "dist", "example", "**/__tests__/*"]
 }

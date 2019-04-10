@@ -1,0 +1,6 @@
+{
+  "extends": ["bambi/native"],
+  "rules": {
+    "no-debugger": 0
+  }
+}
