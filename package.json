@@ -22,8 +22,10 @@
   "scripts": {
     "test:lint": "tslint src/**/*.ts{,x}",
     "test:unit": "jest",
+    "test:unit:ci": "jest --runInBand",
     "test:type": "tsc --noEmit",
-    "test": "yarn test:lint && yarn test:unit && yarn test:type"
+    "test": "yarn test:lint && yarn test:unit && yarn test:type",
+    "test:ci": "yarn test:lint && yarn test:unit:ci && yarn test:type"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
