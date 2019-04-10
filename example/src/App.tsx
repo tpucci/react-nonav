@@ -1,30 +1,14 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/emin93/react-native-template-typescript
- *
- * @format
- */
-
-import React, { Component } from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
-import { FirstName } from "./tunnels/SignIn/FirstName";
+import React, { Component } from 'react';
+import { View } from 'react-native';
+import { NavigationProvider } from 'react-gondola';
 
 interface Props {}
 export default class App extends Component<Props> {
   render() {
     return (
-      <View style={styles.container}>
-        <FirstName />
-      </View>
+      <NavigationProvider>
+        <View />
+      </NavigationProvider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  }
-});

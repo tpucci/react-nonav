@@ -1,1 +1,1 @@
-console.log("init");
+export { NavigationProvider } from './NavigationProvider';
