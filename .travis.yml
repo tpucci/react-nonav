@@ -4,6 +4,9 @@ cache:
     - $HOME/.cache/yarn
     - node_modules
     - example/node_modules
+install:
+  - yarn
+  - cd example && yarn && cd ..
 jobs:
   include:
     - stage: test
