@@ -1,6 +1,12 @@
 language: node_js
-cache: yarn
+cache:
+  directories:
+    - $HOME/.cache/yarn
+    - node_modules
+    - example/node_modules
 jobs:
   include:
     - stage: test
       script: yarn test:ci
+    - # run test in example project
+      script: cd example && yarn test:ci
