@@ -4,7 +4,12 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test:lint": "cd .. && yarn tslint example/src/**/*.ts{,x} && cd example",
+    "test:unit": "jest",
+    "test:unit:ci": "jest --runInBand",
+    "test:type": "tsc --noEmit",
+    "test": "yarn test:lint && yarn test:unit && yarn test:type",
+    "test:ci": "yarn test:lint && yarn test:unit:ci && yarn test:type"
   },
   "dependencies": {
     "mobx": "^5.9.4",
@@ -19,7 +24,6 @@
     "@types/jest": "^24.0.11",
     "@types/react-native": "^0.57.42",
     "@types/react-test-renderer": "^16.8.1",
-    "@types/react": "^16.8.11",
     "babel-jest": "^24.7.0",
     "babel-plugin-module-resolver": "^3.2.0",
     "jest": "^24.7.0",

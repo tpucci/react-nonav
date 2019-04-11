@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
-interface Props {}
-export class FirstName extends Component<Props> {
+interface IProps {}
+export class FirstName extends Component<IProps> {
   render() {
     return (
       <View style={styles.container}>
@@ -14,9 +14,9 @@ export class FirstName extends Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FFAAAA',
+    flex: 1,
+    justifyContent: 'center',
   },
 });
