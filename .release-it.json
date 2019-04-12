@@ -1,0 +1,14 @@
+{
+  "preReleaseId": "beta",
+  "scripts": {
+    "beforeStart": "yarn test",
+    "beforeStage": "conventional-changelog -i CHANGELOG.md -s -n node_modules/conventional-changelog-cz-emoji",
+    "changelog": "conventional-changelog -n node_modules/conventional-changelog-cz-emoji | tail -n +3"
+  },
+  "npm": {
+    "otp": true
+  },
+  "github": {
+    "release": true
+  }
+}

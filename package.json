@@ -49,5 +49,8 @@
     "release-it": "^10.4.2",
     "tslint": "^5.15.0",
     "typescript": "^3.4.3"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }
