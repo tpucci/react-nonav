@@ -25,7 +25,8 @@
     "test:unit:ci": "jest --runInBand",
     "test:type": "tsc --noEmit",
     "test": "yarn test:lint && yarn test:unit && yarn test:type",
-    "test:ci": "yarn test:lint && yarn test:unit:ci && yarn test:type"
+    "test:ci": "yarn test:lint && yarn test:unit:ci && yarn test:type",
+    "release": "release-it"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
@@ -44,6 +45,7 @@
     "react": "16.8.3",
     "react-native": "0.59.3",
     "react-test-renderer": "^16.8.6",
+    "release-it": "^10.4.2",
     "tslint": "^5.15.0",
     "typescript": "^3.4.3"
   }
