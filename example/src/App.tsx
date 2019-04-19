@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
 import { NavigationProvider } from 'react-gondola';
+import { SignIn } from './canals/SignIn';
 
 interface IProps {}
 export default class App extends Component<IProps> {
   render() {
     return (
       <NavigationProvider>
-        <View />
+        <SignIn />
       </NavigationProvider>
     );
   }

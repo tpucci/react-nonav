@@ -28,7 +28,11 @@
     "isolatedModules": true,
     "moduleResolution": "node",
     "paths": {
-      "react-gondola": ["../../src"]
+      "react-gondola": ["../../src"],
+      "mobx": ["../node_modules/mobx"],
+      "mobx-react": ["../node_modules/mobx-react"],
+      "react": ["../node_modules/react"],
+      "react-native": ["../node_modules/react-native"]
     }
   },
   "include": ["./src"],
