@@ -5,8 +5,8 @@
   "scripts": {
     "start": "node ../node_modules/react-native/local-cli/cli.js start",
     "test:lint": "cd .. && yarn tslint example/src/**/*.ts{,x} && cd example",
-    "test:unit": "jest",
-    "test:unit:ci": "jest --runInBand",
+    "test:unit": "cd .. && yarn jest --config=example/jest.config.js && cd example",
+    "test:unit:ci": "cd .. && yarn jest --config=example/jest.config.js --runInBand && cd example",
     "test:type": "tsc --noEmit",
     "test": "yarn test:lint && yarn test:unit && yarn test:type",
     "test:ci": "yarn test:lint && yarn test:unit:ci && yarn test:type"
@@ -15,14 +15,9 @@
     "@babel/core": "^7.4.3",
     "@babel/preset-typescript": "^7.3.3",
     "@babel/runtime": "^7.4.3",
-    "@types/jest": "^24.0.11",
     "@types/react-native": "^0.57.45",
-    "@types/react-test-renderer": "^16.8.1",
-    "babel-jest": "^24.7.1",
     "babel-plugin-module-resolver": "^3.2.0",
-    "jest": "^24.7.1",
     "metro-react-native-babel-preset": "^0.53.1",
-    "react-test-renderer": "16.8.6",
     "typescript": "^3.4.3"
   }
 }
