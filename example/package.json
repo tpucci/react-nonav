@@ -14,8 +14,8 @@
   "dependencies": {
     "mobx": "^5.9.4",
     "mobx-react": "^5.4.3",
-    "react": "16.8.3",
-    "react-native": "0.59.5",
+    "react": "16.8.6",
+    "react-native": "0.59.6",
     "react-gondola": "file:../src"
   },
   "devDependencies": {
