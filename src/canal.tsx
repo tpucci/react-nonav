@@ -1,10 +1,8 @@
-import React, { ComponentType, FunctionComponent } from 'react';
+export interface IStop {
+  name: string;
+}
 
-export const canal = (Page: ComponentType): FunctionComponent => {
-  if (!(React.isValidElement(Page) || typeof Page === 'function')) {
-    throw new Error(
-      `\`canal\` expects its first argument to be a React component. Received type: ${typeof Page}`
-    );
-  }
-  return () => <Page />;
-};
+export class Canal {
+  id: number = Date.now();
+  stopsList: IStop[] = [];
+}

@@ -1,2 +1,2 @@
-export { canal } from './canal';
+export { createCanal } from './createCanal';
 export { NavigationProvider } from './NavigationProvider';
