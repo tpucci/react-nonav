@@ -1,3 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`createCanal renders the first page when mounted 1`] = `<View />`;
+exports[`createCanal renders the first page when mounted 1`] = `
+<View
+  navigation={
+    Navigation {
+      "canalsMap": Object {},
+    }
+  }
+/>
+`;

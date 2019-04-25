@@ -28,5 +28,12 @@
     "types": ["react-native"]
   },
   "include": ["./src"],
-  "exclude": ["node_modules", "dist", "example", "**/__tests__/*"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "example",
+    "**/__tests__/*",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ]
 }

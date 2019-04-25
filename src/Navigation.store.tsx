@@ -7,7 +7,17 @@ interface ICanalsMap {
 }
 
 export class Navigation {
+  static getInstance() {
+    if (Navigation.instance) {
+      return Navigation.instance;
+    }
+    Navigation.instance = new Navigation();
+    return Navigation.instance;
+  }
+  private static instance: Navigation;
+
+  private canalsMap: ICanalsMap = {};
+
   @observable
-  state: INavigationState = {};
-  canalsMap: ICanalsMap = {};
+  private state: INavigationState = {};
 }

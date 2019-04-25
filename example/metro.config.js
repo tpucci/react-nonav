@@ -21,6 +21,10 @@ module.exports = {
       'mobx-react': path.resolve(__dirname, '../node_modules/mobx-react'),
       react: path.resolve(__dirname, '../node_modules/react'),
       'react-native': path.resolve(__dirname, '../node_modules/react-native'),
+      '@babel/plugin-proposal-decorators': path.resolve(
+        __dirname,
+        '../node_modules/@babel/plugin-proposal-decorators'
+      ),
     },
   },
   transformer: {
