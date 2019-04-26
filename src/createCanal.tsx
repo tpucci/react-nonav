@@ -1,12 +1,10 @@
-import React, { ComponentType, FunctionComponent } from 'react';
-import { Navigation } from 'Navigation.store';
+import React, { ComponentType, FunctionComponent, useEffect } from 'react';
+import { Canal } from './Canal';
 import { useNavigation } from './NavigationContext';
 
-export const createCanal = (
-  ...Pages: Array<ComponentType<{ navigation: Navigation }>>
-): FunctionComponent => {
-  for (let index = 0; index < Pages.length; index++) {
-    const Page = Pages[index];
+export const createCanal = (...PagesList: ComponentType[]): FunctionComponent => {
+  for (let index = 0; index < PagesList.length; index++) {
+    const Page = PagesList[index];
     if (!(React.isValidElement(Page) || typeof Page === 'function')) {
       throw new Error(
         `\`createCanal\` expects its first arguments to be a React component. Received type for argument ${index +
@@ -14,10 +12,13 @@ export const createCanal = (
       );
     }
   }
-  const FirstPage = Pages[0];
-  const Canal = () => {
+  const LocalTransitioner = () => {
+    const FirstPage = PagesList[0];
     const navigation = useNavigation();
-    return <FirstPage navigation={navigation} />;
+    useEffect(() => {
+      navigation.canalsSubject.next(new Canal(PagesList));
+    }, [false]);
+    return <FirstPage />;
   };
-  return Canal;
+  return LocalTransitioner;
 };

@@ -1,12 +1,6 @@
 import { Navigation } from '../Navigation.store';
 
 describe('Navigation store', () => {
-  it('exposes the store instance', () => {
-    const expectedNavigation = new Navigation();
-    const navigation = Navigation.getInstance();
-    expect(navigation).toEqual(expectedNavigation);
-  });
-
   it('exposes the same store instance if it accessed twice', () => {
     const navigation = Navigation.getInstance();
     const otherNavigation = Navigation.getInstance();

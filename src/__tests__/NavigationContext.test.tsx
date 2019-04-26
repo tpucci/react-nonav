@@ -8,7 +8,7 @@ import { Navigation } from '../Navigation.store';
 describe('NavigationContext', () => {
   describe('NavigationConsumer', () => {
     it('connects to context and exposes the navigation prop', () => {
-      const expectedNavigation = new Navigation();
+      const expectedNavigation = Navigation.getInstance();
       TestRenderer.create(
         <NavigationConsumer>
           {navigation => {
@@ -22,7 +22,7 @@ describe('NavigationContext', () => {
   });
   describe('withNavigation', () => {
     it('connects to context and exposes the navigation prop', () => {
-      const expectedNavigation = new Navigation();
+      const expectedNavigation = Navigation.getInstance();
       // @ts-ignore
       const ViewWithNavigation = withNavigation(View);
       const testRenderer = TestRenderer.create(<ViewWithNavigation />);
@@ -33,7 +33,7 @@ describe('NavigationContext', () => {
   });
   describe('useNavigation', () => {
     it('connects to context and exposes the navigation prop', () => {
-      const expectedNavigation = new Navigation();
+      const expectedNavigation = Navigation.getInstance();
       const ViewWithNavigation = () => {
         const navigation = useNavigation();
         // @ts-ignore
