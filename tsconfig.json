@@ -25,7 +25,7 @@
     "noEmit": true,
     "allowJs": true,
     "lib": ["es6"],
-    "types": ["react-native"]
+    "types": ["react-native", "mobx-react"]
   },
   "include": ["./src"],
   "exclude": [

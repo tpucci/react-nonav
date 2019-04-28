@@ -13,7 +13,7 @@ describe('createCanal', () => {
       createCanal('aaa');
     } catch (error) {
       expect(error.message).toBe(
-        '`createCanal` expects its first arguments to be a React component. Received type for argument 1: string'
+        '`createCanal` expects its arguments to be React components. Received type for argument 1: string'
       );
     }
     expect.assertions(1);
@@ -25,13 +25,13 @@ describe('createCanal', () => {
     expect(testRenderer.toJSON()).toMatchSnapshot();
   });
 
-  it('throws an error if any first arg is not a Component', () => {
+  it('throws an error if any arg is not a Component', () => {
     try {
       // @ts-ignore
       createCanal(View, 'aaa');
     } catch (error) {
       expect(error.message).toBe(
-        '`createCanal` expects its first arguments to be a React component. Received type for argument 2: string'
+        '`createCanal` expects its arguments to be React components. Received type for argument 2: string'
       );
     }
     expect.assertions(1);

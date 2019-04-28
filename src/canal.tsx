@@ -1,7 +1,7 @@
 import { ComponentType } from 'react';
 
 export interface IStop {
-  component: ComponentType;
+  Component: ComponentType;
   name: string;
 }
 
@@ -10,7 +10,7 @@ export class Canal {
   stopsList: IStop[] = [];
   constructor(PagesList: ComponentType[]) {
     this.stopsList = PagesList.map(Page => ({
-      component: Page,
+      Component: Page,
       name: Page.displayName || 'UntitledPage',
     }));
   }

@@ -1,3 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`createCanal renders the first page when mounted 1`] = `<View />`;
+exports[`createCanal renders the first page when mounted 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View />
+  </View>
+</View>
+`;
