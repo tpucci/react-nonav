@@ -8,10 +8,7 @@ export interface IStop {
 export class Canal {
   id: number = Date.now();
   stopsList: IStop[] = [];
-  constructor(PagesList: ComponentType[]) {
-    this.stopsList = PagesList.map(Page => ({
-      Component: Page,
-      name: Page.displayName || 'UntitledPage',
-    }));
+  constructor(StopsList: IStop[]) {
+    this.stopsList = StopsList;
   }
 }

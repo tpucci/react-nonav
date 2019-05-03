@@ -6,6 +6,7 @@
     "start": "node ../node_modules/react-native/local-cli/cli.js start",
     "test:lint": "cd .. && yarn tslint example/src/**/*.ts{,x} && cd example",
     "test:unit": "cd .. && yarn jest --config=example/jest.config.js && cd example",
+    "test:unit:u": "cd .. && yarn jest --config=example/jest.config.js -u && cd example",
     "test:unit:ci": "cd .. && yarn jest --config=example/jest.config.js --runInBand && cd example",
     "test:type": "tsc --noEmit",
     "test": "yarn test:lint && yarn test:unit && yarn test:type",

@@ -1,6 +1,6 @@
 import { observable, computed, action } from 'mobx';
 import { Subject } from 'rxjs';
-import { Canal, IStop } from 'Canal';
+import { Canal, IStop } from './Canal';
 
 interface INavigationEvent {
   canalId: Canal['id'];

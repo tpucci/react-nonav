@@ -1,31 +1,45 @@
 import React, { ComponentType, Component as ReactComponent } from 'react';
-import { ViewStyle, View, StyleSheet } from 'react-native';
+import { ViewStyle, View, StyleSheet, StyleProp } from 'react-native';
 import { observer } from 'mobx-react/native';
-import { Canal } from './Canal';
+import { Canal, IStop } from './Canal';
 import { Navigation } from './Navigation.store';
 
-interface ILocalTransitionerProps {
-  style?: ViewStyle;
-}
+type CanalComponentProps<T> = {
+  style?: StyleProp<ViewStyle>;
+} & T;
 
-export const createCanal = (
-  ...PagesList: ComponentType[]
-): ComponentType<ILocalTransitionerProps> => {
-  for (let index = 0; index < PagesList.length; index++) {
-    const Page = PagesList[index];
-    if (!(React.isValidElement(Page) || typeof Page === 'function')) {
+export const createCanal = <
+  T extends string,
+  U extends { name: T } & IStop,
+  V = { [K in U['name']]?: boolean }
+>(
+  ...StopsList: U[]
+): ComponentType<CanalComponentProps<V>> => {
+  for (let index = 0; index < StopsList.length; index++) {
+    const Stop = StopsList[index];
+    if (!Stop.name || typeof Stop.name !== 'string') {
       throw new Error(
-        `\`createCanal\` expects its arguments to be React components. Received type for argument ${index +
-          1}: ${typeof Page}`
+        `\`createCanal\` could not find a valid \`name\` key for argument ${index +
+          1}. Received: ${JSON.stringify(Stop)}`
+      );
+    }
+    if (!(React.isValidElement(Stop.Component) || typeof Stop.Component === 'function')) {
+      throw new Error(
+        `\`createCanal\` could not find a valid \`Component\` key for argument ${index +
+          1}. Received: ${JSON.stringify(Stop)}`
       );
     }
   }
 
   @observer
-  class LocalTransitioner extends ReactComponent<ILocalTransitionerProps> {
-    canal = new Canal(PagesList);
+  class CanalComponent extends ReactComponent<CanalComponentProps<V>> {
+    static defaultProps = {
+      style: StyleSheet.absoluteFill,
+    };
 
-    constructor(props: ILocalTransitionerProps) {
+    canal = new Canal(StopsList);
+
+    constructor(props: CanalComponentProps<V>) {
       super(props);
       const navigation = Navigation.getInstance();
       navigation.canalsSubject.next(this.canal);
@@ -43,5 +57,7 @@ export const createCanal = (
       );
     }
   }
-  return LocalTransitioner;
+
+  // @ts-ignore
+  return CanalComponent;
 };
