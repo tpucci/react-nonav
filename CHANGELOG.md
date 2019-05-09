@@ -1,3 +1,6 @@
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/tpucci/react-gondola/compare/1.0.0...1.1.0) (2019-05-09)
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/tpucci/react-gondola/compare/1.0.0-beta.0...1.0.0) (2019-05-09)
 
