@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
 interface IProps {}
 export class FirstName extends Component<IProps> {
   render() {
     return (
       <View style={styles.container}>
-        <Text>FirstName</Text>
+        <Text>Waht is your first name ?</Text>
+        <TextInput placeholder="Type here" />
+        <Button title="Next" onPress={() => true} />
       </View>
     );
   }
@@ -17,6 +19,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FFAAAA',
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-around',
   },
 });

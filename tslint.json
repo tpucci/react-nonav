@@ -7,7 +7,9 @@
     "ordered-imports": false,
     "trailing-comma": false,
     "no-empty-interface": false,
-    "member-access": false
+    "member-access": false,
+    "arrow-parens": false,
+    "semicolon": false
   },
   "rulesDirectory": []
 }

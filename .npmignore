@@ -6,3 +6,10 @@ example
 
 # Coverage
 coverage
+
+# VSCode
+.vscode
+
+# Jest
+__mocks__
+jest

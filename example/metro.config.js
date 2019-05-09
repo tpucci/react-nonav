@@ -19,8 +19,10 @@ module.exports = {
       // See https://github.com/facebook/metro/issues/7#issuecomment-464668678.
       mobx: path.resolve(__dirname, '../node_modules/mobx'),
       'mobx-react': path.resolve(__dirname, '../node_modules/mobx-react'),
+      'mobx-utils': path.resolve(__dirname, '../node_modules/mobx-utils'),
       react: path.resolve(__dirname, '../node_modules/react'),
       'react-native': path.resolve(__dirname, '../node_modules/react-native'),
+      '@babel/plugin-proposal-decorators': path.resolve(__dirname, '../node_modules/@babel/plugin-proposal-decorators'),
     },
   },
   transformer: {
