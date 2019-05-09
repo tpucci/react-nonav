@@ -1,58 +1,107 @@
 import React, { ComponentType, Component as ReactComponent } from 'react';
 import { ViewStyle, View, StyleSheet, StyleProp } from 'react-native';
-import { observer } from 'mobx-react/native';
-import { Canal, IStop } from './Canal';
-import { Navigation } from './Navigation.store';
+import { Observer } from 'mobx-react/native';
+import { fromStream } from 'mobx-utils';
+import { Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 type CanalComponentProps<T> = {
   style?: StyleProp<ViewStyle>;
 } & T;
 
 export const createCanal = <
-  T extends string,
-  U extends { name: T } & IStop,
-  V = { [K in U['name']]?: boolean }
+  StopName extends string,
+  Stop extends { name: StopName; Component: ComponentType },
+  Authorizations = { [K in Stop['name']]?: boolean }
 >(
-  ...StopsList: U[]
-): ComponentType<CanalComponentProps<V>> => {
-  for (let index = 0; index < StopsList.length; index++) {
-    const Stop = StopsList[index];
-    if (!Stop.name || typeof Stop.name !== 'string') {
+  stopsList: Stop[]
+): ComponentType<CanalComponentProps<Authorizations>> => {
+  for (let index = 0; index < stopsList.length; index++) {
+    const stop = stopsList[index];
+    if (!stop.name || typeof stop.name !== 'string') {
       throw new Error(
         `\`createCanal\` could not find a valid \`name\` key for argument ${index +
-          1}. Received: ${JSON.stringify(Stop)}`
+          1}. Received: ${JSON.stringify(stop)}`
       );
     }
-    if (!(React.isValidElement(Stop.Component) || typeof Stop.Component === 'function')) {
+    if (
+      !(
+        React.isValidElement(stop.Component) ||
+        typeof stop.Component === 'function'
+      )
+    ) {
       throw new Error(
         `\`createCanal\` could not find a valid \`Component\` key for argument ${index +
-          1}. Received: ${JSON.stringify(Stop)}`
+          1}. Received: ${JSON.stringify(stop)}`
       );
     }
   }
 
-  @observer
-  class CanalComponent extends ReactComponent<CanalComponentProps<V>> {
+  class CanalComponent extends ReactComponent<
+    CanalComponentProps<Authorizations>
+  > {
     static defaultProps = {
-      style: StyleSheet.absoluteFill,
+      style: StyleSheet.absoluteFill
     };
 
-    canal = new Canal(StopsList);
+    stopsList = stopsList;
+    authorizations$ = new Subject<Authorizations>();
+    progress$ = this.authorizations$.pipe(
+      map(authorizations =>
+        this.stopsList
+          .slice(0)
+          .reduce((acc: Stop[], stop, _, stopsCandidatesList) => {
+            /**
+             * @TODO 19-06-01 Check if Authorization type can be indexed with StopName type.
+             * See https://github.com/Microsoft/TypeScript/issues/2491.
+             */
+            // @ts-ignore
+            if (authorizations[stop.name]) {
+              acc.push(stop);
+            } else {
+              stopsCandidatesList.splice(1);
+            }
+            return acc;
+          }, [])
+      )
+    );
 
-    constructor(props: CanalComponentProps<V>) {
+    stack = fromStream(this.progress$, []);
+
+    constructor(props: CanalComponentProps<Authorizations>) {
       super(props);
-      const navigation = Navigation.getInstance();
-      navigation.canalsSubject.next(this.canal);
+      const { style, ...nextAuthorizations } = props;
+      /**
+       * @TODO 19-06-01 Find a way to safely forbid the use of reserved prop `style` in a StopName.
+       */
+      // @ts-ignore
+      this.authorizations$.next(nextAuthorizations);
+    }
+
+    shouldComponentUpdate({
+      style,
+      ...nextAuthorizations
+    }: CanalComponentProps<Authorizations>) {
+      /**
+       * @TODO 19-06-01 Find a way to safely forbid the use of reserved prop `style` in a StopName.
+       */
+      // @ts-ignore
+      this.authorizations$.next(nextAuthorizations);
+      return style !== this.props.style;
     }
 
     render() {
       return (
         <View style={this.props.style}>
-          {Navigation.getInstance().state[this.canal.id].map(({ Component, name }) => (
-            <View style={StyleSheet.absoluteFill} key={name}>
-              <Component />
-            </View>
-          ))}
+          <Observer>
+            {() =>
+              this.stack.current.map(({ name, Component }) => (
+                <View style={StyleSheet.absoluteFill} key={name}>
+                  <Component />
+                </View>
+              ))
+            }
+          </Observer>
         </View>
       );
     }

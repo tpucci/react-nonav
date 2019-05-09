@@ -1,7 +1,7 @@
 import { configure } from 'mobx';
 
 configure({
-  enforceActions: 'always',
+  enforceActions: 'observed',
 });
 
 Date.now = jest.fn(() => 0);

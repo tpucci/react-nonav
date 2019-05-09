@@ -1,16 +1,21 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { ComponentType } from 'react';
+import { View, Text } from 'react-native';
 import TestRenderer from 'react-test-renderer';
 
 import { createCanal } from '../createCanal';
-import { Navigation } from '../Navigation.store';
-import { Canal } from '../Canal';
+
+const stopCreator = <T extends string>(
+  name: T
+): { name: T; Component: ComponentType } => {
+  const Component = () => <Text>{name}</Text>;
+  return { name, Component };
+};
 
 describe('createCanal', () => {
   it('throws an error if first arg is not a Component', () => {
     try {
       // @ts-ignore
-      createCanal({ name: 'a', Component: 'aaa' });
+      createCanal([{ name: 'a', Component: 'aaa' }]);
     } catch (error) {
       expect(error.message).toBe(
         '`createCanal` could not find a valid `Component` key for argument 1. Received: {"name":"a","Component":"aaa"}'
@@ -19,16 +24,52 @@ describe('createCanal', () => {
     expect.assertions(1);
   });
 
-  it('renders the first page when mounted', () => {
-    const Transitioner = createCanal({ name: 'a', Component: View });
-    const testRenderer = TestRenderer.create(<Transitioner />);
+  it('renders nothing if no authorization is passed', () => {
+    const Canal = createCanal([stopCreator('a')]);
+    const testRenderer = TestRenderer.create(<Canal />);
     expect(testRenderer.toJSON()).toMatchSnapshot();
+  });
+
+  it('renders the first page if authorization for first page is given', () => {
+    const Canal = createCanal([stopCreator('a')]);
+    const testRenderer = TestRenderer.create(<Canal a />);
+    expect(testRenderer.toJSON()).toMatchSnapshot();
+  });
+
+  it('renders the all pages if all authorizations are given', () => {
+    const Canal = createCanal([stopCreator('a'), stopCreator('b')]);
+    const testRenderer = TestRenderer.create(<Canal a b />);
+    expect(testRenderer.toJSON()).toMatchSnapshot();
+  });
+
+  it('renders only the first page if all authorizations are given but the one for the second page', () => {
+    const Canal = createCanal([
+      stopCreator('a'),
+      stopCreator('b'),
+      stopCreator('c')
+    ]);
+    const testRenderer = TestRenderer.create(<Canal a c />);
+    expect(testRenderer.toJSON()).toMatchSnapshot();
+  });
+
+  it('only rerender if style was modified', () => {
+    const Canal = createCanal([
+      stopCreator('a'),
+      stopCreator('b'),
+      stopCreator('c')
+    ]);
+    const testRenderer = TestRenderer.create(<Canal a />);
+    const renderSpy = jest.spyOn(testRenderer.root.instance, 'render');
+    testRenderer.update(<Canal a={false} />);
+    expect(renderSpy).not.toHaveBeenCalled();
+    testRenderer.update(<Canal a={false} style={{}} />);
+    expect(renderSpy).toHaveBeenCalled();
   });
 
   it('throws an error if any arg is not a Component', () => {
     try {
       // @ts-ignore
-      createCanal({ name: 'a', Component: View }, { name: 'b', Component: 'aaa' });
+      createCanal([stopCreator('a'), { name: 'b', Component: 'aaa' }]);
     } catch (error) {
       expect(error.message).toBe(
         '`createCanal` could not find a valid `Component` key for argument 2. Received: {"name":"b","Component":"aaa"}'
@@ -37,30 +78,10 @@ describe('createCanal', () => {
     expect.assertions(1);
   });
 
-  it('emits the new canal to the navigation store', () => {
-    const PageOne = () => <View />;
-    const PageTwo = () => <View />;
-    const Transitioner = createCanal(
-      { name: 'pageOne', Component: PageOne },
-      { name: 'pageTwo', Component: PageTwo }
-    );
-    const expectedCanal = new Canal([
-      { name: 'pageOne', Component: PageOne },
-      { name: 'pageTwo', Component: PageTwo },
-    ]);
-    Navigation.getInstance().canalsSubject.subscribe({
-      next: canal => {
-        expect(canal).toEqual(expectedCanal);
-      },
-    });
-    TestRenderer.create(<Transitioner />);
-    expect.assertions(1);
-  });
-
   it('throws an error if name is missing', () => {
     try {
       // @ts-ignore
-      createCanal({ Component: View });
+      createCanal([{ Component: View }]);
     } catch (error) {
       expect(error.message).toBe(
         '`createCanal` could not find a valid `name` key for argument 1. Received: {}'
@@ -73,9 +94,11 @@ describe('createCanal', () => {
   xit('throws an error some names are duplicated', () => {
     try {
       // @ts-ignore
-      createCanal({ name: 'a', Component: View }, { name: 'a', Component: View });
+      createCanal([stopCreator('a'), stopCreator('a')]);
     } catch (error) {
-      expect(error.message).toBe('`createCanal` found duplicated `name: a` key.');
+      expect(error.message).toBe(
+        '`createCanal` found duplicated `name: a` key.'
+      );
     }
     expect.assertions(1);
   });
