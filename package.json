@@ -48,7 +48,7 @@
     "react": "16.8.3",
     "react-native": "0.59.5",
     "react-test-renderer": "^16.8.6",
-    "release-it": "^10.4.2",
+    "release-it": "^12.0.1",
     "rxjs": "^6.4.0",
     "tslint": "^5.15.0",
     "typescript": "^3.4.3"
