@@ -3,7 +3,8 @@ import { ViewStyle, View, StyleSheet, StyleProp } from 'react-native';
 import { Observer } from 'mobx-react/native';
 import { fromStream } from 'mobx-utils';
 import { Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, distinctUntilChanged } from 'rxjs/operators';
+import { Navigation } from './Navigation';
 
 type CanalComponentProps<T> = {
   style?: StyleProp<ViewStyle>;
@@ -11,7 +12,11 @@ type CanalComponentProps<T> = {
 
 export const createCanal = <
   StopName extends string,
-  Stop extends { name: StopName; Component: ComponentType },
+  Stop extends {
+    name: StopName;
+    Component: ComponentType;
+    isFullScreen?: boolean;
+  },
   Authorizations = { [K in Stop['name']]?: boolean }
 >(
   stopsList: Stop[]
@@ -44,6 +49,8 @@ export const createCanal = <
       style: StyleSheet.absoluteFill
     };
 
+    canalId = Date.now().toString();
+
     stopsList = stopsList;
     authorizations$ = new Subject<Authorizations>();
     progress$ = this.authorizations$.pipe(
@@ -66,7 +73,26 @@ export const createCanal = <
       )
     );
 
-    stack = fromStream(this.progress$, []);
+    stack = fromStream(
+      this.progress$.pipe(
+        map(progressStopsList =>
+          progressStopsList.filter(stop => !stop.isFullScreen)
+        )
+      ),
+      []
+    );
+
+    fullScreenStackProperties$ = this.progress$.pipe(
+      map(progressStopsList => ({
+        canalId: this.canalId,
+        fullScreenStack: progressStopsList.filter(stop => stop.isFullScreen)
+      })),
+      distinctUntilChanged(
+        (lastFullScreenStackProperties, fullScreenStackProperties) =>
+          lastFullScreenStackProperties.fullScreenStack.length ===
+          fullScreenStackProperties.fullScreenStack.length
+      )
+    );
 
     constructor(props: CanalComponentProps<Authorizations>) {
       super(props);
@@ -76,6 +102,9 @@ export const createCanal = <
        */
       // @ts-ignore
       this.authorizations$.next(nextAuthorizations);
+      Navigation.getInstance().canalsFullScreenStackProperties$.next(
+        this.fullScreenStackProperties$
+      );
     }
 
     shouldComponentUpdate({
@@ -88,6 +117,12 @@ export const createCanal = <
       // @ts-ignore
       this.authorizations$.next(nextAuthorizations);
       return style !== this.props.style;
+    }
+
+    componentWillUnmount() {
+      // @ts-ignore @TODO 19-06-01
+      this.authorizations$.next({});
+      this.authorizations$.complete();
     }
 
     render() {
