@@ -1,15 +1,10 @@
-import React, { ComponentType } from 'react';
-import { View, Text } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
 import TestRenderer from 'react-test-renderer';
 
-import { createCanal } from '../createCanal';
+import { stopCreator } from './utils/stopCreator';
 
-const stopCreator = <T extends string>(
-  name: T
-): { name: T; Component: ComponentType } => {
-  const Component = () => <Text>{name}</Text>;
-  return { name, Component };
-};
+import { createCanal } from '../createCanal';
 
 describe('createCanal', () => {
   it('throws an error if first arg is not a Component', () => {
@@ -101,5 +96,42 @@ describe('createCanal', () => {
       );
     }
     expect.assertions(1);
+  });
+
+  it('emits new fullscreen stack only when fullscreen stack has changed', () => {
+    const spy = jest.fn();
+    const stopB = stopCreator('b', true);
+    const Canal = createCanal([stopCreator('a'), stopB]);
+    const testRenderer = TestRenderer.create(<Canal a />);
+    testRenderer.root.instance.fullScreenStackProperties$.subscribe(spy);
+    testRenderer.update(<Canal a />);
+    testRenderer.update(<Canal a />);
+    testRenderer.update(<Canal a b />);
+    testRenderer.update(<Canal a b />);
+    testRenderer.update(<Canal a b />);
+    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenCalledWith({
+      canalId: '0',
+      fullScreenStack: []
+    });
+    expect(spy).toHaveBeenCalledWith({
+      canalId: '0',
+      fullScreenStack: [stopB]
+    });
+  });
+
+  it('emits empty fullscreen stack when unmounted', () => {
+    const spy = jest.fn();
+    const stopB = stopCreator('b', true);
+    const Canal = createCanal([stopCreator('a'), stopB]);
+    const testRenderer = TestRenderer.create(<Canal a />);
+    testRenderer.root.instance.fullScreenStackProperties$.subscribe(spy);
+    testRenderer.update(<Canal a b />);
+    testRenderer.update(<View />);
+    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenCalledWith({
+      canalId: '0',
+      fullScreenStack: [stopB]
+    });
   });
 });

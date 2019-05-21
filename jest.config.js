@@ -13,4 +13,5 @@ module.exports = {
       statements: 100,
     },
   },
+  testPathIgnorePatterns: ['/node_modules/', '/__tests__/utils'],
 };
