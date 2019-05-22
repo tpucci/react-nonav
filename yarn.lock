@@ -773,6 +773,11 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@iarna/toml@2.2.3":
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/@iarna/toml/-/toml-2.2.3.tgz#f060bf6eaafae4d56a7dac618980838b0696e2ab"
+  integrity sha512-FmuxfCuolpLl0AnQ2NHSzoUKWEJDFl63qXjzdoWBVyFCXzMGm1spBzk7LeHNoVCiWCF7mRVms9e6jEV9+MoPbg==
+
 "@jest/console@^24.7.1":
   version "24.7.1"
   resolved "https://registry.yarnpkg.com/@jest/console/-/console-24.7.1.tgz#32a9e42535a97aedfe037e725bd67e954b459545"
@@ -2370,7 +2375,7 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
-cosmiconfig@^5.0.5:
+cosmiconfig@5.2.0, cosmiconfig@^5.0.5:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-5.2.0.tgz#45038e4d28a7fe787203aede9c25bca4a08b12c8"
   integrity sha512-nxt+Nfc3JAqf4WIWd0jXLjTJZmsPLrA9DDc4nRw2KFJQJK7DNooqSXrNI7tzLG50CF8axczly5UV929tBmh/7g==
@@ -7113,13 +7118,15 @@ release-it@^11.0.0:
     yargs-parser "13.0.0"
 
 release-it@^12.0.1:
-  version "12.0.1"
-  resolved "https://registry.yarnpkg.com/release-it/-/release-it-12.0.1.tgz#156e48961bd1a09ffd2a40c41092a451eb111425"
-  integrity sha512-dakhruhvF+hAX4wbDypSCyHAq20IdnfiQ34h8RTwIJIAxJ0E3zqGLGngfhUI3g7qizXyQrROCL7QY+ck24LREQ==
+  version "12.2.0"
+  resolved "https://registry.yarnpkg.com/release-it/-/release-it-12.2.0.tgz#dec51387f1ab9a1b43e12661e028d5afe9783282"
+  integrity sha512-76NXmzgsU5pint+8wcv7Lzn7taJ4fPqJENTZQJSf/fWaed9p7i++Jh+40YTS7QMXTQMm/8X690rwyzvUOkZfzA==
   dependencies:
+    "@iarna/toml" "2.2.3"
     "@octokit/rest" "16.25.0"
     async-retry "1.2.3"
     chalk "2.4.2"
+    cosmiconfig "5.2.0"
     debug "4.1.1"
     deprecated-obj "1.0.0"
     detect-repo-changelog "1.0.1"
