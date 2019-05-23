@@ -2226,9 +2226,9 @@ conventional-changelog-core@^3.2.2:
     through2 "^3.0.0"
 
 conventional-changelog-cz-emoji@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/conventional-changelog-cz-emoji/-/conventional-changelog-cz-emoji-2.0.0.tgz#a124a00ecad8eb850b49b51a915fe3a84bfc557d"
-  integrity sha512-nwmGlQBQFjFvp20AuviYZQ1TX1gz7p5zPbeDmtNWp7STirC0Xb16nvPwExd/xW3lzcUAEHTCtDSFAicMQkZiyA==
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/conventional-changelog-cz-emoji/-/conventional-changelog-cz-emoji-2.0.1.tgz#fa240a1636ca0fde02040bd1af475e49a8aa8f25"
+  integrity sha512-ENgDhX9VYU3KuZp5+Py9b0LPXe+jgqx1PsAEPtyPa8eQCK1SWpLSc5iiP0cISozPDwsdvP4xSgH1gGex+++e5g==
   dependencies:
     compare-func "^1.3.2"
     github-url-from-git "^1.5.0"
