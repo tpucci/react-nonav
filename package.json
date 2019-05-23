@@ -37,7 +37,7 @@
     "@types/react-native": "^0.57.43",
     "@types/react-test-renderer": "^16.8.1",
     "babel-jest": "^24.7.0",
-    "conventional-changelog-cz-emoji": "^1.1.0",
+    "conventional-changelog-cz-emoji": "^2.0.0",
     "eslint": "^5.16.0",
     "eslint-config-bambi": "^1.4.0",
     "jest": "^24.7.0",
