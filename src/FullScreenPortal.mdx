@@ -1,0 +1,41 @@
+---
+name: FullScreenPortal
+menu: API
+---
+
+# FullScreenPortal
+
+`type: React.Component`
+
+## Props
+
+| Prop name  | Required | Default     | Usage                                                                                                      |
+| :--------: | :------: | ----------- | ---------------------------------------------------------------------------------------------------------- |
+| `children` |  `true`  | `undefined` | Children are wrapped in a `React.Fragment`. All full screen Stops are rendered in front of those children. |
+
+## Properties
+
+### `fullScreenStack: IStreamListener<IStop[]>`
+
+MobX Strem Listener of list of React Gondola full screen Stops. This stream is observed by MobX and fires the rendering of the full screen stack in the `FullScreenPortal.render` method.
+
+## Basic usage
+
+Wrap your application main canal with `FullScreenPortal`. `FullScreenPortal` must appear at the top of your tree in order to render full screen pages.
+
+```tsx
+import React, { Component } from "react";
+import { FullScreenPortal } from "react-gondola";
+
+import { MainCanal } from "./canals/MainCanal";
+
+export default class App extends Component {
+  render() {
+    return (
+      <FullScreenPortal>
+        <MainCanal />
+      </FullScreenPortal>
+    );
+  }
+}
+```
