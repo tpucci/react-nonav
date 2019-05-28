@@ -20,13 +20,15 @@
     "react-native": "*"
   },
   "scripts": {
-    "test:lint": "tslint src/**/*.ts{,x}",
-    "test:unit": "jest",
-    "test:unit:ci": "jest --runInBand",
-    "test:type": "tsc --noEmit",
-    "test": "yarn test:lint && yarn test:unit && yarn test:type",
+    "predoc:build": "cd example && yarn && cd ..",
+    "doc:build": "docz build",
+    "release": "release-it",
     "test:ci": "yarn test:lint && yarn test:unit:ci && yarn test:type",
-    "release": "release-it"
+    "test:lint": "tslint src/**/*.ts{,x}",
+    "test:type": "tsc --noEmit",
+    "test:unit:ci": "jest --runInBand",
+    "test:unit": "jest",
+    "test": "yarn test:lint && yarn test:unit && yarn test:type"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
@@ -38,6 +40,8 @@
     "@types/react-test-renderer": "^16.8.1",
     "babel-jest": "^24.7.0",
     "conventional-changelog-cz-emoji": "^2.0.0",
+    "docz": "^1.2.0",
+    "docz-theme-default": "^1.2.0",
     "eslint": "^5.16.0",
     "eslint-config-bambi": "^1.4.0",
     "jest": "^24.7.0",
@@ -46,13 +50,19 @@
     "mobx-react": "^5.4.3",
     "mobx-utils": "^5.4.0",
     "prettier": "^1.16.4",
-    "react": "16.8.3",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
     "react-native": "0.59.5",
+    "react-native-web": "^0.11.4",
     "react-test-renderer": "^16.8.6",
     "release-it": "^12.0.1",
     "rxjs": "^6.4.0",
     "tslint": "^5.15.0",
     "typescript": "^3.4.3"
+  },
+  "resolutions": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"

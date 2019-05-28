@@ -48,7 +48,7 @@ export class Navigation {
       }),
       {}
     ),
-    map(fullScreenStackMap =>
+    map((fullScreenStackMap: IFullScreenStackMap) =>
       Object.keys(fullScreenStackMap).reduce(
         (fullScreenStack: Stack, canalId: string) =>
           fullScreenStack.concat(fullScreenStackMap[canalId]),

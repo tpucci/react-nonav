@@ -13,3 +13,6 @@ coverage
 # Jest
 __mocks__
 jest
+
+# Doc
+.docz
