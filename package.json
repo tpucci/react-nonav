@@ -20,6 +20,7 @@
     "react-native": "*"
   },
   "scripts": {
+    "predoc:build": "cd example && yarn && cd ..",
     "doc:build": "docz build",
     "release": "release-it",
     "test:ci": "yarn test:lint && yarn test:unit:ci && yarn test:type",
