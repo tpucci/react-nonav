@@ -6,13 +6,13 @@ React Native declarative and reactive navigation.
 
 ## Philosophy
 
-This repo focuses on grouping pages by business conversion tunnels called **canals**. When navigating in Venice, you can not teleport yourself from the beginning of a canal to the end of it. You are forced to either go ahead or go back; and doing so you might discover another canal. **When you use React Gondola**, define several gondoliers and hhow they are authorize to move accross their canals.
+This repo focuses on grouping pages by business conversion tunnels called **canals**. When navigating in Venice, you can not teleport yourself from the beginning of a canal to the end of it. You are forced to either go ahead or go back; and doing so you might discover another canal 😲. **When you use React Gondola**, you define several gondoliers and how each one of them is authorized to move accross its own canal.
 
 ## 👍 TLDR; Use this package if:
 
 - you want to group pages by **business** conversion tunnels rather than transition.
 - you want to control your navigation state with a **state machine**.
-- you want you navigation to **react** to your store changes.
+- you want your navigation to **react** to your store changes.
 
 ## 👎 Do not use this repo if:
 
@@ -22,6 +22,7 @@ This repo focuses on grouping pages by business conversion tunnels called **cana
 ## Docs
 
 The docs are here: https://react-gondola.netlify.com/
+Powered by the incredible [docz](https://www.docz.site/).
 
 ## Contribute
 
