@@ -22,6 +22,7 @@
   "scripts": {
     "predoc:build": "cd example && yarn && cd ..",
     "doc:build": "docz build",
+    "doc:dev": "docz dev",
     "release": "release-it",
     "test:ci": "yarn test:lint && yarn test:unit:ci && yarn test:type",
     "test:lint": "tslint src/**/*.ts{,x}",
@@ -52,6 +53,7 @@
     "prettier": "^1.16.4",
     "react": "16.8.6",
     "react-dom": "16.8.6",
+    "react-github-btn": "^1.0.5",
     "react-native": "0.59.5",
     "react-native-web": "^0.11.4",
     "react-test-renderer": "^16.8.6",

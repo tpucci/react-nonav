@@ -39,7 +39,7 @@ const SignInCanal = createCanal([
 ]);
 ```
 
-Then, use the canal wherever you want in your app. Specify wether to show/hide a screen by using the screen's name as a prop:
+Then, use the canal wherever you want in your app. Specify whether to show/hide a screen by using the screen's name as a prop:
 
 ```ts
 import React, { Component } from "react";
@@ -47,16 +47,16 @@ import { SignInCanal } from "./canals/SignIn";
 
 export default class App extends Component {
   render() {
-    return <SignInCanal firstName />;
+    return <SignInCanal firstName={true} lastName={false} />;
   }
 }
 ```
 
 That's all !
 
-### Add some full screen page
+### Add a full screen page
 
-If you want to add full screen page, pass the `isFullScreen` flag when creating a canal. In the following example, `confirm` is a full screen page.
+If you want to add full screen page, pass the `isFullScreen` flag to the right page when creating a canal. In the following example, `confirm` is a full screen page.
 
 ```ts
 import React from "react";
@@ -89,4 +89,4 @@ export default class App extends Component {
 }
 ```
 
-You are ready to use React-Gondola
+You are ready to use React-Gondola 🎸.
