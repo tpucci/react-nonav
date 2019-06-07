@@ -43,6 +43,7 @@
     "babel-jest": "^24.7.0",
     "conventional-changelog-cz-emoji": "^2.0.0",
     "coveralls": "^3.0.4",
+    "cz-emoji": "^1.1.2",
     "docz": "^1.2.0",
     "docz-theme-default": "^1.2.0",
     "eslint": "^5.16.0",
@@ -70,5 +71,10 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-emoji"
+    }
   }
 }
