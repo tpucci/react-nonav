@@ -20,6 +20,7 @@
     "react-native": "*"
   },
   "scripts": {
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "predoc:build": "cd example && yarn && cd ..",
     "doc:build": "docz build",
     "doc:dev": "docz dev",
@@ -41,6 +42,7 @@
     "@types/react-test-renderer": "^16.8.1",
     "babel-jest": "^24.7.0",
     "conventional-changelog-cz-emoji": "^2.0.0",
+    "coveralls": "^3.0.4",
     "docz": "^1.2.0",
     "docz-theme-default": "^1.2.0",
     "eslint": "^5.16.0",

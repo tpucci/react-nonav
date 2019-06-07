@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/tpucci/react-gondola.svg?branch=master)](https://travis-ci.com/tpucci/react-gondola)
+[![Coverage Status](https://coveralls.io/repos/github/tpucci/react-gondola/badge.svg?branch=master)](https://coveralls.io/github/tpucci/react-gondola?branch=master)
 
 # React Gondola
 

@@ -13,3 +13,5 @@ jobs:
       script: yarn test:ci
     - # run test in example project
       script: cd example && yarn test:ci
+after_success:
+  - yarn coveralls
