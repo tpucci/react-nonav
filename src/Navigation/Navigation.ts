@@ -1,14 +1,14 @@
 import { FullScreenDelegate } from './FullScreenDelegate';
 
 export class Navigation {
-  static getInstance() {
-    if (Navigation.instance) {
-      return Navigation.instance;
+  static get instance() {
+    if (Navigation.singleton) {
+      return Navigation.singleton;
     }
-    Navigation.instance = new Navigation();
-    return Navigation.instance;
+    Navigation.singleton = new Navigation();
+    return Navigation.singleton;
   }
-  private static instance: Navigation;
+  private static singleton: Navigation;
 
   fullScreenDelegate = new FullScreenDelegate();
 }

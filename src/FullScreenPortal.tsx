@@ -6,7 +6,7 @@ import { Navigation } from './Navigation';
 
 export class FullScreenPortal extends ReactComponent {
   fullScreenStack = fromStream(
-    Navigation.getInstance().fullScreenDelegate.fullSceenStack$
+    Navigation.instance.fullScreenDelegate.fullSceenStack$
   );
 
   render() {
