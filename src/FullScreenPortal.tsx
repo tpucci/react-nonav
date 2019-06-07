@@ -5,7 +5,9 @@ import { fromStream } from 'mobx-utils';
 import { Navigation } from './Navigation';
 
 export class FullScreenPortal extends ReactComponent {
-  fullScreenStack = fromStream(Navigation.getInstance().fullSceenStack$);
+  fullScreenStack = fromStream(
+    Navigation.getInstance().fullScreenDelegate.fullSceenStack$
+  );
 
   render() {
     return (

@@ -1,23 +1,4 @@
-import { Subject, Observable } from 'rxjs';
-import { ComponentType } from 'react';
-import { mergeAll, map, scan } from 'rxjs/operators';
-
-export interface IStop {
-  name: string;
-  Component: ComponentType;
-  isFullScreen?: boolean;
-}
-
-type Stack = IStop[];
-
-interface IFullScreenStackProperties {
-  canalId: string;
-  fullScreenStack: Stack;
-}
-
-interface IFullScreenStackMap {
-  [canalId: string]: Stack;
-}
+import { FullScreenDelegate } from './FullScreenDelegate';
 
 export class Navigation {
   static getInstance() {
@@ -29,31 +10,5 @@ export class Navigation {
   }
   private static instance: Navigation;
 
-  canalsFullScreenStackProperties$ = new Subject<
-    Observable<IFullScreenStackProperties>
-  >();
-
-  fullSceenStack$: Observable<
-    Stack
-  > = this.canalsFullScreenStackProperties$.pipe(
-    mergeAll(),
-    scan(
-      (
-        fullScreenStackMap: IFullScreenStackMap,
-        fullScreenStackProperties: IFullScreenStackProperties
-      ) => ({
-        ...fullScreenStackMap,
-        [fullScreenStackProperties.canalId]:
-          fullScreenStackProperties.fullScreenStack
-      }),
-      {}
-    ),
-    map((fullScreenStackMap: IFullScreenStackMap) =>
-      Object.keys(fullScreenStackMap).reduce(
-        (fullScreenStack: Stack, canalId: string) =>
-          fullScreenStack.concat(fullScreenStackMap[canalId]),
-        []
-      )
-    )
-  );
+  fullScreenDelegate = new FullScreenDelegate();
 }

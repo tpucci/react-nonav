@@ -102,7 +102,7 @@ export const createCanal = <
        */
       // @ts-ignore
       this.authorizations$.next(nextAuthorizations);
-      Navigation.getInstance().canalsFullScreenStackProperties$.next(
+      Navigation.getInstance().fullScreenDelegate.canalsFullScreenStackProperties$.next(
         this.fullScreenStackProperties$
       );
     }
