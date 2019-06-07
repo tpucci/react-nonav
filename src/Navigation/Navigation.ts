@@ -1,4 +1,5 @@
 import { FullScreenDelegate } from './FullScreenDelegate';
+import { BackHandlerDelegate } from './BackHandlerDelegate';
 
 export class Navigation {
   static get instance() {
@@ -11,4 +12,6 @@ export class Navigation {
   private static singleton: Navigation;
 
   fullScreenDelegate = new FullScreenDelegate();
+
+  backHandlerDelegate = new BackHandlerDelegate();
 }
