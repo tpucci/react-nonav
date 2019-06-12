@@ -1,3 +1,19 @@
+<a name="1.2.2"></a>
+## [1.2.2](https://github.com/tpucci/react-gondola/compare/1.2.1...1.2.2) (2019-06-12)
+
+
+### 🐛 Bug Fixes
+
+* **package:** add missing dist folder ([a8b1aa5](https://github.com/tpucci/react-gondola/commit/a8b1aa5))
+
+
+### 📝 Documentation
+
+* **docz:** add static routes ([d3417db](https://github.com/tpucci/react-gondola/commit/d3417db))
+* **GettingStarted:** add peer dependencie installation instruction ([485454a](https://github.com/tpucci/react-gondola/commit/485454a))
+* **README.md:** add badges 🎉 ([64e53cc](https://github.com/tpucci/react-gondola/commit/64e53cc))
+* **Welcome:** rewrite philosophy ([afd1edb](https://github.com/tpucci/react-gondola/commit/afd1edb))
+
 <a name="1.2.1"></a>
 ## [1.2.1](https://github.com/tpucci/react-gondola/compare/1.2.0...1.2.1) (2019-06-04)
 
