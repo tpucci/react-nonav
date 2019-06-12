@@ -4,4 +4,5 @@ module.exports = {
   moduleDirectories: ['node_modules', 'example/node_modules'],
   rootDir: '..',
   testPathIgnorePatterns: ['/node_modules/', '<rootDir>/src/'],
+  modulePathIgnorePatterns: ['<rootDir>/example/node_modules/react-native/'],
 };
