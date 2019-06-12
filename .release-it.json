@@ -1,7 +1,7 @@
 {
   "preReleaseId": "beta",
   "scripts": {
-    "beforeStart": "yarn test"
+    "beforeStart": "yarn test && yarn build"
   },
   "npm": {
     "otp": true
