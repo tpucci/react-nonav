@@ -14,8 +14,9 @@
     "declarative"
   ],
   "peerDependencies": {
-    "mobx": "*",
-    "mobx-react": "*",
+    "mobx": "5.x.x",
+    "mobx-react": "5.x.x",
+    "mobx-utils": "5.x.x",
     "react": "*",
     "react-native": "*"
   },
