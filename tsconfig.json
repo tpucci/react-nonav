@@ -22,8 +22,6 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "noEmit": true,
-    "allowJs": true,
     "lib": ["es6"],
     "types": ["react-native", "mobx-react"]
   },

@@ -20,6 +20,7 @@
     "react-native": "*"
   },
   "scripts": {
+    "build": "tsc",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "predoc:build": "cd example && yarn && cd ..",
     "doc:build": "docz build",
