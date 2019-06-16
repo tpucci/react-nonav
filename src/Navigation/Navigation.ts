@@ -14,4 +14,6 @@ export class Navigation {
   fullScreenDelegate = new FullScreenDelegate();
 
   backHandlerDelegate = new BackHandlerDelegate();
+
+  private constructor() {}
 }
