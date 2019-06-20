@@ -3,8 +3,10 @@ import { ViewStyle, View, StyleSheet, StyleProp } from 'react-native';
 import { Observer } from 'mobx-react/native';
 import { fromStream } from 'mobx-utils';
 import { Subject } from 'rxjs';
-import { map, distinctUntilChanged } from 'rxjs/operators';
+import { map, distinctUntilChanged, withLatestFrom } from 'rxjs/operators';
 import { Navigation } from './Navigation';
+import { BackContext } from './Navigation/BackContext';
+import { last } from './utils/Array.last';
 
 type CanalComponentProps<T> = {
   style?: StyleProp<ViewStyle>;
@@ -48,6 +50,9 @@ export const createCanal = <
     static defaultProps = {
       style: StyleSheet.absoluteFill
     };
+
+    static contextType = BackContext;
+    context!: React.ContextType<typeof BackContext>;
 
     canalId = Date.now().toString();
 
@@ -126,6 +131,18 @@ export const createCanal = <
     }
 
     render() {
+      // @ts-ignore
+      const back$ = this.context.back$
+        .pipe(withLatestFrom(this.progress$))
+        .pipe(
+          map(([_, progress]) => {
+            const currentStop = last(progress);
+            if (currentStop) {
+              return { target: currentStop.name };
+            }
+            return { target: null };
+          })
+        );
       return (
         <View style={this.props.style}>
           <Observer>
