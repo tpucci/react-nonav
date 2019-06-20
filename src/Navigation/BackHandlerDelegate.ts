@@ -19,6 +19,5 @@ export class BackHandlerDelegate {
     BackHandlerDelegate.addEventListener
   );
 
-  // tslint:disable-next-line:member-ordering
   defaultBackContext = { back$: this.back$ };
 }

@@ -47,6 +47,18 @@ export const createCanal = <
   class CanalComponent extends ReactComponent<
     CanalComponentProps<Authorizations>
   > {
+    constructor(props: CanalComponentProps<Authorizations>) {
+      super(props);
+      const { style, ...nextAuthorizations } = props;
+      /**
+       * @TODO 19-06-01 Find a way to safely forbid the use of reserved prop `style` in a StopName.
+       */
+      // @ts-ignore
+      this.authorizations$.next(nextAuthorizations);
+      Navigation.instance.fullScreenDelegate.canalsFullScreenStackProperties$.next(
+        this.fullScreenStackProperties$
+      );
+    }
     static defaultProps = {
       style: StyleSheet.absoluteFill
     };
@@ -98,19 +110,6 @@ export const createCanal = <
           fullScreenStackProperties.fullScreenStack.length
       )
     );
-
-    constructor(props: CanalComponentProps<Authorizations>) {
-      super(props);
-      const { style, ...nextAuthorizations } = props;
-      /**
-       * @TODO 19-06-01 Find a way to safely forbid the use of reserved prop `style` in a StopName.
-       */
-      // @ts-ignore
-      this.authorizations$.next(nextAuthorizations);
-      Navigation.instance.fullScreenDelegate.canalsFullScreenStackProperties$.next(
-        this.fullScreenStackProperties$
-      );
-    }
 
     shouldComponentUpdate({
       style,

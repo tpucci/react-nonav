@@ -9,11 +9,11 @@ export class Navigation {
     Navigation.singleton = new Navigation();
     return Navigation.singleton;
   }
-  private static singleton: Navigation;
 
-  fullScreenDelegate = new FullScreenDelegate();
+  private constructor() {}
+  private static singleton: Navigation;
 
   backHandlerDelegate = new BackHandlerDelegate();
 
-  private constructor() {}
+  fullScreenDelegate = new FullScreenDelegate();
 }

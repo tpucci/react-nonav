@@ -9,7 +9,23 @@
     "no-empty-interface": false,
     "member-access": false,
     "arrow-parens": false,
-    "semicolon": false
+    "semicolon": false,
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "private-constructor",
+          "public-constructor",
+          "private-static-field",
+          "public-static-field",
+          "private-instance-field",
+          "public-instance-field",
+          "private-instance-method",
+          "protected-instance-method",
+          "public-instance-method"
+        ]
+      }
+    ]
   },
   "rulesDirectory": [],
   "linterOptions": {
