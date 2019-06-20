@@ -11,5 +11,8 @@
     "arrow-parens": false,
     "semicolon": false
   },
-  "rulesDirectory": []
+  "rulesDirectory": [],
+  "linterOptions": {
+    "exclude": ["node_modules/**"]
+  }
 }
