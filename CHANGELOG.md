@@ -1,3 +1,12 @@
+<a name="1.2.3"></a>
+## [1.2.3](https://github.com/tpucci/react-gondola/compare/1.2.2...1.2.3) (2019-06-21)
+
+
+### 📝 Documentation
+
+* **analytics:** add google analytics ([b472643](https://github.com/tpucci/react-gondola/commit/b472643))
+* **peerDependencies:** fix peerDependencies ([25659da](https://github.com/tpucci/react-gondola/commit/25659da))
+
 <a name="1.2.2"></a>
 ## [1.2.2](https://github.com/tpucci/react-gondola/compare/1.2.1...1.2.2) (2019-06-12)
 
