@@ -48,7 +48,7 @@
     "cz-emoji": "^1.1.2",
     "docz": "^1.2.0",
     "docz-theme-default": "^1.2.0",
-    "eslint": "^5.16.0",
+    "eslint": "^6.0.1",
     "eslint-config-bambi": "^1.4.0",
     "jest": "^24.7.0",
     "metro-react-native-babel-preset": "^0.54.0",
