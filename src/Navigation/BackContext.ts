@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { IBackEvent } from './BackHandlerDelegate';
 import { Navigation } from './Navigation';
 
-interface IBackContext {
+export interface IBackContext {
   back$: Observable<IBackEvent>;
 }
 

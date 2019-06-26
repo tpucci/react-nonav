@@ -2,58 +2,49 @@ import React, { ComponentType, Component as ReactComponent } from 'react';
 import { ViewStyle, View, StyleSheet, StyleProp } from 'react-native';
 import { Observer } from 'mobx-react/native';
 import { fromStream } from 'mobx-utils';
-import { Subject } from 'rxjs';
-import { map, distinctUntilChanged, withLatestFrom } from 'rxjs/operators';
+import { Subject, Observable } from 'rxjs';
+import {
+  map,
+  distinctUntilChanged,
+  withLatestFrom,
+  share
+} from 'rxjs/operators';
 import { Navigation } from './Navigation';
-import { BackContext } from './Navigation/BackContext';
 import { last } from './utils/Array.last';
+import { IBackEvent } from './Navigation/BackHandlerDelegate';
+import { withBackContext, WithBackContext } from './withBackContext';
+import { StopValidator, IStop } from './StopValidator';
+import { StopHOC } from './StopHOC';
 
 type CanalComponentProps<T> = {
   style?: StyleProp<ViewStyle>;
 } & T;
 
+export interface ICanal {
+  back$: Observable<IBackEvent>;
+}
+
 export const createCanal = <
   StopName extends string,
-  Stop extends {
-    name: StopName;
-    Component: ComponentType;
-    isFullScreen?: boolean;
-  },
+  Stop extends IStop<StopName>,
   Authorizations = { [K in Stop['name']]?: boolean }
 >(
-  stopsList: Stop[]
+  stops: Stop[]
 ): ComponentType<CanalComponentProps<Authorizations>> => {
-  for (let index = 0; index < stopsList.length; index++) {
-    const stop = stopsList[index];
-    if (!stop.name || typeof stop.name !== 'string') {
-      throw new Error(
-        `\`createCanal\` could not find a valid \`name\` key for argument ${index +
-          1}. Received: ${JSON.stringify(stop)}`
-      );
-    }
-    if (
-      !(
-        React.isValidElement(stop.Component) ||
-        typeof stop.Component === 'function'
-      )
-    ) {
-      throw new Error(
-        `\`createCanal\` could not find a valid \`Component\` key for argument ${index +
-          1}. Received: ${JSON.stringify(stop)}`
-      );
-    }
-  }
+  StopValidator.validateList(stops);
 
-  class CanalComponent extends ReactComponent<
-    CanalComponentProps<Authorizations>
-  > {
-    constructor(props: CanalComponentProps<Authorizations>) {
+  class CanalComponent
+    extends ReactComponent<WithBackContext<CanalComponentProps<Authorizations>>>
+    implements ICanal {
+    constructor(props: WithBackContext<CanalComponentProps<Authorizations>>) {
       super(props);
       const { style, ...nextAuthorizations } = props;
+
       /**
        * @TODO 19-06-01 Find a way to safely forbid the use of reserved prop `style` in a StopName.
        */
       // @ts-ignore
+
       this.authorizations$.next(nextAuthorizations);
       Navigation.instance.fullScreenDelegate.canalsFullScreenStackProperties$.next(
         this.fullScreenStackProperties$
@@ -63,12 +54,18 @@ export const createCanal = <
       style: StyleSheet.absoluteFill
     };
 
-    static contextType = BackContext;
-    context!: React.ContextType<typeof BackContext>;
-
     canalId = Date.now().toString();
 
-    stopsList = stopsList;
+    stopsList = stops.map(stop => ({
+      ...stop,
+      Component: StopHOC(
+        this,
+        stop.onBack,
+        stop.name,
+        stop.Component,
+        stop.props
+      )
+    }));
     authorizations$ = new Subject<Authorizations>();
     progress$ = this.authorizations$.pipe(
       map(authorizations =>
@@ -111,6 +108,18 @@ export const createCanal = <
       )
     );
 
+    back$: Observable<IBackEvent> = this.props.backContext.back$.pipe(
+      withLatestFrom(this.progress$),
+      map(([_, progress]) => {
+        const currentStop = last(progress);
+        if (currentStop) {
+          return { target: currentStop.name };
+        }
+        return { target: null };
+      }),
+      share()
+    );
+
     shouldComponentUpdate({
       style,
       ...nextAuthorizations
@@ -130,26 +139,12 @@ export const createCanal = <
     }
 
     render() {
-      // @ts-ignore
-      const back$ = this.context.back$
-        .pipe(withLatestFrom(this.progress$))
-        .pipe(
-          map(([_, progress]) => {
-            const currentStop = last(progress);
-            if (currentStop) {
-              return { target: currentStop.name };
-            }
-            return { target: null };
-          })
-        );
       return (
         <View style={this.props.style}>
           <Observer>
             {() =>
               this.stack.current.map(({ name, Component }) => (
-                <View style={StyleSheet.absoluteFill} key={name}>
-                  <Component />
-                </View>
+                <Component key={name} />
               ))
             }
           </Observer>
@@ -159,5 +154,5 @@ export const createCanal = <
   }
 
   // @ts-ignore
-  return CanalComponent;
+  return withBackContext(CanalComponent);
 };
