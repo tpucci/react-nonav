@@ -16,4 +16,13 @@ describe('BackHandlerDelegate', () => {
     BackHandler.mockPressBack();
     expect.assertions(1);
   });
+
+  it('fires the registered onBackCallback after the event has been handled', () => {
+    const spy = jest.fn();
+    const backHandlerDelegate = new BackHandlerDelegate();
+    backHandlerDelegate.setOnBackCallback(spy);
+    backHandlerDelegate.defaultBackContext.back$.subscribe();
+    BackHandler.mockPressBack();
+    expect(spy).toHaveBeenCalled();
+  });
 });
