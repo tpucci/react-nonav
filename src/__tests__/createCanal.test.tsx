@@ -5,6 +5,9 @@ import TestRenderer from 'react-test-renderer';
 import { stopCreator } from './utils/stopCreator';
 
 import { createCanal } from '../createCanal';
+import { Subject } from 'rxjs';
+import { BackContext } from '../Navigation/BackContext';
+import { IBackEvent } from '../Navigation/BackHandlerDelegate';
 
 describe('createCanal', () => {
   it('throws an error if first arg is not a Component', () => {
@@ -149,6 +152,37 @@ describe('createCanal', () => {
     expect(spy).toHaveBeenCalledWith({
       canalId: '0',
       fullScreenStack: []
+    });
+  });
+
+  it('passes back events on', () => {
+    const back$ = new Subject<IBackEvent>();
+    const spy = jest.fn();
+    const Canal = createCanal([stopCreator('a'), stopCreator('b')]);
+    const testRenderer = TestRenderer.create(
+      <BackContext.Provider value={{ back$ }}>
+        <Canal a />
+      </BackContext.Provider>
+    );
+    testRenderer.update(
+      <BackContext.Provider value={{ back$ }}>
+        <Canal a b />
+      </BackContext.Provider>
+    );
+    // @ts-ignore
+    testRenderer.root.children[0].instance.back$.subscribe(spy);
+    back$.next({ target: null });
+    expect(spy).toHaveBeenCalledWith({
+      target: 'b'
+    });
+    testRenderer.update(
+      <BackContext.Provider value={{ back$ }}>
+        <Canal />
+      </BackContext.Provider>
+    );
+    back$.next({ target: null });
+    expect(spy).toHaveBeenCalledWith({
+      target: null
     });
   });
 });

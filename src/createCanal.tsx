@@ -38,7 +38,7 @@ export const createCanal = <
     implements ICanal {
     constructor(props: WithBackContext<CanalComponentProps<Authorizations>>) {
       super(props);
-      const { style, ...nextAuthorizations } = props;
+      const { style, backContext, ...nextAuthorizations } = props;
 
       /**
        * @TODO 19-06-01 Find a way to safely forbid the use of reserved prop `style` in a StopName.
