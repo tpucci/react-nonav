@@ -164,13 +164,17 @@ describe('createCanal', () => {
         <Canal a />
       </BackContext.Provider>
     );
+    // @ts-ignore
+    testRenderer.root.children[0].instance.back$.subscribe(spy);
+    back$.next({ target: null });
+    expect(spy).toHaveBeenCalledWith({
+      target: 'a'
+    });
     testRenderer.update(
       <BackContext.Provider value={{ back$ }}>
         <Canal a b />
       </BackContext.Provider>
     );
-    // @ts-ignore
-    testRenderer.root.children[0].instance.back$.subscribe(spy);
     back$.next({ target: null });
     expect(spy).toHaveBeenCalledWith({
       target: 'b'

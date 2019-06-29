@@ -2,12 +2,12 @@ import React, { ComponentType, Component as ReactComponent } from 'react';
 import { ViewStyle, View, StyleSheet, StyleProp } from 'react-native';
 import { Observer } from 'mobx-react/native';
 import { fromStream } from 'mobx-utils';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, ConnectableObservable } from 'rxjs';
 import {
   map,
   distinctUntilChanged,
   withLatestFrom,
-  share
+  publish
 } from 'rxjs/operators';
 import { Navigation } from './Navigation';
 import { last } from './utils/Array.last';
@@ -38,6 +38,8 @@ export const createCanal = <
     implements ICanal {
     constructor(props: WithBackContext<CanalComponentProps<Authorizations>>) {
       super(props);
+
+      this.back$.connect();
       const { style, backContext, ...nextAuthorizations } = props;
 
       /**
@@ -108,7 +110,14 @@ export const createCanal = <
       )
     );
 
-    back$: Observable<IBackEvent> = this.props.backContext.back$.pipe(
+    /**
+     * @TODO Pipe operator cannot infer return type as ConnectableObservable.
+     * See https://github.com/ReactiveX/rxjs/issues/2972.
+     */
+    // @ts-ignore
+    back$: ConnectableObservable<
+      IBackEvent
+    > = this.props.backContext.back$.pipe(
       withLatestFrom(this.progress$),
       map(([_, progress]) => {
         const currentStop = last(progress);
@@ -117,7 +126,7 @@ export const createCanal = <
         }
         return { target: null };
       }),
-      share()
+      publish()
     );
 
     shouldComponentUpdate({
