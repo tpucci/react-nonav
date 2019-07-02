@@ -5,4 +5,7 @@ module.exports = {
   preset: 'react-native',
   rootDir: '..',
   testPathIgnorePatterns: ['/node_modules/', '<rootDir>/src/'],
+  moduleNameMapper: {
+    '^react-gondola$': '<rootDir>/src/',
+  },
 };
