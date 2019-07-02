@@ -8,13 +8,15 @@ import { View, StyleSheet } from 'react-native';
 import { filter, share, tap } from 'rxjs/operators';
 import { Navigation } from './Navigation';
 import { ICanal } from './createCanal';
+import { TransitionType } from './Transitions/Transition';
 
-export const StopHOC = (
+export const createStop = (
   canal: ICanal,
   onBack: (() => any) | undefined,
   name: string,
   Component: ComponentType,
-  props: object | undefined
+  props: object | undefined,
+  transition: TransitionType | undefined
 ) => {
   /**
    * @TODO 2019-07-26 Update @types/react once https://github.com/DefinitelyTyped/DefinitelyTyped/pull is merged.

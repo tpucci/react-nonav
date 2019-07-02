@@ -14,7 +14,7 @@ import { last } from './utils/Array.last';
 import { IBackEvent } from './Navigation/BackHandlerDelegate';
 import { withBackContext, WithBackContext } from './withBackContext';
 import { StopValidator, IStop } from './StopValidator';
-import { StopHOC } from './StopHOC';
+import { createStop } from './createStop';
 
 type CanalComponentProps<T> = {
   style?: StyleProp<ViewStyle>;
@@ -60,12 +60,13 @@ export const createCanal = <
 
     stopsList = stops.map(stop => ({
       ...stop,
-      Component: StopHOC(
+      Component: createStop(
         this,
         stop.onBack,
         stop.name,
         stop.Component,
-        stop.props
+        stop.props,
+        stop.transition
       )
     }));
     authorizations$ = new Subject<Authorizations>();

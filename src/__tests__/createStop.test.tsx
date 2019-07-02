@@ -3,15 +3,21 @@ import { of } from 'rxjs';
 import { View } from 'react-native';
 import TestRenderer from 'react-test-renderer';
 
-import { StopHOC } from '../StopHOC';
+import { createStop } from '../createStop';
 import { Navigation } from '../Navigation';
 
-describe('StopHOC', () => {
+describe('createStop', () => {
   it('creates a Component which pipes back events and filter them based on name', () => {
     const spy = jest.fn();
     const initialEvent = { target: 'myComponent' };
     const back$ = of(initialEvent);
-    const Stop = StopHOC({ back$ }, undefined, 'myComponent', View, undefined);
+    const Stop = createStop(
+      { back$ },
+      undefined,
+      'myComponent',
+      View,
+      undefined
+    );
     const testRenderer = TestRenderer.create(<Stop />);
     testRenderer.root.instance.back$.subscribe(spy);
     expect(spy).toHaveBeenCalledWith(initialEvent);
@@ -21,7 +27,13 @@ describe('StopHOC', () => {
     const spy = jest.fn();
     const initialEvent = { target: 'notMyComponent' };
     const back$ = of(initialEvent);
-    const Stop = StopHOC({ back$ }, undefined, 'myComponent', View, undefined);
+    const Stop = createStop(
+      { back$ },
+      undefined,
+      'myComponent',
+      View,
+      undefined
+    );
     const testRenderer = TestRenderer.create(<Stop />);
     testRenderer.root.instance.back$.subscribe(spy);
     expect(spy).not.toHaveBeenCalled();
@@ -35,7 +47,13 @@ describe('StopHOC', () => {
     );
     const initialEvent = { target: 'myComponent' };
     const back$ = of(initialEvent);
-    const Stop = StopHOC({ back$ }, onBackSpy, 'myComponent', View, undefined);
+    const Stop = createStop(
+      { back$ },
+      onBackSpy,
+      'myComponent',
+      View,
+      undefined
+    );
     const testRenderer = TestRenderer.create(<Stop />);
     testRenderer.root.instance.back$.subscribe();
     expect(setOnBackCallbackSpy).toHaveBeenCalledWith(onBackSpy);
