@@ -48,9 +48,7 @@ export const createStop = (
             back$: this.back$
           }}
         >
-          <View style={StyleSheet.absoluteFill} key={name}>
-            {factory({ ...props })}
-          </View>
+          <View style={StyleSheet.absoluteFill}>{factory({ ...props })}</View>
         </BackContext.Provider>
       );
     }
