@@ -1,3 +1,36 @@
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/tpucci/react-gondola/compare/1.2.3...1.3.0) (2019-07-02)
+
+
+### ♻️ Code Refactoring
+
+* **jest.config.js:** sort lines ([667df3c](https://github.com/tpucci/react-gondola/commit/667df3c))
+* **Navigation:** enclose in its own folder ([073d179](https://github.com/tpucci/react-gondola/commit/073d179))
+* **Navigation:** move fullScreen properties in FullScreenDelegate ([b926fa4](https://github.com/tpucci/react-gondola/commit/b926fa4))
+* **Navigation:** rename instance into singleton ([c1c9918](https://github.com/tpucci/react-gondola/commit/c1c9918))
+
+
+### ✅ Tests
+
+* **BackHandlerDelegate:** test onBackCallback firing ([5ce2d35](https://github.com/tpucci/react-gondola/commit/5ce2d35))
+* **createCanal:** test back handler ([8f24877](https://github.com/tpucci/react-gondola/commit/8f24877))
+* **StopHOC:** test event handling ([674ae27](https://github.com/tpucci/react-gondola/commit/674ae27))
+
+
+### ✨ Features
+
+* **back:** add Android back button support ([bac0a60](https://github.com/tpucci/react-gondola/commit/bac0a60))
+
+
+### 🐛 Bug Fixes
+
+* **createCanal:** fix missing back subscription on instantiate ([88f7e28](https://github.com/tpucci/react-gondola/commit/88f7e28))
+
+
+### 📝 Documentation
+
+* **createCanal:** add docs for Stop onBack hook ([6bba5fd](https://github.com/tpucci/react-gondola/commit/6bba5fd))
+
 <a name="1.2.3"></a>
 ## [1.2.3](https://github.com/tpucci/react-gondola/compare/1.2.2...1.2.3) (2019-06-21)
 
