@@ -1,12 +1,6 @@
 import { Subject, Observable } from 'rxjs';
-import { ComponentType } from 'react';
 import { mergeAll, map, scan } from 'rxjs/operators';
-
-export interface IStop {
-  name: string;
-  Component: ComponentType;
-  isFullScreen?: boolean;
-}
+import { IStop } from './Stop';
 
 type Stack = IStop[];
 
@@ -19,16 +13,7 @@ interface IFullScreenStackMap {
   [canalId: string]: Stack;
 }
 
-export class Navigation {
-  static getInstance() {
-    if (Navigation.instance) {
-      return Navigation.instance;
-    }
-    Navigation.instance = new Navigation();
-    return Navigation.instance;
-  }
-  private static instance: Navigation;
-
+export class FullScreenDelegate {
   canalsFullScreenStackProperties$ = new Subject<
     Observable<IFullScreenStackProperties>
   >();

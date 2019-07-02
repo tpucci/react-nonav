@@ -5,6 +5,9 @@ import TestRenderer from 'react-test-renderer';
 import { stopCreator } from './utils/stopCreator';
 
 import { createCanal } from '../createCanal';
+import { Subject } from 'rxjs';
+import { BackContext } from '../Navigation/BackContext';
+import { IBackEvent } from '../Navigation/BackHandlerDelegate';
 
 describe('createCanal', () => {
   it('throws an error if first arg is not a Component', () => {
@@ -54,7 +57,11 @@ describe('createCanal', () => {
       stopCreator('c')
     ]);
     const testRenderer = TestRenderer.create(<Canal a />);
-    const renderSpy = jest.spyOn(testRenderer.root.instance, 'render');
+    const renderSpy = jest.spyOn(
+      // @ts-ignore
+      testRenderer.root.children[0].instance,
+      'render'
+    );
     testRenderer.update(<Canal a={false} />);
     expect(renderSpy).not.toHaveBeenCalled();
     testRenderer.update(<Canal a={false} style={{}} />);
@@ -103,7 +110,12 @@ describe('createCanal', () => {
     const stopB = stopCreator('b', true);
     const Canal = createCanal([stopCreator('a'), stopB]);
     const testRenderer = TestRenderer.create(<Canal a />);
-    testRenderer.root.instance.fullScreenStackProperties$.subscribe(spy);
+    // @ts-ignore
+    testRenderer.root.children[0].instance.fullScreenStackProperties$.subscribe(
+      spy
+    );
+    // @ts-ignore
+    const [_, StopB] = testRenderer.root.children[0].instance.stopsList;
     testRenderer.update(<Canal a />);
     testRenderer.update(<Canal a />);
     testRenderer.update(<Canal a b />);
@@ -116,22 +128,65 @@ describe('createCanal', () => {
     });
     expect(spy).toHaveBeenCalledWith({
       canalId: '0',
-      fullScreenStack: [stopB]
+      fullScreenStack: [StopB]
     });
   });
 
   it('emits empty fullscreen stack when unmounted', () => {
     const spy = jest.fn();
-    const stopB = stopCreator('b', true);
-    const Canal = createCanal([stopCreator('a'), stopB]);
+    const Canal = createCanal([stopCreator('a'), stopCreator('b', true)]);
     const testRenderer = TestRenderer.create(<Canal a />);
-    testRenderer.root.instance.fullScreenStackProperties$.subscribe(spy);
+    // @ts-ignore
+    testRenderer.root.children[0].instance.fullScreenStackProperties$.subscribe(
+      spy
+    );
+    // @ts-ignore
+    const [_, StopB] = testRenderer.root.children[0].instance.stopsList;
     testRenderer.update(<Canal a b />);
     testRenderer.update(<View />);
     expect(spy).toHaveBeenCalledTimes(2);
     expect(spy).toHaveBeenCalledWith({
       canalId: '0',
-      fullScreenStack: [stopB]
+      fullScreenStack: [StopB]
+    });
+    expect(spy).toHaveBeenCalledWith({
+      canalId: '0',
+      fullScreenStack: []
+    });
+  });
+
+  it('passes back events on', () => {
+    const back$ = new Subject<IBackEvent>();
+    const spy = jest.fn();
+    const Canal = createCanal([stopCreator('a'), stopCreator('b')]);
+    const testRenderer = TestRenderer.create(
+      <BackContext.Provider value={{ back$ }}>
+        <Canal a />
+      </BackContext.Provider>
+    );
+    // @ts-ignore
+    testRenderer.root.children[0].instance.back$.subscribe(spy);
+    back$.next({ target: null });
+    expect(spy).toHaveBeenCalledWith({
+      target: 'a'
+    });
+    testRenderer.update(
+      <BackContext.Provider value={{ back$ }}>
+        <Canal a b />
+      </BackContext.Provider>
+    );
+    back$.next({ target: null });
+    expect(spy).toHaveBeenCalledWith({
+      target: 'b'
+    });
+    testRenderer.update(
+      <BackContext.Provider value={{ back$ }}>
+        <Canal />
+      </BackContext.Provider>
+    );
+    back$.next({ target: null });
+    expect(spy).toHaveBeenCalledWith({
+      target: null
     });
   });
 });

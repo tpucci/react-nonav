@@ -6,11 +6,15 @@
  */
 
 const path = require('path');
+const blacklist = require('metro-config/src/defaults/blacklist');
+
+const rootPath = path.resolve(__dirname, '..');
 
 module.exports = {
   projectRoot: path.resolve(__dirname),
   watchFolders: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../node_modules')],
   resolver: {
+    blacklistRE: blacklist([new RegExp(`${rootPath}/node_modules/react-native/.*`)]),
     extraNodeModules: {
       'react-gondola': path.resolve(__dirname, '../src'),
       // Important, those are all the dependencies
@@ -21,8 +25,11 @@ module.exports = {
       'mobx-react': path.resolve(__dirname, '../node_modules/mobx-react'),
       'mobx-utils': path.resolve(__dirname, '../node_modules/mobx-utils'),
       react: path.resolve(__dirname, '../node_modules/react'),
-      'react-native': path.resolve(__dirname, '../node_modules/react-native'),
-      '@babel/plugin-proposal-decorators': path.resolve(__dirname, '../node_modules/@babel/plugin-proposal-decorators'),
+      'react-native': path.resolve(__dirname, 'node_modules/react-native'),
+      '@babel/plugin-proposal-decorators': path.resolve(
+        __dirname,
+        '../node_modules/@babel/plugin-proposal-decorators'
+      ),
     },
   },
   transformer: {

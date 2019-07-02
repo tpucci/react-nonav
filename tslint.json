@@ -9,7 +9,11 @@
     "no-empty-interface": false,
     "member-access": false,
     "arrow-parens": false,
-    "semicolon": false
+    "semicolon": false,
+    "member-ordering": false
   },
-  "rulesDirectory": []
+  "rulesDirectory": [],
+  "linterOptions": {
+    "exclude": ["node_modules/**"]
+  }
 }

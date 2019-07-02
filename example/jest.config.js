@@ -1,7 +1,11 @@
 module.exports = {
-  preset: 'react-native',
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   moduleDirectories: ['node_modules', 'example/node_modules'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  modulePathIgnorePatterns: ['<rootDir>/example/node_modules/react-native/'],
+  preset: 'react-native',
   rootDir: '..',
   testPathIgnorePatterns: ['/node_modules/', '<rootDir>/src/'],
+  moduleNameMapper: {
+    '^react-gondola$': '<rootDir>/src/',
+  },
 };
