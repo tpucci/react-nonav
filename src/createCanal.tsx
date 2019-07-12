@@ -16,6 +16,8 @@ import { withBackContext, WithBackContext } from './withBackContext';
 import { StopValidator, IStop } from './StopValidator';
 import { createStop } from './createStop';
 
+import { IStop as IIStop } from './Navigation/Stop.d';
+
 type CanalComponentProps<T> = {
   style?: StyleProp<ViewStyle>;
 } & T;
@@ -42,15 +44,14 @@ export const createCanal = <
       this.back$.connect();
       const { style, backContext, ...nextAuthorizations } = props;
 
+      Navigation.instance.fullScreenDelegate.canalsFullScreenStackProperties$.next(
+        this.fullScreenStackProperties$
+      );
       /**
        * @TODO 19-06-01 Find a way to safely forbid the use of reserved prop `style` in a StopName.
        */
       // @ts-ignore
-
       this.authorizations$.next(nextAuthorizations);
-      Navigation.instance.fullScreenDelegate.canalsFullScreenStackProperties$.next(
-        this.fullScreenStackProperties$
-      );
     }
     static defaultProps = {
       style: StyleSheet.absoluteFill
@@ -66,7 +67,7 @@ export const createCanal = <
         stop.name,
         stop.Component,
         stop.props,
-        stop.transition
+        stop.Transitioner
       )
     }));
     authorizations$ = new Subject<Authorizations>();
@@ -74,17 +75,20 @@ export const createCanal = <
       map(authorizations =>
         this.stopsList
           .slice(0)
-          .reduce((acc: Stop[], stop, _, stopsCandidatesList) => {
-            /**
-             * @TODO 19-06-01 Check if Authorization type can be indexed with StopName type.
-             * See https://github.com/Microsoft/TypeScript/issues/2491.
-             */
-            // @ts-ignore
-            if (authorizations[stop.name]) {
-              acc.push(stop);
-            } else {
-              stopsCandidatesList.splice(1);
-            }
+          .reduce((acc: IIStop[], { name, isFullScreen, Component }) => {
+            acc.push({
+              Component,
+              isAuthorized:
+                /**
+                 * @TODO 19-06-01 Check if Authorization type can be indexed with StopName type.
+                 * See https://github.com/Microsoft/TypeScript/issues/2491.
+                 */
+                // @ts-ignore
+                !!authorizations[name] &&
+                (last(acc) ? last(acc)!.isAuthorized : true),
+              isFullScreen,
+              name
+            });
             return acc;
           }, [])
       )
@@ -105,9 +109,12 @@ export const createCanal = <
         fullScreenStack: progressStopsList.filter(stop => stop.isFullScreen)
       })),
       distinctUntilChanged(
-        (lastFullScreenStackProperties, fullScreenStackProperties) =>
-          lastFullScreenStackProperties.fullScreenStack.length ===
-          fullScreenStackProperties.fullScreenStack.length
+        (
+          { fullScreenStack: previousFullScreenStack },
+          { fullScreenStack: nextFullScreenStack }
+        ) =>
+          previousFullScreenStack.filter(stop => stop.isAuthorized).length ===
+          nextFullScreenStack.filter(stop => stop.isAuthorized).length
       )
     );
 
@@ -121,7 +128,7 @@ export const createCanal = <
     > = this.props.backContext.back$.pipe(
       withLatestFrom(this.progress$),
       map(([_, progress]) => {
-        const currentStop = last(progress);
+        const currentStop = last(progress.filter(stop => stop.isAuthorized));
         if (currentStop) {
           return { target: currentStop.name };
         }
@@ -153,8 +160,8 @@ export const createCanal = <
         <View style={this.props.style}>
           <Observer>
             {() =>
-              this.stack.current.map(({ name, Component }) => (
-                <Component key={name} />
+              this.stack.current.map(({ name, Component, isAuthorized }) => (
+                <Component key={name} isAuthorized={isAuthorized} />
               ))
             }
           </Observer>

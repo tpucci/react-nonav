@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "postinstall": "patch-package",
     "start": "node ../node_modules/react-native/local-cli/cli.js start",
     "test:lint": "cd .. && yarn tslint example/src/**/*.ts{,x} && cd example",
     "test:unit": "cd .. && yarn jest --config=example/jest.config.js && cd example",

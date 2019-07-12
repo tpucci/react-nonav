@@ -117,22 +117,36 @@ describe('createCanal', () => {
     // @ts-ignore
     const [_, StopB] = testRenderer.root.children[0].instance.stopsList;
     testRenderer.update(<Canal a />);
+    expect(spy).toHaveBeenCalledWith({
+      canalId: '0',
+      fullScreenStack: [
+        {
+          Component: StopB.Component,
+          isAuthorized: false,
+          isFullScreen: true,
+          name: 'b'
+        }
+      ]
+    });
     testRenderer.update(<Canal a />);
     testRenderer.update(<Canal a b />);
+    expect(spy).toHaveBeenCalledWith({
+      canalId: '0',
+      fullScreenStack: [
+        {
+          Component: StopB.Component,
+          isAuthorized: true,
+          isFullScreen: true,
+          name: 'b'
+        }
+      ]
+    });
     testRenderer.update(<Canal a b />);
     testRenderer.update(<Canal a b />);
     expect(spy).toHaveBeenCalledTimes(2);
-    expect(spy).toHaveBeenCalledWith({
-      canalId: '0',
-      fullScreenStack: []
-    });
-    expect(spy).toHaveBeenCalledWith({
-      canalId: '0',
-      fullScreenStack: [StopB]
-    });
   });
 
-  it('emits empty fullscreen stack when unmounted', () => {
+  it('emits unauthorized fullscreen stack when unmounted', () => {
     const spy = jest.fn();
     const Canal = createCanal([stopCreator('a'), stopCreator('b', true)]);
     const testRenderer = TestRenderer.create(<Canal a />);
@@ -147,11 +161,25 @@ describe('createCanal', () => {
     expect(spy).toHaveBeenCalledTimes(2);
     expect(spy).toHaveBeenCalledWith({
       canalId: '0',
-      fullScreenStack: [StopB]
+      fullScreenStack: [
+        {
+          Component: StopB.Component,
+          isAuthorized: true,
+          isFullScreen: true,
+          name: 'b'
+        }
+      ]
     });
     expect(spy).toHaveBeenCalledWith({
       canalId: '0',
-      fullScreenStack: []
+      fullScreenStack: [
+        {
+          Component: StopB.Component,
+          isAuthorized: false,
+          isFullScreen: true,
+          name: 'b'
+        }
+      ]
     });
   });
 
