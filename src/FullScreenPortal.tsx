@@ -18,11 +18,11 @@ export class FullScreenPortal extends ReactComponent {
             if (this.fullScreenStack.current) {
               return (
                 this.fullScreenStack.current &&
-                this.fullScreenStack.current.map(({ Component, name }) => (
-                  <View style={StyleSheet.absoluteFill} key={name}>
-                    <Component />
-                  </View>
-                ))
+                this.fullScreenStack.current.map(
+                  ({ Component, name, isAuthorized }) => (
+                    <Component isAuthorized={isAuthorized} key={name} />
+                  )
+                )
               );
             }
             return null;

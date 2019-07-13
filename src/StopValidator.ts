@@ -1,11 +1,14 @@
 import React, { ComponentType } from 'react';
 
+import { TransitionComponentType } from './transitions/Transition';
+
 export interface IStop<T extends string> {
   name: T;
   Component: ComponentType<any>;
   isFullScreen?: boolean;
   onBack?: () => any;
   props?: object;
+  Transitioner?: TransitionComponentType;
 }
 
 export class StopValidator {

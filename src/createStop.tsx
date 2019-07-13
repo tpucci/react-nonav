@@ -4,17 +4,20 @@ import React, {
   ComponentType
 } from 'react';
 import { BackContext } from './Navigation/BackContext';
-import { View, StyleSheet } from 'react-native';
 import { filter, share, tap } from 'rxjs/operators';
 import { Navigation } from './Navigation';
 import { ICanal } from './createCanal';
+import { TransitionComponentType } from './transitions/Transition';
+import { None } from './transitions';
+import { IStopComponentProps } from './Navigation/Stop';
 
-export const StopHOC = (
+export const createStop = (
   canal: ICanal,
   onBack: (() => any) | undefined,
   name: string,
   Component: ComponentType,
-  props: object | undefined
+  props: object | undefined,
+  Transitioner: TransitionComponentType = None
 ) => {
   /**
    * @TODO 2019-07-26 Update @types/react once https://github.com/DefinitelyTyped/DefinitelyTyped/pull is merged.
@@ -22,7 +25,7 @@ export const StopHOC = (
   // @ts-ignore
   const factory = createFactory(Component);
 
-  return class StopComponent extends ReactComponent<{}> {
+  return class StopComponent extends ReactComponent<IStopComponentProps> {
     back$ = canal.back$.pipe(
       filter(value => value.target === name),
       tap(() => {
@@ -41,15 +44,15 @@ export const StopHOC = (
 
     render() {
       return (
-        <BackContext.Provider
-          value={{
-            back$: this.back$
-          }}
-        >
-          <View style={StyleSheet.absoluteFill} key={name}>
-            {factory({ ...props })}
-          </View>
-        </BackContext.Provider>
+        <Transitioner directionForward={this.props.isAuthorized}>
+          <BackContext.Provider
+            value={{
+              back$: this.back$
+            }}
+          >
+            {factory({ navigation: { goBack: onBack }, ...props })}
+          </BackContext.Provider>
+        </Transitioner>
       );
     }
   };

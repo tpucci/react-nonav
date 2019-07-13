@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { createCanal } from 'react-gondola';
+import { RotateCrazy } from 'react-gondola/transitions';
 import { FirstName } from './FirstName';
 import { LastName } from './LastName';
 import { Confirm } from './Confirm';
@@ -32,11 +33,17 @@ export class SignIn extends Component {
     },
     {
       Component: LastName,
+      Transitioner: RotateCrazy,
       name: 'lastName',
       onBack: this.goBackward,
       props: { onNext: this.goForward }
     },
-    { name: 'confirm', Component: Confirm, onBack: this.goBackward }
+    {
+      Component: Confirm,
+      Transitioner: RotateCrazy,
+      name: 'confirm',
+      onBack: this.goBackward
+    }
   ]);
 
   render() {

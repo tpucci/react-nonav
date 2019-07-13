@@ -12,7 +12,7 @@ exports[`FirstName renders correctly 1`] = `
   }
 >
   <Text>
-    Waht is your first name ?
+    What is your first name ?
   </Text>
   <TextInput
     allowFontScaling={true}

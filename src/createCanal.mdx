@@ -12,13 +12,14 @@ route: /api/create-canal
 
 ## Stop
 
-|    Key name    | Required | Default     | Usage                                                                           |
-| :------------: | :------: | ----------- | ------------------------------------------------------------------------------- |
-|     `name`     |  `true`  | `undefined` | Unique identifier.                                                              |
-|  `Component`   |  `true`  | `undefined` | The component that will be rendered when the user progress reaches that stop.   |
-|    `props`     | `false`  | `undefined` | Optional. Props that will be passed down to the component.                      |
-|    `onBack`    | `false`  | `undefined` | Optional. Android Back button Callback.                                         |
-| `isFullScreen` | `false`  | `undefined` | Optional. Indicates if the stop needs to be rendered in the `FullScreenPortal`. |
+|    Key name    | Required | Default     | Usage                                                                                                           |
+| :------------: | :------: | ----------- | --------------------------------------------------------------------------------------------------------------- |
+|     `name`     |  `true`  | `undefined` | Unique identifier.                                                                                              |
+|  `Component`   |  `true`  | `undefined` | The component that will be rendered when the user progress reaches that stop.                                   |
+|    `props`     | `false`  | `undefined` | Optional. Props that will be passed down to the component.                                                      |
+|    `onBack`    | `false`  | `undefined` | Optional. Android Back button Callback.                                                                         |
+| `isFullScreen` | `false`  | `undefined` | Optional. Indicates if the stop needs to be rendered in the `FullScreenPortal`.                                 |
+| `Transitioner` | `false`  | `undefined` | Optional. Transition to be applied between when navigating to this stop. See [Transitions](/guides/transitions) |
 
 ## Canal Props
 
