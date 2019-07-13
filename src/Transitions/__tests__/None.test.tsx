@@ -1,4 +1,4 @@
-import { describeTransitioner } from './utils/transitionDescriptor';
+import { describeTransitioner } from '../utils/describeTransitioner';
 import { None } from '../None';
 
 describeTransitioner(None);

@@ -2,7 +2,7 @@ import React, { Children } from 'react';
 import { StyleSheet, Dimensions } from 'react-native';
 import Animated, { Easing } from 'react-native-reanimated';
 
-import { ITransition, TransitionComponent } from './Transition.d';
+import { TransitionComponent } from './Transition';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -68,7 +68,7 @@ function runTiming(
   ]);
 }
 
-export class RotateCrazy extends TransitionComponent implements ITransition {
+export class RotateCrazy extends TransitionComponent {
   state = {
     hidden: !this.props.directionForward
   };

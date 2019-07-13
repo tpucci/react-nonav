@@ -1,0 +1,59 @@
+---
+name: Transitions
+menu: Guides
+route: /guides/transitions
+---
+
+# Transitions
+
+In order to use transitions between two screens, simply add the `Transitioner` key to your stops.
+
+## Basic example
+
+```ts
+import React from "react";
+import { createCanal } from "react-gondola";
+import { SildeLeft } from "react-gondola/transitions";
+import { FirstName } from "./FirstName";
+import { LastName } from "./LastName";
+
+const SignInCanal = createCanal([
+  { name: "firstName", Component: FirstName },
+  { name: "lastName", Component: LastName, Transitioner: SildeLeft }
+]);
+```
+
+## Available transitioners
+
+|                             Transitioner                              | Import                                                     |                      transition                      |
+| :-------------------------------------------------------------------: | ---------------------------------------------------------- | :--------------------------------------------------: |
+|                              `SildeLeft`                              | `import { SildeLeft } from "react-gondola/transitions";`   |   ![Slide Left transition](./assets/slideLeft.gif)   |
+|                               `SildeUp`                               | `import { SildeUp } from "react-gondola/transitions";`     |     ![Slide Up transition](./assets/slideUp.gif)     |
+| `RotateCrazy` (⚠️ experimental: this might be removed without notice) | `import { RotateCrazy } from "react-gondola/transitions";` | ![Rotate Crazy transition](./assets/rotateCrazy.gif) |
+
+## Create your own transitioner
+
+You can create your own transitioner if the one availables does not fit your needs ! Get some inspiration by looking at `SlideLeft` source code and get started !
+
+1. Your transitioner need to extend `TransitionComponent` (imported from `react-gondola/transitions`).
+2. Your transitioner will receive a `directionForward` prop. If true, your transitioner need to play the transition forward. Else, it need to play the transition backward.
+3. (Optionnal but recommended) If you use jest, you can test your component using `describeTransitioner` from `react-gondola/transitions/describeTransitioner`
+
+⚠️ If you use jest and want to test you Transitioner wihch uses `react-native-reanimated`, make sure you correctly mocked `react-native-reanimated`.
+
+```js
+// in your jest setup file, use the following
+
+jest.mock("react-native-reanimated/src/ReanimatedEventEmitter");
+jest.mock("react-native-reanimated/src/ReanimatedModule", () => ({
+  configureNativeProps: () => {},
+  connectNodes: () => {},
+  disconnectNodes: () => {},
+  createNode: () => {},
+  configureProps: () => {},
+  getValue: () => {},
+  dropNode: () => {}
+}));
+jest.mock("react-native-reanimated/src/derived/evaluateOnce");
+jest.mock("react-native-reanimated/src/core/AnimatedProps");
+```

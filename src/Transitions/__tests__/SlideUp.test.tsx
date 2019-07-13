@@ -1,4 +1,4 @@
-import { describeTransitioner } from './utils/transitionDescriptor';
+import { describeTransitioner } from '../utils/describeTransitioner';
 import { SlideUp } from '../SlideUp';
 
 describeTransitioner(SlideUp);

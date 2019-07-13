@@ -6,6 +6,7 @@ module.exports = {
   menu: [
     'Welcome',
     'Getting Started',
+    { name: 'Guides', menu: ['Transitions'] },
     'Example',
     'Contribute',
     'Roadmap',
@@ -16,6 +17,7 @@ module.exports = {
     config.resolve.alias = Object.assign({}, config.resolve.alias, {
       'react-native$': 'react-native-web',
       'react-gondola$': path.resolve(__dirname, 'src/index.ts'), // eslint-disable-line
+      'react-gondola/transitions$': path.resolve(__dirname, 'src/transitions/index.ts'), // eslint-disable-line
     });
     return config;
   },

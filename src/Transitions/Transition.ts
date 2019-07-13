@@ -1,7 +1,5 @@
 import { Component, ComponentType } from 'react';
 
-export interface ITransition {}
-
 export interface ITransitionComponentProps {
   directionForward: boolean;
 }

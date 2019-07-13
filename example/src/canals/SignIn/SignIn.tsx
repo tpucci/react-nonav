@@ -33,7 +33,7 @@ export class SignIn extends Component {
     },
     {
       Component: LastName,
-      Transitioner: SlideLeft,
+      Transitioner: RotateCrazy,
       name: 'lastName',
       onBack: this.goBackward,
       props: { onNext: this.goForward }

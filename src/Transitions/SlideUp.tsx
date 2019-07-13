@@ -2,7 +2,7 @@ import React, { Children } from 'react';
 import { StyleSheet, Dimensions } from 'react-native';
 import Animated, { Easing } from 'react-native-reanimated';
 
-import { ITransition, TransitionComponent } from './Transition.d';
+import { TransitionComponent } from './Transition';
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
@@ -67,7 +67,7 @@ function runTiming(
   ]);
 }
 
-export class SlideUp extends TransitionComponent implements ITransition {
+export class SlideUp extends TransitionComponent {
   state = {
     hidden: !this.props.directionForward
   };

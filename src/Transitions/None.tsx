@@ -1,9 +1,9 @@
 import React, { Children } from 'react';
 import { View, StyleSheet } from 'react-native';
 
-import { ITransition, TransitionComponent } from './Transition.d';
+import { TransitionComponent } from './Transition';
 
-export class None extends TransitionComponent implements ITransition {
+export class None extends TransitionComponent {
   render() {
     if (!this.props.directionForward) {
       return null;
