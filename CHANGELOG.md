@@ -1,3 +1,27 @@
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/tpucci/react-gondola/compare/1.3.0...1.4.0) (2019-07-13)
+
+
+### ♻️ Code Refactoring
+
+* **createStop:** remove unused key prop ([475e436](https://github.com/tpucci/react-gondola/commit/475e436))
+
+
+### ✨ Features
+
+* **transitions:** support slide transitions ([fba8b03](https://github.com/tpucci/react-gondola/commit/fba8b03))
+
+
+### 🐛 Bug Fixes
+
+* **macos:** move capital folder Transitions to transitions ([dc4e1b1](https://github.com/tpucci/react-gondola/commit/dc4e1b1))
+* **node_modules:** fix missing postinstall script ([3c3440f](https://github.com/tpucci/react-gondola/commit/3c3440f))
+
+
+### 📝 Documentation
+
+* **transitions:** add guides/transitions ([c42f166](https://github.com/tpucci/react-gondola/commit/c42f166))
+
 <a name="1.3.0"></a>
 # [1.3.0](https://github.com/tpucci/react-gondola/compare/1.2.3...1.3.0) (2019-07-02)
 
