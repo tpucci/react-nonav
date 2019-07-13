@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { createCanal } from 'react-gondola';
-import { SlideLeft, SlideUp, RotateCrazy } from 'react-gondola/transitions';
+import { RotateCrazy } from 'react-gondola/transitions';
 import { FirstName } from './FirstName';
 import { LastName } from './LastName';
 import { Confirm } from './Confirm';

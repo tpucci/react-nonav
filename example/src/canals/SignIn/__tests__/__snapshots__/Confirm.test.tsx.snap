@@ -34,7 +34,7 @@ exports[`Confirm renders correctly 1`] = `
       }
     >
       <Text>
-        Waht is your first name ?
+        What is your first name ?
       </Text>
       <TextInput
         allowFontScaling={true}
@@ -84,5 +84,29 @@ exports[`Confirm renders correctly 1`] = `
       </View>
     </View>
   </View>
+  <View
+    collapsable={false}
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
 </View>
 `;
