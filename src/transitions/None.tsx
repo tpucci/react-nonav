@@ -8,10 +8,6 @@ export class None extends TransitionComponent {
     if (!this.props.directionForward) {
       return null;
     }
-    return (
-      <View style={StyleSheet.absoluteFill}>
-        {Children.only(this.props.children)}
-      </View>
-    );
+    return <View style={StyleSheet.absoluteFill}>{Children.only(this.props.children)}</View>;
   }
 }

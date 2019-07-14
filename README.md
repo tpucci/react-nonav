@@ -1,12 +1,16 @@
-[![Build Status](https://travis-ci.com/tpucci/react-gondola.svg?branch=master)](https://travis-ci.com/tpucci/react-gondola)
-[![Coverage Status](https://coveralls.io/repos/github/tpucci/react-gondola/badge.svg?branch=master)](https://coveralls.io/github/tpucci/react-gondola?branch=master)
-![npm](https://img.shields.io/npm/dw/react-gondola.svg)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+<h1 align="center">React Gondola</h1>
 
-# React Gondola
+<p align="center">React Native declarative and reactive navigation.</p>
 
-React Native declarative and reactive navigation.
+<p align="center">
+<a href="https://travis-ci.com/tpucci/react-gondola"><img src="https://travis-ci.com/tpucci/react-gondola.svg?branch=master" alt="Build Status"/></a>
+<a href="https://coveralls.io/github/tpucci/react-gondola?branch=master"><img src="https://coveralls.io/repos/github/tpucci/react-gondola/badge.svg?branch=master" alt="Coverage Status"/></a>
+<a href="https://www.npmjs.com/package/react-gondola"><img src="https://img.shields.io/npm/dw/react-gondola.svg" alt="NPM Downloads"/></a>
+<a href="http://commitizen.github.io/cz-cli/"><img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt="Commitizen friendly"/></a>
+<a href="https://github.com/semantic-release/semantic-release"><img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg" alt="semantic-release"/></a>
+</p>
+
+<br>
 
 ## Philosophy
 

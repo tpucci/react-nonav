@@ -1,14 +1,12 @@
 import { Component, ComponentType } from 'react';
 
-export interface ITransitionComponentProps {
+export interface TransitionComponentProps {
   directionForward: boolean;
 }
 
 export class TransitionComponent<P = {}, S = {}> extends Component<
-  P & ITransitionComponentProps,
+  P & TransitionComponentProps,
   S
 > {}
 
-export type TransitionComponentType<P = {}> = ComponentType<
-  P & ITransitionComponentProps
->;
+export type TransitionComponentType<P = {}> = ComponentType<P & TransitionComponentProps>;

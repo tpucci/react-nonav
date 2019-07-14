@@ -2,7 +2,7 @@ import { BackHandler } from 'react-native';
 import { fromEventPattern, Observable } from 'rxjs';
 import { share } from 'rxjs/operators';
 
-export interface IBackEvent {
+export interface BackEvent {
   target: string | null;
 }
 
@@ -16,10 +16,10 @@ export class BackHandlerDelegate {
    * See https://facebook.github.io/react-native/docs/backhandler.html.
    * @param handler
    */
-  private addEventListener = (handler: (event: IBackEvent) => void) => {
+  private addEventListener = (handler: (event: BackEvent) => void) => {
     BackHandler.addEventListener('hardwareBackPress', () => {
       handler({
-        target: null
+        target: null,
       });
       if (this.onBackCallback) {
         this.onBackCallback();
@@ -30,9 +30,9 @@ export class BackHandlerDelegate {
     });
   };
 
-  private back$: Observable<IBackEvent> = fromEventPattern<IBackEvent>(
-    this.addEventListener
-  ).pipe(share());
+  private back$: Observable<BackEvent> = fromEventPattern<BackEvent>(this.addEventListener).pipe(
+    share()
+  );
 
   private onBackCallback?: () => any;
   setOnBackCallback = (cb: () => any) => {

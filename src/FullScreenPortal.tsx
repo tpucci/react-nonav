@@ -5,9 +5,7 @@ import { fromStream } from 'mobx-utils';
 import { Navigation } from './Navigation';
 
 export class FullScreenPortal extends ReactComponent {
-  fullScreenStack = fromStream(
-    Navigation.instance.fullScreenDelegate.fullSceenStack$
-  );
+  fullScreenStack = fromStream(Navigation.instance.fullScreenDelegate.fullSceenStack$);
 
   render() {
     return (
@@ -18,11 +16,9 @@ export class FullScreenPortal extends ReactComponent {
             if (this.fullScreenStack.current) {
               return (
                 this.fullScreenStack.current &&
-                this.fullScreenStack.current.map(
-                  ({ Component, name, isAuthorized }) => (
-                    <Component isAuthorized={isAuthorized} key={name} />
-                  )
-                )
+                this.fullScreenStack.current.map(({ Component, name, isAuthorized }) => (
+                  <Component isAuthorized={isAuthorized} key={name} />
+                ))
               );
             }
             return null;

@@ -2,9 +2,7 @@ import BackHandler from 'react-native/Libraries/Utilities/__mocks__/BackHandler'
 import { BackHandlerDelegate } from '../BackHandlerDelegate';
 
 jest.mock('react-native', () => ({
-  BackHandler: require.requireActual(
-    'react-native/Libraries/Utilities/__mocks__/BackHandler'
-  )
+  BackHandler: require.requireActual('react-native/Libraries/Utilities/__mocks__/BackHandler'),
 }));
 
 describe('BackHandlerDelegate', () => {

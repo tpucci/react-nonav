@@ -1,39 +1,34 @@
 import { Subject, Observable } from 'rxjs';
 import { mergeAll, map, scan } from 'rxjs/operators';
-import { IStop } from './Stop';
+import { StopInterface } from './Stop';
 
-type Stack = IStop[];
+type Stack = StopInterface[];
 
-interface IFullScreenStackProperties {
+interface FullScreenStackProperties {
   canalId: string;
   fullScreenStack: Stack;
 }
 
-interface IFullScreenStackMap {
+interface FullScreenStackMap {
   [canalId: string]: Stack;
 }
 
 export class FullScreenDelegate {
-  canalsFullScreenStackProperties$ = new Subject<
-    Observable<IFullScreenStackProperties>
-  >();
+  canalsFullScreenStackProperties$ = new Subject<Observable<FullScreenStackProperties>>();
 
-  fullSceenStack$: Observable<
-    Stack
-  > = this.canalsFullScreenStackProperties$.pipe(
+  fullSceenStack$: Observable<Stack> = this.canalsFullScreenStackProperties$.pipe(
     mergeAll(),
     scan(
       (
-        fullScreenStackMap: IFullScreenStackMap,
-        fullScreenStackProperties: IFullScreenStackProperties
+        fullScreenStackMap: FullScreenStackMap,
+        fullScreenStackProperties: FullScreenStackProperties
       ) => ({
         ...fullScreenStackMap,
-        [fullScreenStackProperties.canalId]:
-          fullScreenStackProperties.fullScreenStack
+        [fullScreenStackProperties.canalId]: fullScreenStackProperties.fullScreenStack,
       }),
       {}
     ),
-    map((fullScreenStackMap: IFullScreenStackMap) =>
+    map((fullScreenStackMap: FullScreenStackMap) =>
       Object.keys(fullScreenStackMap).reduce(
         (fullScreenStack: Stack, canalId: string) =>
           fullScreenStack.concat(fullScreenStackMap[canalId]),

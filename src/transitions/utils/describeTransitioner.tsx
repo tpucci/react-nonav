@@ -1,3 +1,5 @@
+/* eslint no-undef:0 */
+
 import React from 'react';
 import TestRenderer from 'react-test-renderer';
 import { Text } from 'react-native';

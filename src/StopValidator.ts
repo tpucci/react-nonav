@@ -2,7 +2,7 @@ import React, { ComponentType } from 'react';
 
 import { TransitionComponentType } from './transitions/Transition';
 
-export interface IStop<T extends string> {
+export interface StopInterface<T extends string> {
   name: T;
   Component: ComponentType<any>;
   isFullScreen?: boolean;
@@ -12,21 +12,16 @@ export interface IStop<T extends string> {
 }
 
 export class StopValidator {
-  static validate(stop: IStop<string>) {
+  static validate(stop: StopInterface<string>) {
     if (!stop.name || typeof stop.name !== 'string') {
       throw new Error('ERR_INVALID_NAME');
     }
-    if (
-      !(
-        React.isValidElement(stop.Component) ||
-        typeof stop.Component === 'function'
-      )
-    ) {
+    if (!(React.isValidElement(stop.Component) || typeof stop.Component === 'function')) {
       throw new Error('ERR_INVALID_COMPONENT');
     }
   }
 
-  static validateList(stops: Array<IStop<string>>) {
+  static validateList(stops: StopInterface<string>[]) {
     for (let index = 0; index < stops.length; index++) {
       const stop = stops[index];
       try {

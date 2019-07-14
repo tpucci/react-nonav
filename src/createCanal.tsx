@@ -3,41 +3,35 @@ import { ViewStyle, View, StyleSheet, StyleProp } from 'react-native';
 import { Observer } from 'mobx-react/native';
 import { fromStream } from 'mobx-utils';
 import { Subject, Observable, ConnectableObservable } from 'rxjs';
-import {
-  map,
-  distinctUntilChanged,
-  withLatestFrom,
-  publish
-} from 'rxjs/operators';
+import { map, distinctUntilChanged, withLatestFrom, publish } from 'rxjs/operators';
 import { Navigation } from './Navigation';
 import { last } from './utils/Array.last';
-import { IBackEvent } from './Navigation/BackHandlerDelegate';
+import { BackEvent } from './Navigation/BackHandlerDelegate';
 import { withBackContext, WithBackContext } from './withBackContext';
-import { StopValidator, IStop } from './StopValidator';
+import { StopValidator, StopInterface } from './StopValidator';
 import { createStop } from './createStop';
 
-import { IStop as IIStop } from './Navigation/Stop.d';
+import { StopInterface as IIStop } from './Navigation/Stop.d';
 
 type CanalComponentProps<T> = {
   style?: StyleProp<ViewStyle>;
 } & T;
 
-export interface ICanal {
-  back$: Observable<IBackEvent>;
+export interface CanalInterface {
+  back$: Observable<BackEvent>;
 }
 
 export const createCanal = <
   StopName extends string,
-  Stop extends IStop<StopName>,
+  Stop extends StopInterface<StopName>,
   Authorizations = { [K in Stop['name']]?: boolean }
 >(
   stops: Stop[]
 ): ComponentType<CanalComponentProps<Authorizations>> => {
   StopValidator.validateList(stops);
 
-  class CanalComponent
-    extends ReactComponent<WithBackContext<CanalComponentProps<Authorizations>>>
-    implements ICanal {
+  class CanalComponent extends ReactComponent<WithBackContext<CanalComponentProps<Authorizations>>>
+    implements CanalInterface {
     constructor(props: WithBackContext<CanalComponentProps<Authorizations>>) {
       super(props);
 
@@ -54,7 +48,7 @@ export const createCanal = <
       this.authorizations$.next(nextAuthorizations);
     }
     static defaultProps = {
-      style: StyleSheet.absoluteFill
+      style: StyleSheet.absoluteFill,
     };
 
     canalId = Date.now().toString();
@@ -68,37 +62,32 @@ export const createCanal = <
         stop.Component,
         stop.props,
         stop.Transitioner
-      )
+      ),
     }));
     authorizations$ = new Subject<Authorizations>();
     progress$ = this.authorizations$.pipe(
       map(authorizations =>
-        this.stopsList
-          .slice(0)
-          .reduce((acc: IIStop[], { name, isFullScreen, Component }) => {
-            acc.push({
-              Component,
-              isAuthorized:
-                /**
-                 * @TODO 19-06-01 Check if Authorization type can be indexed with StopName type.
-                 * See https://github.com/Microsoft/TypeScript/issues/2491.
-                 */
-                // @ts-ignore
-                !!authorizations[name] &&
-                (last(acc) ? last(acc)!.isAuthorized : true),
-              isFullScreen,
-              name
-            });
-            return acc;
-          }, [])
+        this.stopsList.slice(0).reduce((acc: IIStop[], { name, isFullScreen, Component }) => {
+          acc.push({
+            Component,
+            isAuthorized:
+              /**
+               * @TODO 19-06-01 Check if Authorization type can be indexed with StopName type.
+               * See https://github.com/Microsoft/TypeScript/issues/2491.
+               */
+              // @ts-ignore
+              !!authorizations[name] && (last(acc) ? last(acc).isAuthorized : true),
+            isFullScreen,
+            name,
+          });
+          return acc;
+        }, [])
       )
     );
 
     stack = fromStream(
       this.progress$.pipe(
-        map(progressStopsList =>
-          progressStopsList.filter(stop => !stop.isFullScreen)
-        )
+        map(progressStopsList => progressStopsList.filter(stop => !stop.isFullScreen))
       ),
       []
     );
@@ -106,13 +95,10 @@ export const createCanal = <
     fullScreenStackProperties$ = this.progress$.pipe(
       map(progressStopsList => ({
         canalId: this.canalId,
-        fullScreenStack: progressStopsList.filter(stop => stop.isFullScreen)
+        fullScreenStack: progressStopsList.filter(stop => stop.isFullScreen),
       })),
       distinctUntilChanged(
-        (
-          { fullScreenStack: previousFullScreenStack },
-          { fullScreenStack: nextFullScreenStack }
-        ) =>
+        ({ fullScreenStack: previousFullScreenStack }, { fullScreenStack: nextFullScreenStack }) =>
           previousFullScreenStack.filter(stop => stop.isAuthorized).length ===
           nextFullScreenStack.filter(stop => stop.isAuthorized).length
       )
@@ -123,9 +109,7 @@ export const createCanal = <
      * See https://github.com/ReactiveX/rxjs/issues/2972.
      */
     // @ts-ignore
-    back$: ConnectableObservable<
-      IBackEvent
-    > = this.props.backContext.back$.pipe(
+    back$: ConnectableObservable<BackEvent> = this.props.backContext.back$.pipe(
       withLatestFrom(this.progress$),
       map(([_, progress]) => {
         const currentStop = last(progress.filter(stop => stop.isAuthorized));
@@ -137,10 +121,7 @@ export const createCanal = <
       publish()
     );
 
-    shouldComponentUpdate({
-      style,
-      ...nextAuthorizations
-    }: CanalComponentProps<Authorizations>) {
+    shouldComponentUpdate({ style, ...nextAuthorizations }: CanalComponentProps<Authorizations>) {
       /**
        * @TODO 19-06-01 Find a way to safely forbid the use of reserved prop `style` in a StopName.
        */

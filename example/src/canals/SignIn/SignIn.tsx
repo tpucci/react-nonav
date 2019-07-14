@@ -8,7 +8,7 @@ import { Confirm } from './Confirm';
 export class SignIn extends Component {
   state = {
     confirm: false,
-    lastName: false
+    lastName: false,
   };
 
   goForward = () => {
@@ -29,32 +29,26 @@ export class SignIn extends Component {
     {
       Component: FirstName,
       name: 'firstName',
-      props: { onNext: this.goForward }
+      props: { onNext: this.goForward },
     },
     {
       Component: LastName,
       Transitioner: RotateCrazy,
       name: 'lastName',
       onBack: this.goBackward,
-      props: { onNext: this.goForward }
+      props: { onNext: this.goForward },
     },
     {
       Component: Confirm,
       Transitioner: RotateCrazy,
       name: 'confirm',
-      onBack: this.goBackward
-    }
+      onBack: this.goBackward,
+    },
   ]);
 
   render() {
     const { SignInCanal } = this;
 
-    return (
-      <SignInCanal
-        firstName
-        lastName={this.state.lastName}
-        confirm={this.state.confirm}
-      />
-    );
+    return <SignInCanal firstName lastName={this.state.lastName} confirm={this.state.confirm} />;
   }
 }

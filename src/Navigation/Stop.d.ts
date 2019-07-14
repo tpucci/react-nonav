@@ -1,12 +1,12 @@
 import { ComponentType } from 'react';
 
-export interface IStop {
-  Component: ComponentType<IStopComponentProps>;
+export interface StopInterface {
+  Component: ComponentType<StopComponentProps>;
   isFullScreen?: boolean;
   name: string;
   isAuthorized: boolean;
 }
 
-export interface IStopComponentProps {
+export interface StopComponentProps {
   isAuthorized: boolean;
 }

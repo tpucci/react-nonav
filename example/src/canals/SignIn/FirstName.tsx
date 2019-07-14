@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
-interface IProps {
+interface Props {
   onNext: () => any;
 }
-export class FirstName extends Component<IProps> {
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    backgroundColor: '#FFAAAA',
+    flex: 1,
+    justifyContent: 'space-around',
+  },
+});
+
+export class FirstName extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
@@ -15,12 +25,3 @@ export class FirstName extends Component<IProps> {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    backgroundColor: '#FFAAAA',
-    flex: 1,
-    justifyContent: 'space-around'
-  }
-});
