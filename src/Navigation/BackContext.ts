@@ -1,12 +1,12 @@
 import { createContext } from 'react';
 import { Observable } from 'rxjs';
-import { IBackEvent } from './BackHandlerDelegate';
+import { BackEvent } from './BackHandlerDelegate';
 import { Navigation } from './Navigation';
 
-export interface IBackContext {
-  back$: Observable<IBackEvent>;
+export interface BackContextInterface {
+  back$: Observable<BackEvent>;
 }
 
-export const BackContext = createContext<IBackContext>(
+export const BackContext = createContext<BackContextInterface>(
   Navigation.instance.backHandlerDelegate.defaultBackContext
 );

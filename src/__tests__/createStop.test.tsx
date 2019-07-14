@@ -11,13 +11,7 @@ describe('createStop', () => {
     const spy = jest.fn();
     const initialEvent = { target: 'myComponent' };
     const back$ = of(initialEvent);
-    const Stop = createStop(
-      { back$ },
-      undefined,
-      'myComponent',
-      View,
-      undefined
-    );
+    const Stop = createStop({ back$ }, undefined, 'myComponent', View, undefined);
     const testRenderer = TestRenderer.create(<Stop />);
     testRenderer.root.instance.back$.subscribe(spy);
     expect(spy).toHaveBeenCalledWith(initialEvent);
@@ -27,19 +21,13 @@ describe('createStop', () => {
     const spy = jest.fn();
     const initialEvent = { target: 'notMyComponent' };
     const back$ = of(initialEvent);
-    const Stop = createStop(
-      { back$ },
-      undefined,
-      'myComponent',
-      View,
-      undefined
-    );
+    const Stop = createStop({ back$ }, undefined, 'myComponent', View, undefined);
     const testRenderer = TestRenderer.create(<Stop />);
     testRenderer.root.instance.back$.subscribe(spy);
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('creates a Component which register the onBack side effect in the Navigation\'s BackHandlerDelegate', () => {
+  it("creates a Component which register the onBack side effect in the Navigation's BackHandlerDelegate", () => {
     const onBackSpy = jest.fn();
     const setOnBackCallbackSpy = jest.spyOn(
       Navigation.instance.backHandlerDelegate,
@@ -47,13 +35,7 @@ describe('createStop', () => {
     );
     const initialEvent = { target: 'myComponent' };
     const back$ = of(initialEvent);
-    const Stop = createStop(
-      { back$ },
-      onBackSpy,
-      'myComponent',
-      View,
-      undefined
-    );
+    const Stop = createStop({ back$ }, onBackSpy, 'myComponent', View, undefined);
     const testRenderer = TestRenderer.create(<Stop />);
     testRenderer.root.instance.back$.subscribe();
     expect(setOnBackCallbackSpy).toHaveBeenCalledWith(onBackSpy);

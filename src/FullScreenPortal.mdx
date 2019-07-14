@@ -16,7 +16,7 @@ route: /api/full-screen-portal
 
 ## Properties
 
-### `fullScreenStack: IStreamListener<IStop[]>`
+### `fullScreenStack: IStreamListener<StopInterface[]>`
 
 MobX Strem Listener of list of React Gondola full screen Stops. This stream is observed by MobX and fires the rendering of the full screen stack in the `FullScreenPortal.render` method.
 
@@ -25,10 +25,10 @@ MobX Strem Listener of list of React Gondola full screen Stops. This stream is o
 Wrap your application main canal with `FullScreenPortal`. `FullScreenPortal` must appear at the top of your tree in order to render full screen pages.
 
 ```tsx
-import React, { Component } from "react";
-import { FullScreenPortal } from "react-gondola";
+import React, { Component } from 'react';
+import { FullScreenPortal } from 'react-gondola';
 
-import { MainCanal } from "./canals/MainCanal";
+import { MainCanal } from './canals/MainCanal';
 
 export default class App extends Component {
   render() {

@@ -18,7 +18,7 @@ const {
   and,
   eq,
   stopClock,
-  block
+  block,
 } = Animated;
 
 function runTiming(
@@ -31,13 +31,13 @@ function runTiming(
     finished: new Value(0),
     frameTime: new Value(0),
     position: value,
-    time: new Value(0)
+    time: new Value(0),
   };
 
   const config = {
     duration: 200,
     easing: Easing.inOut(Easing.ease),
-    toValue: dest
+    toValue: dest,
   };
 
   return block([
@@ -45,7 +45,7 @@ function runTiming(
       clockRunning(clock),
       [
         // if the clock is already running we update the toValue, in case a new dest has been passed in
-        set(config.toValue, dest)
+        set(config.toValue, dest),
       ],
       [
         // If the clock isn't running we reset all the animation params and start the clock
@@ -54,7 +54,7 @@ function runTiming(
         set(state.position, value),
         set(state.frameTime, 0),
         set(config.toValue, dest),
-        startClock(clock)
+        startClock(clock),
       ]
     ),
     // we run the step here that is going to update position
@@ -63,35 +63,26 @@ function runTiming(
     cond(state.finished, stopClock(clock)),
     cond(and(state.finished, eq(state.position, 1)), setIsHidden(true)),
     // we made the block return the updated position
-    state.position
+    state.position,
   ]);
 }
 
 export class SlideLeft extends TransitionComponent {
   state = {
-    hidden: !this.props.directionForward
+    hidden: !this.props.directionForward,
   };
 
   clock = new Clock();
-  progress: Animated.Value<number> = new Value(
-    this.props.directionForward ? 0 : 1
-  );
-  animation: Animated.Value<number> = new Value(
-    this.props.directionForward ? 0 : 1
-  );
-  transX = runTiming(
-    this.clock,
-    this.progress,
-    this.animation,
-    (hidden: boolean) => {
-      // react-native-reanimated is not correctly mocked
-      // istanbul ignore next
-      // @ts-ignore
-      if (process.env.NODE_ENV !== 'test' && this.state.hidden !== hidden) {
-        this.setState({ hidden });
-      }
+  progress: Animated.Value<number> = new Value(this.props.directionForward ? 0 : 1);
+  animation: Animated.Value<number> = new Value(this.props.directionForward ? 0 : 1);
+  transX = runTiming(this.clock, this.progress, this.animation, (hidden: boolean) => {
+    // react-native-reanimated is not correctly mocked
+    // istanbul ignore next
+    // @ts-ignore
+    if (process.env.NODE_ENV !== 'test' && this.state.hidden !== hidden) {
+      this.setState({ hidden });
     }
-  );
+  });
 
   componentDidUpdate() {
     this.animation.setValue(this.props.directionForward ? 0 : 1);
@@ -106,8 +97,8 @@ export class SlideLeft extends TransitionComponent {
         style={[
           StyleSheet.absoluteFill,
           {
-            transform: [{ translateX: multiply(this.transX, SCREEN_WIDTH) }]
-          }
+            transform: [{ translateX: multiply(this.transX, SCREEN_WIDTH) }],
+          },
         ]}
       >
         {!this.state.hidden && Children.only(this.props.children)}

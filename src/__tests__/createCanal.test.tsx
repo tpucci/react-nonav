@@ -7,7 +7,7 @@ import { stopCreator } from './utils/stopCreator';
 import { createCanal } from '../createCanal';
 import { Subject } from 'rxjs';
 import { BackContext } from '../Navigation/BackContext';
-import { IBackEvent } from '../Navigation/BackHandlerDelegate';
+import { BackEvent } from '../Navigation/BackHandlerDelegate';
 
 describe('createCanal', () => {
   it('throws an error if first arg is not a Component', () => {
@@ -41,21 +41,13 @@ describe('createCanal', () => {
   });
 
   it('renders only the first page if all authorizations are given but the one for the second page', () => {
-    const Canal = createCanal([
-      stopCreator('a'),
-      stopCreator('b'),
-      stopCreator('c')
-    ]);
+    const Canal = createCanal([stopCreator('a'), stopCreator('b'), stopCreator('c')]);
     const testRenderer = TestRenderer.create(<Canal a c />);
     expect(testRenderer.toJSON()).toMatchSnapshot();
   });
 
   it('only rerender if style was modified', () => {
-    const Canal = createCanal([
-      stopCreator('a'),
-      stopCreator('b'),
-      stopCreator('c')
-    ]);
+    const Canal = createCanal([stopCreator('a'), stopCreator('b'), stopCreator('c')]);
     const testRenderer = TestRenderer.create(<Canal a />);
     const renderSpy = jest.spyOn(
       // @ts-ignore
@@ -98,9 +90,7 @@ describe('createCanal', () => {
       // @ts-ignore
       createCanal([stopCreator('a'), stopCreator('a')]);
     } catch (error) {
-      expect(error.message).toBe(
-        '`createCanal` found duplicated `name: a` key.'
-      );
+      expect(error.message).toBe('`createCanal` found duplicated `name: a` key.');
     }
     expect.assertions(1);
   });
@@ -111,9 +101,7 @@ describe('createCanal', () => {
     const Canal = createCanal([stopCreator('a'), stopB]);
     const testRenderer = TestRenderer.create(<Canal a />);
     // @ts-ignore
-    testRenderer.root.children[0].instance.fullScreenStackProperties$.subscribe(
-      spy
-    );
+    testRenderer.root.children[0].instance.fullScreenStackProperties$.subscribe(spy);
     // @ts-ignore
     const [_, StopB] = testRenderer.root.children[0].instance.stopsList;
     testRenderer.update(<Canal a />);
@@ -124,9 +112,9 @@ describe('createCanal', () => {
           Component: StopB.Component,
           isAuthorized: false,
           isFullScreen: true,
-          name: 'b'
-        }
-      ]
+          name: 'b',
+        },
+      ],
     });
     testRenderer.update(<Canal a />);
     testRenderer.update(<Canal a b />);
@@ -137,9 +125,9 @@ describe('createCanal', () => {
           Component: StopB.Component,
           isAuthorized: true,
           isFullScreen: true,
-          name: 'b'
-        }
-      ]
+          name: 'b',
+        },
+      ],
     });
     testRenderer.update(<Canal a b />);
     testRenderer.update(<Canal a b />);
@@ -151,9 +139,7 @@ describe('createCanal', () => {
     const Canal = createCanal([stopCreator('a'), stopCreator('b', true)]);
     const testRenderer = TestRenderer.create(<Canal a />);
     // @ts-ignore
-    testRenderer.root.children[0].instance.fullScreenStackProperties$.subscribe(
-      spy
-    );
+    testRenderer.root.children[0].instance.fullScreenStackProperties$.subscribe(spy);
     // @ts-ignore
     const [_, StopB] = testRenderer.root.children[0].instance.stopsList;
     testRenderer.update(<Canal a b />);
@@ -166,9 +152,9 @@ describe('createCanal', () => {
           Component: StopB.Component,
           isAuthorized: true,
           isFullScreen: true,
-          name: 'b'
-        }
-      ]
+          name: 'b',
+        },
+      ],
     });
     expect(spy).toHaveBeenCalledWith({
       canalId: '0',
@@ -177,14 +163,14 @@ describe('createCanal', () => {
           Component: StopB.Component,
           isAuthorized: false,
           isFullScreen: true,
-          name: 'b'
-        }
-      ]
+          name: 'b',
+        },
+      ],
     });
   });
 
   it('passes back events on', () => {
-    const back$ = new Subject<IBackEvent>();
+    const back$ = new Subject<BackEvent>();
     const spy = jest.fn();
     const Canal = createCanal([stopCreator('a'), stopCreator('b')]);
     const testRenderer = TestRenderer.create(
@@ -196,7 +182,7 @@ describe('createCanal', () => {
     testRenderer.root.children[0].instance.back$.subscribe(spy);
     back$.next({ target: null });
     expect(spy).toHaveBeenCalledWith({
-      target: 'a'
+      target: 'a',
     });
     testRenderer.update(
       <BackContext.Provider value={{ back$ }}>
@@ -205,7 +191,7 @@ describe('createCanal', () => {
     );
     back$.next({ target: null });
     expect(spy).toHaveBeenCalledWith({
-      target: 'b'
+      target: 'b',
     });
     testRenderer.update(
       <BackContext.Provider value={{ back$ }}>
@@ -214,7 +200,7 @@ describe('createCanal', () => {
     );
     back$.next({ target: null });
     expect(spy).toHaveBeenCalledWith({
-      target: null
+      target: null,
     });
   });
 });
