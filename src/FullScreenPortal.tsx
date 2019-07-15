@@ -1,6 +1,6 @@
 import React, { Component as ReactComponent, Fragment } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Observer } from 'mobx-react/native';
+import { Observer } from 'mobx-react';
 import { fromStream } from 'mobx-utils';
 import { Navigation } from './Navigation';
 
@@ -15,13 +15,19 @@ export class FullScreenPortal extends ReactComponent {
           {() => {
             if (this.fullScreenStack.current) {
               return (
-                this.fullScreenStack.current &&
-                this.fullScreenStack.current.map(({ Component, name, isAuthorized }) => (
-                  <Component isAuthorized={isAuthorized} key={name} />
-                ))
+                <Fragment>
+                  {this.fullScreenStack.current &&
+                    this.fullScreenStack.current.map(({ Component, name, isAuthorized }) => (
+                      <Component isAuthorized={isAuthorized} key={name} />
+                    ))}
+                </Fragment>
               );
             }
-            return null;
+            /**
+             * @todo Improve typing of <Observer /> to accept null JSXElement.
+             * Expected: `return null;`
+             */
+            return <Fragment />;
           }}
         </Observer>
       </View>

@@ -1,6 +1,6 @@
-import React, { ComponentType, Component as ReactComponent } from 'react';
+import React, { ComponentType, Component as ReactComponent, Fragment } from 'react';
 import { ViewStyle, View, StyleSheet, StyleProp } from 'react-native';
-import { Observer } from 'mobx-react/native';
+import { Observer } from 'mobx-react';
 import { fromStream } from 'mobx-utils';
 import { Subject, Observable, ConnectableObservable } from 'rxjs';
 import { map, distinctUntilChanged, withLatestFrom, publish } from 'rxjs/operators';
@@ -140,11 +140,13 @@ export const createCanal = <
       return (
         <View style={this.props.style}>
           <Observer>
-            {() =>
-              this.stack.current.map(({ name, Component, isAuthorized }) => (
-                <Component key={name} isAuthorized={isAuthorized} />
-              ))
-            }
+            {() => (
+              <Fragment>
+                {this.stack.current.map(({ name, Component, isAuthorized }) => (
+                  <Component key={name} isAuthorized={isAuthorized} />
+                ))}
+              </Fragment>
+            )}
           </Observer>
         </View>
       );
