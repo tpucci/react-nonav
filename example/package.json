@@ -16,7 +16,7 @@
   "devDependencies": {
     "@babel/core": "^7.5.4",
     "@babel/preset-typescript": "^7.3.3",
-    "@babel/runtime": "^7.5.4",
+    "@babel/runtime": "^7.5.5",
     "babel-plugin-module-resolver": "^3.2.0",
     "metro-react-native-babel-preset": "^0.55.0",
     "patch-package": "^6.1.2",
