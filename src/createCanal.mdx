@@ -4,7 +4,13 @@ menu: API
 route: /api/create-canal
 ---
 
-# createCanal
+# [deprecated] createCanal
+
+import { Warning } from 'components/Warning';
+
+<Warning>
+  This API is deprecated and will be removed in the next major release; i.e. in `react-gondola` 2.
+</Warning>
 
 `type: <Authorizations = { [K in Stop['name']]?: boolean }>(stopsList: Stop[]): ComponentType<CanalComponentProps<Authorizations>>`
 
@@ -55,15 +61,15 @@ MobX Strem Listener of list of local Stops. All full screen stops are filtered o
 Link your pages in a canal.
 
 ```tsx
-import React from "react";
-import { createCanal } from "react-gondola";
-import { FirstName } from "./FirstName";
-import { LastName } from "./LastName";
-import { Confirm } from "./Confirm";
+import React from 'react';
+import { createCanal } from 'react-gondola';
+import { FirstName } from './FirstName';
+import { LastName } from './LastName';
+import { Confirm } from './Confirm';
 
 export const SignInCanal = createCanal([
-  { name: "firstName", Component: FirstName },
-  { name: "lastName", Component: LastName },
-  { name: "confirm", Component: Confirm, isFullScreen: true }
+  { name: 'firstName', Component: FirstName },
+  { name: 'lastName', Component: LastName },
+  { name: 'confirm', Component: Confirm, isFullScreen: true },
 ]);
 ```

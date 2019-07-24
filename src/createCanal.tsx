@@ -21,6 +21,9 @@ export interface CanalInterface {
   back$: Observable<BackEvent>;
 }
 
+/**
+ * @deprecated This will be removed in the next major.
+ */
 export const createCanal = <
   StopName extends string,
   Stop extends StopInterface<StopName>,
