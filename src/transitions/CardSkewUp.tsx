@@ -1,8 +1,10 @@
 import React, { Children } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import Animated, { Easing } from 'react-native-reanimated';
 
 import { TransitionComponent } from './Transition';
+
+const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const {
   block,
@@ -33,7 +35,7 @@ function runTiming(
   };
 
   const config = {
-    duration: 1000,
+    duration: 300,
     easing: Easing.inOut(Easing.ease),
     toValue: dest,
   };
@@ -65,7 +67,7 @@ function runTiming(
   ]);
 }
 
-export class RotateCrazy extends TransitionComponent {
+export class CardSkewUp extends TransitionComponent {
   state = {
     hidden: !this.props.directionForward,
   };
@@ -95,17 +97,21 @@ export class RotateCrazy extends TransitionComponent {
         pointerEvents={this.state.hidden ? 'none' : 'auto'}
         style={[
           StyleSheet.absoluteFill,
-          {
-            opacity: sub(new Value(1), this.trans),
-            transform: [
-              {
-                rotate: multiply(this.trans, 5),
-              },
-            ],
-          },
+          { backgroundColor: '#00000050', alignItems: 'center', justifyContent: 'center' },
+          { opacity: sub(new Value(1), this.trans) },
         ]}
       >
-        {!this.state.hidden && Children.only(this.props.children)}
+        <Animated.View
+          style={{
+            transform: [
+              { perspective: 500 },
+              { rotateX: multiply(this.trans, -0.5) },
+              { translateY: multiply(this.trans, SCREEN_HEIGHT / 2) },
+            ],
+          }}
+        >
+          {!this.state.hidden && Children.only(this.props.children)}
+        </Animated.View>
       </Animated.View>
     );
   }

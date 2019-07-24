@@ -7,25 +7,24 @@ import { TransitionComponent } from './Transition';
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const {
-  multiply,
-  Clock,
-  Value,
-  set,
-  cond,
-  startClock,
-  clockRunning,
-  timing,
-  and,
-  eq,
-  stopClock,
   block,
+  call,
+  Clock,
+  clockRunning,
+  cond,
+  multiply,
+  set,
+  startClock,
+  stopClock,
+  timing,
+  Value,
 } = Animated;
 
 function runTiming(
   clock: Animated.Clock,
   value: Animated.Value<number>,
   dest: Animated.Value<number>,
-  setIsHidden: (value: boolean) => any
+  updateVisibility: () => any
 ) {
   const state = {
     finished: new Value(0),
@@ -60,8 +59,7 @@ function runTiming(
     // we run the step here that is going to update position
     timing(clock, state, config),
     // if the animation is over we stop the clock
-    cond(state.finished, stopClock(clock)),
-    cond(and(state.finished, eq(state.position, 1)), setIsHidden(true)),
+    cond(state.finished, [call([state.finished], updateVisibility), stopClock(clock)]),
     // we made the block return the updated position
     state.position,
   ]);
@@ -75,12 +73,12 @@ export class SlideLeft extends TransitionComponent {
   clock = new Clock();
   progress: Animated.Value<number> = new Value(this.props.directionForward ? 0 : 1);
   animation: Animated.Value<number> = new Value(this.props.directionForward ? 0 : 1);
-  transX = runTiming(this.clock, this.progress, this.animation, (hidden: boolean) => {
+  transX = runTiming(this.clock, this.progress, this.animation, () => {
     // react-native-reanimated is not correctly mocked
     // istanbul ignore next
     // @ts-ignore
-    if (process.env.NODE_ENV !== 'test' && this.state.hidden !== hidden) {
-      this.setState({ hidden });
+    if (process.env.NODE_ENV !== 'test' && this.state.hidden !== !this.props.directionForward) {
+      this.setState({ hidden: !this.props.directionForward });
     }
   });
 
