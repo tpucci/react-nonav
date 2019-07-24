@@ -86,6 +86,7 @@ exports[`Confirm renders correctly 1`] = `
   </View>
   <View
     collapsable={false}
+    pointerEvents="none"
     style={
       Object {
         "bottom": 0,
@@ -98,6 +99,7 @@ exports[`Confirm renders correctly 1`] = `
   />
   <View
     collapsable={false}
+    pointerEvents="none"
     style={
       Object {
         "bottom": 0,

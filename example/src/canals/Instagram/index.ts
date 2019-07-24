@@ -1,0 +1,1 @@
+export { Instagram } from './Instagram';

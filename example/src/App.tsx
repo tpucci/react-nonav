@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Instagram } from './canals/Instagram';
 import { SignIn } from './canals/SignIn';
 import { FullScreenPortal } from 'react-gondola';
 import { View, TouchableOpacity, Text } from 'react-native';
@@ -7,11 +8,11 @@ interface State {
   example: null | 'SignIn' | 'Instagram';
 }
 
-const EXAMPLES = { SignIn, Instagram: SignIn };
+const EXAMPLES = { SignIn, Instagram };
 
 export default class App extends Component<{}, State> {
   state: State = {
-    example: null,
+    example: 'Instagram',
   };
 
   render() {
