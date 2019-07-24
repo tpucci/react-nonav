@@ -14,13 +14,15 @@
 
 ## Philosophy
 
-This repo focuses on grouping pages by business conversion tunnels called **canals**. When navigating in Venice, you can not teleport yourself from the beginning of a canal to the end of it. You are forced to either go ahead or go back; and doing so you might discover another canal 😲. **When you use React Gondola**, you define several gondoliers and how each one of them is authorized to move accross its own canal.
+This repo focuses on grouping screens by business conversion tunnels called **canals**. Why did I call it `react-gondola`? Just because I though of this package when I was visiting Venice... and I kind of hope that using this package will feel like navigating in Venice 📸
+
+**When you use React Gondola**, you define several screens and you have the possibility to control their visibility with YOU're state machine. You define the rules of WHEN some screens should appear; `react-gondola` takes care of the rest.
 
 ## 👍 TLDR; Use this package if:
 
-- you want to group pages by **business** conversion tunnels rather than transition.
-- you want to control your navigation state with a **state machine**.
-- you want your navigation to **react** to your store changes.
+- you want to group screens by **business** conversion tunnels rather than transition.
+- you want to control your navigation state with YOUR **state machine**.
+- you want your navigation to **react** to YOUR store changes.
 
 ## 👎 Do not use this repo if:
 
