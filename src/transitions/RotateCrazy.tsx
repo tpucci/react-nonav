@@ -73,6 +73,7 @@ export class RotateCrazy extends TransitionComponent {
   clock = new Clock();
   progress: Animated.Value<number> = new Value(this.props.directionForward ? 0 : 1);
   animation: Animated.Value<number> = new Value(this.props.directionForward ? 0 : 1);
+  // istanbul ignore next
   trans = runTiming(this.clock, this.progress, this.animation, () => {
     // react-native-reanimated is not correctly mocked
     // istanbul ignore next
