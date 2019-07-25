@@ -1,6 +1,6 @@
 import { BackHandler } from 'react-native';
-import { fromEventPattern, Observable } from 'rxjs';
-import { share } from 'rxjs/operators';
+import { fromEventPattern, Observable, Subject } from 'rxjs';
+import { share, map, merge, tap } from 'rxjs/operators';
 
 export interface BackEvent {
   target: string | null;
@@ -16,27 +16,41 @@ export class BackHandlerDelegate {
    * See https://facebook.github.io/react-native/docs/backhandler.html.
    * @param handler
    */
-  private addEventListener = (handler: (event: BackEvent) => void) => {
+  private addEventListener = (handler: () => void) => {
     BackHandler.addEventListener('hardwareBackPress', () => {
-      handler({
-        target: null,
-      });
-      if (this.onBackCallback) {
-        this.onBackCallback();
-        this.onBackCallback = undefined;
-        return true;
-      }
-      return false;
+      handler();
+      return true;
     });
   };
 
-  private back$: Observable<BackEvent> = fromEventPattern<BackEvent>(this.addEventListener).pipe(
+  private softwareBack$ = new Subject<undefined>();
+
+  private back$: Observable<BackEvent> = fromEventPattern<undefined>(this.addEventListener).pipe(
+    merge(this.softwareBack$),
+    tap(() => {
+      // After the event has spread, we fire onBacks callbacks.
+      setTimeout(() => {
+        if (this.onBackCallback) {
+          this.onBackCallback();
+          this.onBackCallback = undefined;
+        } else {
+          BackHandler.exitApp();
+        }
+      }, 0);
+    }),
+    map(() => ({
+      target: null,
+    })),
     share()
   );
 
   private onBackCallback?: () => any;
   setOnBackCallback = (cb: () => any) => {
     this.onBackCallback = cb;
+  };
+
+  back = () => {
+    this.softwareBack$.next();
   };
 
   defaultBackContext = { back$: this.back$ };

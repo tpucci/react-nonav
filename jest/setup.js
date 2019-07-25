@@ -18,3 +18,5 @@ jest.mock('react-native-reanimated/src/ReanimatedModule', () => ({
 }));
 jest.mock('react-native-reanimated/src/derived/evaluateOnce');
 jest.mock('react-native-reanimated/src/core/AnimatedProps');
+
+jest.useFakeTimers();

@@ -16,7 +16,21 @@ export interface ScreenProps {
   visible: boolean;
 }
 
-class ScreenComponent extends ReactComponent<WithBackContext<ScreenProps>> {
+class ScreenComponent extends ReactComponent<WithBackContext<ScreenProps>, ScreenProps['props']> {
+  constructor(props: WithBackContext<ScreenProps>) {
+    super(props);
+    this.state = props.props;
+  }
+
+  state: ScreenProps['props'];
+  static getDerivedStateFromProps(
+    props: WithBackContext<ScreenProps>,
+    state: ScreenProps['props']
+  ) {
+    if (!props.visible) return state;
+    return props.props;
+  }
+
   static defaultProps = {
     isFullScreen: false,
     Transitioner: None,
@@ -46,7 +60,7 @@ class ScreenComponent extends ReactComponent<WithBackContext<ScreenProps>> {
   factory = createFactory(this.props.Component);
 
   render() {
-    const { Transitioner, onBack, props } = this.props;
+    const { Transitioner, onBack } = this.props;
     return (
       /**
        *  @todo Transitioner is always defined in static defaultProps.
@@ -58,11 +72,12 @@ class ScreenComponent extends ReactComponent<WithBackContext<ScreenProps>> {
             back$: this.back$,
           }}
         >
-          {this.factory({ navigation: { goBack: onBack }, ...props })}
+          {this.factory({ navigation: { goBack: onBack }, ...this.state })}
         </BackContext.Provider>
       </Transitioner>
     );
   }
 }
 
+// @ts-ignore
 export const Screen = withBackContext(ScreenComponent);
