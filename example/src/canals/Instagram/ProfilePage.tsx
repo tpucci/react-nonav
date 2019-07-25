@@ -16,6 +16,7 @@ const POST_SIZE = SCREEN_WIDTH / 3;
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'white',
     flex: 1,
   },
   header: {

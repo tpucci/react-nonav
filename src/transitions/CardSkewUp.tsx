@@ -98,7 +98,7 @@ export class CardSkewUp extends TransitionComponent {
         pointerEvents={this.state.hidden ? 'none' : 'auto'}
         style={[
           StyleSheet.absoluteFill,
-          { backgroundColor: '#00000050', alignItems: 'center', justifyContent: 'center' },
+          { backgroundColor: '#000000aa', alignItems: 'center', justifyContent: 'center' },
           { opacity: sub(new Value(1), this.trans) },
         ]}
       >

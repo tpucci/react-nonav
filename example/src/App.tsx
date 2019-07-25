@@ -3,6 +3,7 @@ import { Instagram } from './canals/Instagram';
 import { SignIn } from './canals/SignIn';
 import { FullScreenPortal } from 'react-gondola';
 import { View, TouchableOpacity, Text } from 'react-native';
+import { Navigation } from 'react-gondola/Navigation';
 
 interface State {
   example: null | 'SignIn' | 'Instagram';
@@ -44,9 +45,19 @@ export default class App extends Component<{}, State> {
     const Example = EXAMPLES[this.state.example];
 
     return (
-      <FullScreenPortal>
-        <Example />
-      </FullScreenPortal>
+      <>
+        <FullScreenPortal>
+          <Example />
+        </FullScreenPortal>
+        <TouchableOpacity
+          style={{ position: 'absolute', bottom: 8, right: 8 }}
+          onPress={Navigation.instance.back}
+        >
+          <View style={{ backgroundColor: 'black', borderRadius: 4 }}>
+            <Text style={{ color: 'white', margin: 4 }}>Go Back</Text>
+          </View>
+        </TouchableOpacity>
+      </>
     );
   }
 }
