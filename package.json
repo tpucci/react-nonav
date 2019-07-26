@@ -85,5 +85,8 @@
     "commitizen": {
       "path": "./node_modules/cz-emoji"
     }
+  },
+  "dependencies": {
+    "recompose": "^0.30.0"
   }
 }
