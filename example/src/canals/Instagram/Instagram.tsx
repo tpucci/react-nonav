@@ -3,7 +3,7 @@ import { ProfilePage } from './ProfilePage';
 import { PostPage } from './PostPage';
 import { PostSneakPeek } from './PostSneakPeek';
 import { Screen, Canal } from 'react-gondola';
-import { CardSkewUp, SlideLeft } from 'react-gondola/transitions';
+import { CardSkewUp, SlideLeft, SlideUp } from 'react-gondola/transitions';
 import { getRandomUser } from './getRandomUser';
 
 interface State {
@@ -35,7 +35,6 @@ export class Instagram extends Component<Props, State> {
         <Screen
           name="profile"
           Component={ProfilePage}
-          Transitioner={CardSkewUp}
           visible
           props={{
             selectPost: (selectedPost: any) => this.setState({ selectedPost }),
@@ -50,7 +49,6 @@ export class Instagram extends Component<Props, State> {
           Transitioner={CardSkewUp}
           visible={this.state.isSneakPeeking && !!this.state.selectedPost}
           onBack={() => {
-            debugger;
             this.setState({ selectedPost: null, isSneakPeeking: false });
           }}
           props={{
@@ -64,12 +62,26 @@ export class Instagram extends Component<Props, State> {
           Transitioner={SlideLeft}
           visible={!this.state.isSneakPeeking && !!this.state.selectedPost}
           onBack={() => {
-            debugger;
             this.setState({ selectedPost: null, isSneakPeeking: false });
           }}
           props={{
             user: this.user,
             post: this.state.selectedPost,
+            selectUser: (user: any) => {
+              this.setState({ selectedUser: user });
+            },
+          }}
+        />
+        <Screen
+          name="nextProfile"
+          Component={Instagram}
+          Transitioner={SlideUp}
+          visible={!!this.state.selectedUser}
+          onBack={() => {
+            this.setState({ selectedUser: null });
+          }}
+          props={{
+            user: this.state.selectedUser,
           }}
         />
       </Canal>

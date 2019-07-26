@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, SafeAreaView, Text, View, Dimensions } from 'react-native';
+import { StyleSheet, SafeAreaView, Text, View, Dimensions, TouchableOpacity } from 'react-native';
 import { getRandomComments } from './getRandomComment';
 
 const { width: POST_SIZE } = Dimensions.get('window');
@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
 interface Props {
   user: any;
   post: any;
+  selectUser: (user: any) => any;
 }
 
 export class PostPage extends Component<Props> {
@@ -79,9 +80,15 @@ export class PostPage extends Component<Props> {
         </View>
         {comments.map(comment => (
           <View style={styles.comment} key={comment.id}>
-            <View style={[styles.avatar, { backgroundColor: comment.author.color }]}>
-              <Text style={styles.emoji}>{comment.author.emoji}</Text>
-            </View>
+            <TouchableOpacity
+              onPress={() => {
+                this.props.selectUser(comment.author);
+              }}
+            >
+              <View style={[styles.avatar, { backgroundColor: comment.author.color }]}>
+                <Text style={styles.emoji}>{comment.author.emoji}</Text>
+              </View>
+            </TouchableOpacity>
             <View style={styles.commentComment}>
               <Text style={styles.commentAuthor}>{comment.author.name}</Text>
               <Text style={styles.commentCommentComment}>{comment.comment}</Text>
