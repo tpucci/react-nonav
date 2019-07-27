@@ -1,3 +1,51 @@
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/tpucci/react-gondola/compare/1.4.0...2.0.0) (2019-07-27)
+
+
+### :fire:
+
+* **createCanal:** remove API v1 createCanal ([0f8ab46](https://github.com/tpucci/react-gondola/commit/0f8ab46))
+
+
+### ♻️ Code Refactoring
+
+* **CardSkewUp:** rename CardSkewUp into ConvexUp ([b07592d](https://github.com/tpucci/react-gondola/commit/b07592d))
+* **createCanal:** deprecate createCanal API ([80b637a](https://github.com/tpucci/react-gondola/commit/80b637a))
+
+
+### ✅ Tests
+
+* **Instagram:** simply test that render is not broken ([82b7b75](https://github.com/tpucci/react-gondola/commit/82b7b75))
+* **package:** 100% cover new API ([42b3fc1](https://github.com/tpucci/react-gondola/commit/42b3fc1))
+* **transitions:** fix tests ([32453dc](https://github.com/tpucci/react-gondola/commit/32453dc))
+
+
+### ✨ Features
+
+* **back:** add back support on Transitioners ([f3d69aa](https://github.com/tpucci/react-gondola/commit/f3d69aa))
+* **Canal:** add Canal and Screen components ([046bafd](https://github.com/tpucci/react-gondola/commit/046bafd))
+* **Transitions:** add CardSkewUp ([3c3d127](https://github.com/tpucci/react-gondola/commit/3c3d127))
+
+
+### 🐛 Bug Fixes
+
+* **example:** fix example app ([072b104](https://github.com/tpucci/react-gondola/commit/072b104))
+* **FullScreenPortal:** fix full screen portal ([8889cfa](https://github.com/tpucci/react-gondola/commit/8889cfa))
+* **Observers:** fix typing errors after mobx-reaxt update ([03feed7](https://github.com/tpucci/react-gondola/commit/03feed7))
+
+
+### 📝 Documentation
+
+* **Canal:** update doc for v2 ([5268fb0](https://github.com/tpucci/react-gondola/commit/5268fb0))
+* **README.md:** change header style ([a447646](https://github.com/tpucci/react-gondola/commit/a447646))
+* **README.md:** update READMEs ([06e50a8](https://github.com/tpucci/react-gondola/commit/06e50a8))
+
+
+### BREAKING CHANGES
+
+* **createCanal:** createCanal has been removed, use <Canal /> and <Screen /> instead. See
+documentation.
+
 <a name="1.4.0"></a>
 # [1.4.0](https://github.com/tpucci/react-gondola/compare/1.3.0...1.4.0) (2019-07-13)
 
