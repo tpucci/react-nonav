@@ -9,12 +9,9 @@ route: /getting-started
 
 React-gondola needs the following dependencies; if you do not have those installed, you need to install them with the correspondig command:
 
-| Dependencie name |  Yarn Installation command   | NPM Installation command  |
-| :--------------: | :--------------------------: | :-----------------------: |
-|      `mobx`      |    `yarn add mobx@5.0.0`     |    `npm i mobx@5.0.0`     |
-|   `mobx-react`   | `yarn add mobx-reactx@5.0.0` | `npm i mobx-reactx@5.0.0` |
-|   `mobx-utils`   | `yarn add mobx-utilsx@5.0.0` | `npm i mobx-utilsx@5.0.0` |
-|      `rxjs`      |       `yarn add rxjs`        |       `npm i rxjs`        |
+| Dependencie name | Yarn Installation command | NPM Installation command |
+| :--------------: | :-----------------------: | :----------------------: |
+|      `rxjs`      |      `yarn add rxjs`      |       `npm i rxjs`       |
 
 Then, install React-Gondola with:
 
@@ -31,22 +28,22 @@ or
 In order to create a canal, use the `createCanal` function. Pass it your screens in the business order.
 
 ```ts
-import React from "react";
-import { createCanal } from "react-gondola";
-import { FirstName } from "./FirstName";
-import { LastName } from "./LastName";
+import React from 'react';
+import { createCanal } from 'react-gondola';
+import { FirstName } from './FirstName';
+import { LastName } from './LastName';
 
 const SignInCanal = createCanal([
-  { name: "firstName", Component: FirstName },
-  { name: "lastName", Component: LastName }
+  { name: 'firstName', Component: FirstName },
+  { name: 'lastName', Component: LastName },
 ]);
 ```
 
 Then, use the canal wherever you want in your app. Specify whether to show/hide a screen by using the screen's name as a prop:
 
 ```ts
-import React, { Component } from "react";
-import { SignInCanal } from "./canals/SignIn";
+import React, { Component } from 'react';
+import { SignInCanal } from './canals/SignIn';
 
 export default class App extends Component {
   render() {
@@ -62,24 +59,24 @@ That's all !
 If you want to add full screen page, pass the `isFullScreen` flag to the right page when creating a canal. In the following example, `confirm` is a full screen page.
 
 ```ts
-import React from "react";
-import { createCanal } from "react-gondola";
-import { FirstName } from "./FirstName";
-import { LastName } from "./LastName";
+import React from 'react';
+import { createCanal } from 'react-gondola';
+import { FirstName } from './FirstName';
+import { LastName } from './LastName';
 
 const SignInCanal = createCanal([
-  { name: "firstName", Component: FirstName },
-  { name: "lastName", Component: LastName },
-  { name: "confirm", Component: Confirm, isFullScreen: true }
+  { name: 'firstName', Component: FirstName },
+  { name: 'lastName', Component: LastName },
+  { name: 'confirm', Component: Confirm, isFullScreen: true },
 ]);
 ```
 
 In order to render the full screen page at the top level in your app, add the `FullScreenPortal` at the top level in your rendering tree.
 
 ```ts
-import React, { Component } from "react";
-import { SignInCanal } from "./canals/SignIn";
-import { FullScreenPortal } from "react-gondola";
+import React, { Component } from 'react';
+import { SignInCanal } from './canals/SignIn';
+import { FullScreenPortal } from 'react-gondola';
 
 export default class App extends Component {
   render() {

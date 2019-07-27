@@ -1,9 +1,3 @@
-import { configure } from 'mobx';
-
-configure({
-  enforceActions: 'observed',
-});
-
 Date.now = jest.fn(() => 0);
 
 jest.mock('react-native-reanimated/src/ReanimatedEventEmitter');
