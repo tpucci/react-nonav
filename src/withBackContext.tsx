@@ -5,7 +5,9 @@ export type WithBackContext<T> = T & {
   backContext: BackContextInterface;
 };
 
-export function withBackContext<P>(Component: ComponentType<P>): FunctionComponent<P> {
+export function withBackContext<P>(
+  Component: ComponentType<WithBackContext<P>>
+): FunctionComponent<P> {
   /**
    * @TODO 2019-07-26 Update @types/react once https://github.com/DefinitelyTyped/DefinitelyTyped/pull is merged.
    */

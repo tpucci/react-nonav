@@ -16,4 +16,8 @@ export class Navigation {
   backHandlerDelegate = new BackHandlerDelegate();
 
   fullScreenDelegate = new FullScreenDelegate();
+
+  back = () => {
+    this.backHandlerDelegate.back();
+  };
 }

@@ -22,15 +22,8 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "lib": ["es6"],
-    "types": ["react-native", "mobx-react"]
+    "types": ["react-native"]
   },
   "include": ["./src"],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "example",
-    "**/__tests__/*",
-    "**/*.test.ts",
-    "**/*.test.tsx"
-  ]
+  "exclude": ["node_modules", "dist", "example", "**/__tests__/*", "**/*.test.ts", "**/*.test.tsx"]
 }

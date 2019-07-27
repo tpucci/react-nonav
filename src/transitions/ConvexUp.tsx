@@ -1,8 +1,11 @@
 import React, { Children } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions, TouchableWithoutFeedback, View } from 'react-native';
 import Animated, { Easing } from 'react-native-reanimated';
 
 import { TransitionComponent } from './Transition';
+import { Navigation } from '../Navigation';
+
+const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const {
   block,
@@ -33,7 +36,7 @@ function runTiming(
   };
 
   const config = {
-    duration: 1000,
+    duration: 300,
     easing: Easing.inOut(Easing.ease),
     toValue: dest,
   };
@@ -65,7 +68,7 @@ function runTiming(
   ]);
 }
 
-export class RotateCrazy extends TransitionComponent {
+export class ConvexUp extends TransitionComponent {
   state = {
     hidden: !this.props.directionForward,
   };
@@ -92,22 +95,35 @@ export class RotateCrazy extends TransitionComponent {
 
   render() {
     return (
-      <Animated.View
-        pointerEvents={this.state.hidden ? 'none' : 'auto'}
-        style={[
-          StyleSheet.absoluteFill,
-          {
-            opacity: sub(new Value(1), this.trans),
-            transform: [
-              {
-                rotate: multiply(this.trans, 5),
-              },
-            ],
-          },
-        ]}
-      >
-        {!this.state.hidden && Children.only(this.props.children)}
-      </Animated.View>
+      <View style={[StyleSheet.absoluteFill]} pointerEvents={this.state.hidden ? 'none' : 'auto'}>
+        <Animated.View
+          style={[StyleSheet.absoluteFill, { opacity: sub(new Value(1), this.trans) }]}
+        >
+          <TouchableWithoutFeedback
+            onPress={Navigation.instance.backHandlerDelegate.back}
+            style={StyleSheet.absoluteFill}
+          >
+            <View style={[StyleSheet.absoluteFill, { backgroundColor: '#000000aa' }]}></View>
+          </TouchableWithoutFeedback>
+        </Animated.View>
+        <View
+          style={[StyleSheet.absoluteFill, { alignItems: 'center', justifyContent: 'center' }]}
+          pointerEvents="box-none"
+        >
+          <Animated.View
+            style={{
+              opacity: sub(new Value(1), this.trans),
+              transform: [
+                { perspective: 500 },
+                { rotateX: multiply(this.trans, -0.5) },
+                { translateY: multiply(this.trans, SCREEN_HEIGHT / 2) },
+              ],
+            }}
+          >
+            {!this.state.hidden && Children.only(this.props.children)}
+          </Animated.View>
+        </View>
+      </View>
     );
   }
 }

@@ -1,8 +1,9 @@
 import { Subject, Observable } from 'rxjs';
-import { mergeAll, map, scan } from 'rxjs/operators';
-import { StopInterface } from './Stop';
+import { map, scan } from 'rxjs/operators';
+import { ReactElement } from 'react';
+import { ScreenProps, Screen } from '../Screen';
 
-type Stack = StopInterface[];
+type Stack = ReactElement<ScreenProps, typeof Screen>[];
 
 interface FullScreenStackProperties {
   canalId: string;
@@ -14,10 +15,9 @@ interface FullScreenStackMap {
 }
 
 export class FullScreenDelegate {
-  canalsFullScreenStackProperties$ = new Subject<Observable<FullScreenStackProperties>>();
+  canalsFullScreenStackProperties$ = new Subject<FullScreenStackProperties>();
 
   fullSceenStack$: Observable<Stack> = this.canalsFullScreenStackProperties$.pipe(
-    mergeAll(),
     scan(
       (
         fullScreenStackMap: FullScreenStackMap,

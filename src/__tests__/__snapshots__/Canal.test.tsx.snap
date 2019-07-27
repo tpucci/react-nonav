@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BasicUsage renders page in the full screen portal 1`] = `
+exports[`Canal renders its children 1`] = `
 <View
   style={
     Object {
@@ -23,21 +23,9 @@ exports[`BasicUsage renders page in the full screen portal 1`] = `
       }
     }
   >
-    <View
-      style={
-        Object {
-          "bottom": 0,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        }
-      }
-    >
-      <Text>
-        a
-      </Text>
-    </View>
+    <Text>
+      a
+    </Text>
   </View>
   <View
     style={
@@ -57,7 +45,7 @@ exports[`BasicUsage renders page in the full screen portal 1`] = `
 </View>
 `;
 
-exports[`BasicUsage renders page inside the canal 1`] = `
+exports[`Canal renders its only child 1`] = `
 <View
   style={
     Object {
@@ -80,36 +68,39 @@ exports[`BasicUsage renders page inside the canal 1`] = `
       }
     }
   >
-    <View
-      style={
-        Object {
-          "bottom": 0,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        }
+    <Text>
+      a
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Canal renders only non-fullscreen children 1`] = `
+<View
+  style={
+    Object {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
       }
-    >
-      <Text>
-        a
-      </Text>
-    </View>
-    <View
-      style={
-        Object {
-          "bottom": 0,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        }
-      }
-    >
-      <Text>
-        b
-      </Text>
-    </View>
+    }
+  >
+    <Text>
+      a
+    </Text>
   </View>
 </View>
 `;

@@ -11,5 +11,28 @@ exports[`FullScreenPortal renders the full screen portal 1`] = `
       "top": 0,
     }
   }
-/>
+>
+  <View />
+</View>
+`;
+
+exports[`FullScreenPortal renders the full screen screens 1`] = `
+<View
+  style={
+    Object {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+>
+  <View />
+  <View>
+    <Text>
+      I should be rendered
+    </Text>
+  </View>
+</View>
 `;

@@ -6,21 +6,23 @@ route: /guides/transitions
 
 # Transitions
 
-In order to use transitions between two screens, simply add the `Transitioner` key to your stops.
+In order to use transitions between two screens, simply add the `Transitioner` key to your screens.
 
 ## Basic example
 
 ```ts
-import React from "react";
-import { createCanal } from "react-gondola";
-import { SildeLeft } from "react-gondola/transitions";
-import { FirstName } from "./FirstName";
-import { LastName } from "./LastName";
+import React from 'react';
+import { Canal, Screen } from 'react-gondola';
+import { SildeLeft } from 'react-gondola/transitions';
+import { FirstName } from './FirstName';
+import { LastName } from './LastName';
 
-const SignInCanal = createCanal([
-  { name: "firstName", Component: FirstName },
-  { name: "lastName", Component: LastName, Transitioner: SildeLeft }
-]);
+const SignInCanal = () => (
+  <Canal>
+    <Screen name="firstname" Component={FirstName} Transitioner={SlideLeft} />
+    <Screen name="lastname" Component={LastName} Transitioner={SlideLeft} />
+  </Canal>
+);
 ```
 
 ## Available transitioners
@@ -29,6 +31,7 @@ const SignInCanal = createCanal([
 | :-------------------------------------------------------------------: | ---------------------------------------------------------- | :--------------------------------------------------: |
 |                              `SildeLeft`                              | `import { SildeLeft } from "react-gondola/transitions";`   |   ![Slide Left transition](./assets/slideLeft.gif)   |
 |                               `SildeUp`                               | `import { SildeUp } from "react-gondola/transitions";`     |     ![Slide Up transition](./assets/slideUp.gif)     |
+|                              `ConvexUp`                               | `import { ConvexUp } from "react-gondola/transitions";`    |                                                      |
 | `RotateCrazy` (⚠️ experimental: this might be removed without notice) | `import { RotateCrazy } from "react-gondola/transitions";` | ![Rotate Crazy transition](./assets/rotateCrazy.gif) |
 
 ## Create your own transitioner
@@ -44,16 +47,16 @@ You can create your own transitioner if the one availables does not fit your nee
 ```js
 // in your jest setup file, use the following
 
-jest.mock("react-native-reanimated/src/ReanimatedEventEmitter");
-jest.mock("react-native-reanimated/src/ReanimatedModule", () => ({
+jest.mock('react-native-reanimated/src/ReanimatedEventEmitter');
+jest.mock('react-native-reanimated/src/ReanimatedModule', () => ({
   configureNativeProps: () => {},
   connectNodes: () => {},
   disconnectNodes: () => {},
   createNode: () => {},
   configureProps: () => {},
   getValue: () => {},
-  dropNode: () => {}
+  dropNode: () => {},
 }));
-jest.mock("react-native-reanimated/src/derived/evaluateOnce");
-jest.mock("react-native-reanimated/src/core/AnimatedProps");
+jest.mock('react-native-reanimated/src/derived/evaluateOnce');
+jest.mock('react-native-reanimated/src/core/AnimatedProps');
 ```

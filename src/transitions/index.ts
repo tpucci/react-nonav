@@ -2,6 +2,7 @@ export { None } from './None';
 export { SlideLeft } from './SlideLeft';
 export { SlideUp } from './SlideUp';
 export { RotateCrazy } from './RotateCrazy';
+export { ConvexUp } from './ConvexUp';
 export { TransitionComponent } from './Transition';
 
 // test utility

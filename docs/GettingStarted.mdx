@@ -9,12 +9,9 @@ route: /getting-started
 
 React-gondola needs the following dependencies; if you do not have those installed, you need to install them with the correspondig command:
 
-| Dependencie name |  Yarn Installation command   | NPM Installation command  |
-| :--------------: | :--------------------------: | :-----------------------: |
-|      `mobx`      |    `yarn add mobx@5.0.0`     |    `npm i mobx@5.0.0`     |
-|   `mobx-react`   | `yarn add mobx-reactx@5.0.0` | `npm i mobx-reactx@5.0.0` |
-|   `mobx-utils`   | `yarn add mobx-utilsx@5.0.0` | `npm i mobx-utilsx@5.0.0` |
-|      `rxjs`      |       `yarn add rxjs`        |       `npm i rxjs`        |
+| Dependencie name | Yarn Installation command | NPM Installation command |
+| :--------------: | :-----------------------: | :----------------------: |
+|      `rxjs`      |      `yarn add rxjs`      |       `npm i rxjs`       |
 
 Then, install React-Gondola with:
 
@@ -28,68 +25,99 @@ or
 
 ### Create a canal
 
-In order to create a canal, use the `createCanal` function. Pass it your screens in the business order.
+In order to create a canal, use the `Canal` and `Screen` components. Your screens order is important: the order is the elevation order. If two or more screens are visible, last visible in the array is shown.
 
 ```ts
-import React from "react";
-import { createCanal } from "react-gondola";
-import { FirstName } from "./FirstName";
-import { LastName } from "./LastName";
+import React from 'react';
+import { Canal, Screen } from 'react-gondola';
+import { FirstName } from './FirstName';
+import { LastName } from './LastName';
 
-const SignInCanal = createCanal([
-  { name: "firstName", Component: FirstName },
-  { name: "lastName", Component: LastName }
-]);
-```
-
-Then, use the canal wherever you want in your app. Specify whether to show/hide a screen by using the screen's name as a prop:
-
-```ts
-import React, { Component } from "react";
-import { SignInCanal } from "./canals/SignIn";
-
-export default class App extends Component {
-  render() {
-    return <SignInCanal firstName={true} lastName={false} />;
-  }
-}
+const SignInCanal = () => (
+  <Canal>
+    <Screen name="firstname" Component={FirstName} visible />
+    <Screen name="lastname" Component={LastName} visible={false} />
+  </Canal>
+);
 ```
 
 That's all !
 
 ### Add a full screen page
 
-If you want to add full screen page, pass the `isFullScreen` flag to the right page when creating a canal. In the following example, `confirm` is a full screen page.
+If you want to add full screen page, pass the `isFullScreen` flag prop to your `Screen` when creating a canal. In the following example, `lastname` is a full screen page.
 
 ```ts
-import React from "react";
-import { createCanal } from "react-gondola";
-import { FirstName } from "./FirstName";
-import { LastName } from "./LastName";
+import React from 'react';
+import { Canal, Screen } from 'react-gondola';
+import { FirstName } from './FirstName';
+import { LastName } from './LastName';
 
-const SignInCanal = createCanal([
-  { name: "firstName", Component: FirstName },
-  { name: "lastName", Component: LastName },
-  { name: "confirm", Component: Confirm, isFullScreen: true }
-]);
+const SignInCanal = () => (
+  <Canal>
+    <Screen name="firstname" Component={FirstName} visible />
+    <Screen name="lastname" Component={LastName} visible={false} isFullScreen />
+  </Canal>
+);
 ```
 
-In order to render the full screen page at the top level in your app, add the `FullScreenPortal` at the top level in your rendering tree.
+In order to render the full screen page, add the `FullScreenPortal` at the top level in your rendering tree.
 
 ```ts
-import React, { Component } from "react";
-import { SignInCanal } from "./canals/SignIn";
-import { FullScreenPortal } from "react-gondola";
+import React, { Component } from 'react';
+import { MyCanal } from './canals/MyCanal';
+import { FullScreenPortal } from 'react-gondola';
 
 export default class App extends Component {
   render() {
     return (
       <FullScreenPortal>
-        <SignInCanal firstName lastName confirm />
+        <MyCanal />
       </FullScreenPortal>
     );
   }
 }
 ```
+
+### Go Back
+
+Back events are also managed in a declarative way. Use the `onBack` callback prop on your screen.
+
+```ts
+import React from 'react';
+import { Canal, Screen } from 'react-gondola';
+import { FirstName } from './FirstName';
+import { LastName } from './LastName';
+
+const SignInCanal = () => (
+  <Canal>
+    <Screen name="firstname" Component={FirstName} visible />
+    <Screen
+      name="lastname"
+      Component={LastName}
+      visible={false}
+      onBack={() => {
+        doSomething();
+      }}
+    />
+  </Canal>
+);
+```
+
+import { Info } from 'components/Info';
+import { Warning } from 'components/Warning';
+
+<Warning>
+  You should use a state machine in order to make your canal a controlled component. In fact, your
+  `onBack` callbacks should modify your state in a way it affects the visibility of your screens.
+  See the example in the repo.
+</Warning>
+<Info>
+  If you have nested or multiple canals, here is the priority of `onBack` callbacks:
+  <br/>
+  - Last visible full-screen screen.
+  <br/>
+  - Deepest visible screen.
+</Info>
 
 You are ready to use React-Gondola 🎸.
