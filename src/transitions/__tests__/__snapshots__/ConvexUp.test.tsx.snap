@@ -2,114 +2,326 @@
 
 exports[`hides its child if direction is backward 1`] = `
 <View
-  collapsable={false}
   pointerEvents="none"
   style={
-    Object {
-      "alignItems": "center",
-      "backgroundColor": "#00000050",
-      "bottom": 0,
-      "justifyContent": "center",
-      "left": 0,
-      "position": "absolute",
-      "right": 0,
-      "top": 0,
-    }
+    Array [
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      },
+    ]
   }
 >
   <View
     collapsable={false}
-    style={Object {}}
-  />
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Object {
+            "backgroundColor": "#000000aa",
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    pointerEvents="box-none"
+    style={
+      Array [
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+        },
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={Object {}}
+    />
+  </View>
 </View>
 `;
 
 exports[`shows its child if direction changed to forward 1`] = `
 <View
-  collapsable={false}
   pointerEvents="auto"
   style={
-    Object {
-      "alignItems": "center",
-      "backgroundColor": "#00000050",
-      "bottom": 0,
-      "justifyContent": "center",
-      "left": 0,
-      "position": "absolute",
-      "right": 0,
-      "top": 0,
-    }
+    Array [
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      },
+    ]
   }
 >
   <View
     collapsable={false}
-    style={Object {}}
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
   >
-    <Text
-      testID="child"
+    <View
+      accessible={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Object {
+            "backgroundColor": "#000000aa",
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    pointerEvents="box-none"
+    style={
+      Array [
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+        },
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={Object {}}
     >
-      I should be rendered
-    </Text>
+      <Text
+        testID="child"
+      >
+        I should be rendered
+      </Text>
+    </View>
   </View>
 </View>
 `;
 
 exports[`shows its child if direction is forward 1`] = `
 <View
-  collapsable={false}
   pointerEvents="auto"
   style={
-    Object {
-      "alignItems": "center",
-      "backgroundColor": "#00000050",
-      "bottom": 0,
-      "justifyContent": "center",
-      "left": 0,
-      "position": "absolute",
-      "right": 0,
-      "top": 0,
-    }
+    Array [
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      },
+    ]
   }
 >
   <View
     collapsable={false}
-    style={Object {}}
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
   >
-    <Text
-      testID="child"
+    <View
+      accessible={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Object {
+            "backgroundColor": "#000000aa",
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    pointerEvents="box-none"
+    style={
+      Array [
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+        },
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={Object {}}
     >
-      I should be rendered
-    </Text>
+      <Text
+        testID="child"
+      >
+        I should be rendered
+      </Text>
+    </View>
   </View>
 </View>
 `;
 
 exports[`snapshots component when direction changed to backward 1`] = `
 <View
-  collapsable={false}
   pointerEvents="auto"
   style={
-    Object {
-      "alignItems": "center",
-      "backgroundColor": "#00000050",
-      "bottom": 0,
-      "justifyContent": "center",
-      "left": 0,
-      "position": "absolute",
-      "right": 0,
-      "top": 0,
-    }
+    Array [
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      },
+    ]
   }
 >
   <View
     collapsable={false}
-    style={Object {}}
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
   >
-    <Text
-      testID="child"
+    <View
+      accessible={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Object {
+            "backgroundColor": "#000000aa",
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    pointerEvents="box-none"
+    style={
+      Array [
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+        },
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={Object {}}
     >
-      I should not be rendered
-    </Text>
+      <Text
+        testID="child"
+      >
+        I should not be rendered
+      </Text>
+    </View>
   </View>
 </View>
 `;

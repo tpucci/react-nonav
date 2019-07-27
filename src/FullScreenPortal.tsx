@@ -1,7 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { from } from 'rxjs';
+
+/**
+ * import order is important between recompose and rxjs
+ * @see https://stackoverflow.com/questions/53878650/you-provided-an-invalid-object-where-a-stream-was-expected-when-using-rxjs6-an.
+ */
 import { componentFromStreamWithConfig } from 'recompose';
+import { from } from 'rxjs';
 
 import { Navigation } from './Navigation';
 import { map, publish, withLatestFrom } from 'rxjs/operators';
@@ -9,7 +14,9 @@ import { withBackContext, WithBackContext } from './withBackContext';
 import { BackContext } from './Navigation/BackContext';
 import { last } from './utils/Array.last';
 
-class FullScreenPortalComponent extends Component<WithBackContext<{}>> {
+interface Props {}
+
+class FullScreenPortalComponent extends Component<WithBackContext<Props>> {
   static FullScreenStack = componentFromStreamWithConfig({
     fromESObservable: from,
     toESObservable: stream => stream,

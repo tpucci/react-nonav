@@ -1,11 +1,12 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import TestRenderer from 'react-test-renderer';
 import { Canal } from '../Canal';
 import { Screen } from '../Screen';
 import { Subject } from 'rxjs';
 import { BackEvent } from '../Navigation/BackHandlerDelegate';
 import { BackContext } from '../Navigation/BackContext';
+import { Navigation } from '../Navigation';
 
 describe('Canal', () => {
   it('renders its children', () => {
@@ -33,6 +34,47 @@ describe('Canal', () => {
       </Canal>
     );
     expect(testRenderer.toJSON()).toMatchSnapshot();
+  });
+  it('notifies the fullScreenDelegate of the full-screen screens after any render', () => {
+    const spy = jest.spyOn(
+      Navigation.instance.fullScreenDelegate.canalsFullScreenStackProperties$,
+      'next'
+    );
+    const ScreenB = <Screen Component={() => <Text>b</Text>} name="b" visible isFullScreen />;
+    const testRenderer = TestRenderer.create(
+      <Canal>
+        <Screen Component={() => <Text>a</Text>} name="a" visible />
+        {ScreenB}
+      </Canal>
+    );
+    expect(spy).toHaveBeenCalledWith({ canalId: '0', fullScreenStack: [ScreenB] });
+    const ScreenC = (
+      <Screen Component={() => <Text>c</Text>} name="c" visible={false} isFullScreen />
+    );
+    testRenderer.update(
+      <Canal>
+        <Screen Component={() => <Text>a</Text>} name="a" visible />
+        {ScreenC}
+      </Canal>
+    );
+    expect(spy).toHaveBeenCalledWith({ canalId: '0', fullScreenStack: [ScreenC] });
+  });
+  it('notifies the fullScreenDelegate on unmount', () => {
+    const spy = jest.spyOn(
+      Navigation.instance.fullScreenDelegate.canalsFullScreenStackProperties$,
+      'next'
+    );
+    const ScreenB = <Screen Component={() => <Text>b</Text>} name="b" visible isFullScreen />;
+    const testRenderer = TestRenderer.create(
+      <Canal>
+        <Screen Component={() => <Text>a</Text>} name="a" visible />
+        {ScreenB}
+      </Canal>
+    );
+    expect(spy).not.toHaveBeenCalledWith({ canalId: '0', fullScreenStack: [] });
+    expect(spy).toHaveBeenCalledWith({ canalId: '0', fullScreenStack: [ScreenB] });
+    testRenderer.update(<View></View>);
+    expect(spy).toHaveBeenCalledWith({ canalId: '0', fullScreenStack: [] });
   });
   it('passes back events on', () => {
     const back$ = new Subject<BackEvent>();

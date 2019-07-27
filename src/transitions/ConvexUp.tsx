@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions, TouchableWithoutFeedback, View } from 'react-na
 import Animated, { Easing } from 'react-native-reanimated';
 
 import { TransitionComponent } from './Transition';
-import { Navigation } from 'react-gondola/Navigation';
+import { Navigation } from '../Navigation';
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
