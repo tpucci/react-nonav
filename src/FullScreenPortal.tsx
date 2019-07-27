@@ -1,36 +1,60 @@
-import React, { Component as ReactComponent, Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Observer } from 'mobx-react';
-import { fromStream } from 'mobx-utils';
-import { Navigation } from './Navigation';
+import { from } from 'rxjs';
+import { componentFromStreamWithConfig } from 'recompose';
 
-export class FullScreenPortal extends ReactComponent {
-  fullScreenStack = fromStream(Navigation.instance.fullScreenDelegate.fullSceenStack$);
+import { Navigation } from './Navigation';
+import { map, publish, withLatestFrom } from 'rxjs/operators';
+import { withBackContext, WithBackContext } from './withBackContext';
+import { BackContext } from './Navigation/BackContext';
+import { last } from './utils/Array.last';
+
+class FullScreenPortalComponent extends Component<WithBackContext<{}>> {
+  static FullScreenStack = componentFromStreamWithConfig({
+    fromESObservable: from,
+    toESObservable: stream => stream,
+  })(() =>
+    Navigation.instance.fullScreenDelegate.fullSceenStack$.pipe(
+      map(fullScreenStack => <>{fullScreenStack}</>)
+    )
+  );
+
+  constructor(props: WithBackContext<{}>) {
+    super(props);
+    this.back$.connect();
+  }
+
+  /**
+   * @TODO Pipe operator cannot infer return type as ConnectableObservable.
+   * See https://github.com/ReactiveX/rxjs/issues/2972.
+   */
+  // @ts-ignore
+  back$: ConnectableObservable<BackEvent> = this.props.backContext.back$.pipe(
+    withLatestFrom(Navigation.instance.fullScreenDelegate.fullSceenStack$),
+    map(([_, fullScreenStack]) => {
+      const currentScreen = last(fullScreenStack.filter(screen => screen.props.visible));
+      if (currentScreen) {
+        return { target: currentScreen.props.name };
+      }
+      return { target: null };
+    }),
+    publish()
+  );
 
   render() {
     return (
-      <View style={StyleSheet.absoluteFill}>
-        <Fragment>{this.props.children}</Fragment>
-        <Observer>
-          {() => {
-            if (this.fullScreenStack.current) {
-              return (
-                <Fragment>
-                  {this.fullScreenStack.current &&
-                    this.fullScreenStack.current.map(({ Component, name, isAuthorized }) => (
-                      <Component isAuthorized={isAuthorized} key={name} />
-                    ))}
-                </Fragment>
-              );
-            }
-            /**
-             * @todo Improve typing of <Observer /> to accept null JSXElement.
-             * Expected: `return null;`
-             */
-            return <Fragment />;
-          }}
-        </Observer>
-      </View>
+      <BackContext.Provider
+        value={{
+          back$: this.back$,
+        }}
+      >
+        <View style={StyleSheet.absoluteFill}>
+          <Fragment>{this.props.children}</Fragment>
+          <FullScreenPortalComponent.FullScreenStack />
+        </View>
+      </BackContext.Provider>
     );
   }
 }
+
+export const FullScreenPortal = withBackContext(FullScreenPortalComponent);
