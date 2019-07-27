@@ -16,7 +16,7 @@
 
 This repo focuses on grouping screens by business conversion tunnels called **canals**. Why did I call it `react-gondola`? Just because I though of this package when I was visiting Venice... and I kind of hope that using this package will feel like navigating in Venice 📸
 
-**When you use React Gondola**, you define several screens and you have the possibility to control their visibility with YOU're state machine. You define the rules of WHEN some screens should appear; `react-gondola` takes care of the rest.
+**When you use React Gondola**, you define several screens and you have the possibility to control their visibility with YOUR state machine. You define the rules of WHEN some screens should appear; `react-gondola` takes care of the rest.
 
 ## 👍 TLDR; Use this package if:
 

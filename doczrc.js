@@ -10,7 +10,7 @@ module.exports = {
     'Example',
     'Contribute',
     'Roadmap',
-    { name: 'API', menu: ['createCanal', 'FullScreenPortal'] },
+    { name: 'API', menu: ['Screen', 'FullScreenPortal'] },
   ],
   modifyBundlerConfig: config => {
     // Combine the default docz aliases with our custom aliases.
@@ -19,6 +19,7 @@ module.exports = {
       'react-native$': 'react-native-web',
       'react-gondola$': path.resolve(__dirname, 'src/index.ts'), // eslint-disable-line
       'react-gondola/transitions$': path.resolve(__dirname, 'src/transitions/index.ts'), // eslint-disable-line
+      'react-native-reanimated$': path.resolve(__dirname, 'docs/mocks/react-native-reanimated'), // eslint-disable-line
     });
     return config;
   },
