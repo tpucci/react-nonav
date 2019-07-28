@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     borderRadius: 32,
     justifyContent: 'center',
     alignItems: 'center',
+    overflow: 'hidden',
   },
   info: {
     paddingVertical: 8,
@@ -45,9 +46,11 @@ const styles = StyleSheet.create({
   post: {
     flex: 1,
     height: POST_SIZE,
+    maxWidth: POST_SIZE,
     justifyContent: 'center',
     alignItems: 'center',
     margin: 1,
+    overflow: 'hidden',
   },
   emoji: {
     fontSize: 48,

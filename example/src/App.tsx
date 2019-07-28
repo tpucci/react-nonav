@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity, Text, Platform } from 'react-native';
 import { Navigation } from 'react-gondola';
 import { FullScreenPortal, Canal, Screen } from 'react-gondola';
 import { Instagram } from './canals/Instagram';
@@ -46,7 +46,6 @@ export default class App extends Component<{}, State> {
               },
               shadowOpacity: 0.25,
               shadowRadius: 3.84,
-              elevation: 5,
               backgroundColor: 'white',
             }}
           >
@@ -70,7 +69,7 @@ export default class App extends Component<{}, State> {
           </View>
         </FullScreenPortal>
         <TouchableOpacity
-          style={{ position: 'absolute', top: 20, left: 0 }}
+          style={{ position: 'absolute', top: Platform.OS === 'ios' ? 20 : 0, left: 0 }}
           onPress={Navigation.instance.back}
         >
           <View style={{ backgroundColor: 'black', borderBottomRightRadius: 4 }}>

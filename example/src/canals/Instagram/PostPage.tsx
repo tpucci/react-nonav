@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
+    overflow: 'hidden',
   },
   info: {
     paddingVertical: 8,
@@ -29,6 +30,7 @@ const styles = StyleSheet.create({
     height: POST_SIZE,
     justifyContent: 'center',
     alignItems: 'center',
+    overflow: 'hidden',
   },
   emoji: {
     fontSize: 24,
