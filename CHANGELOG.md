@@ -1,3 +1,12 @@
+<a name="2.0.1"></a>
+## [2.0.1](https://github.com/tpucci/react-gondola/compare/2.0.0...2.0.1) (2019-07-28)
+
+
+### 🐛 Bug Fixes
+
+* **android:** fix example for Android ([30c60af](https://github.com/tpucci/react-gondola/commit/30c60af))
+* **recompose:** fix error due to import order ([df1c5ed](https://github.com/tpucci/react-gondola/commit/df1c5ed))
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/tpucci/react-gondola/compare/1.4.0...2.0.0) (2019-07-27)
 
