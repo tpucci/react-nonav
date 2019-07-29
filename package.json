@@ -18,7 +18,7 @@
     "react-native": "*"
   },
   "scripts": {
-    "postinstall": "patch-package",
+    "post-install": "patch-package",
     "build": "tsc",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "predoc:build": "cd example && yarn && cd ..",
