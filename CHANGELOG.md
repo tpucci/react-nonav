@@ -1,3 +1,11 @@
+<a name="2.0.3"></a>
+## [2.0.3](https://github.com/tpucci/react-gondola/compare/2.0.2...2.0.3) (2019-07-29)
+
+
+### 📝 Documentation
+
+* **GettingStarted:** add peer dependencies installation instructions ([ce310e0](https://github.com/tpucci/react-gondola/commit/ce310e0))
+
 <a name="2.0.2"></a>
 ## [2.0.2](https://github.com/tpucci/react-gondola/compare/2.0.1...2.0.2) (2019-07-29)
 
