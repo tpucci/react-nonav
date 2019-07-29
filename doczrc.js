@@ -6,7 +6,7 @@ module.exports = {
   menu: [
     'Welcome',
     'Getting Started',
-    { name: 'Guides', menu: ['Back', 'Transitions'] },
+    { name: 'Guides', menu: ['Back', 'Transitions', 'React Navigation Interoperability'] },
     'Example',
     'Contribute',
     'Roadmap',

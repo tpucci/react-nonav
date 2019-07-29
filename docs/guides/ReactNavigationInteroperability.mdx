@@ -1,0 +1,27 @@
+---
+name: React Navigation Interoperability
+menu: Guides
+route: /guides/react-navigation
+---
+
+# Can React Gondola work with React Navigation ❤️ ?
+
+Yes it can.
+
+## Good use of both of us 👍
+
+1. The user is free to navigate on some top level pages (use `react-navigation`).
+2. The user is forced to move forward/backward when he completes come steps in low level tunnels (use `react-gondola`).
+
+This means that at a certain point in your navigation, you need to control the visibility of your page. That great power comes with great responsability.
+✅ Test your state machine !
+
+## How well it works ?
+
+**Disclaimer:** interoperability has not been entirely tested. If you encounter any issue, feel free to open an issue on the `react-gondola` repo.
+
+## Steps
+
+1. Include one `Canal` inside a `react-navigation` page.
+2. Disable `gesture` on that `react-navigation` page.
+3. Disable `onBack` setting `<AndroidBackHandler onBackPress={() => {if (youWantToGoBackInReactNavigation()) {return false}; return true} />` in your `react-navigation` page (use `https://github.com/vonovak/react-navigation-backhandler`).
