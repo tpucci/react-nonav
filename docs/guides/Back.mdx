@@ -1,0 +1,20 @@
+---
+name: Back
+menu: Guides
+route: /guides/back
+---
+
+# Back 🔙
+
+## Steps
+
+In order to go back, you need to code two steps.
+
+1. Add a `onBack` callback on the `Screen` you are going back from. Make sure this callback affects the visibility (prop `visible`) of the screen you are going back from.
+2. Call `Navigation.instance.back()` (`import { Navigation } from 'react-gondola'`).
+
+You're set 🎸.
+
+## Example
+
+Checkout the `example` folder in the repo to get some inspiration.
