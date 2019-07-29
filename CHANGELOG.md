@@ -1,3 +1,17 @@
+<a name="2.0.2"></a>
+## [2.0.2](https://github.com/tpucci/react-gondola/compare/2.0.1...2.0.2) (2019-07-29)
+
+
+### 🐛 Bug Fixes
+
+* **install:** fix patch-package in production ([8d62f13](https://github.com/tpucci/react-gondola/commit/8d62f13))
+
+
+### 📝 Documentation
+
+* **back:** add back guide ([6469e2b](https://github.com/tpucci/react-gondola/commit/6469e2b))
+* **react-navigation:** add react-navigation interoperability guide ([038d75c](https://github.com/tpucci/react-gondola/commit/038d75c))
+
 <a name="2.0.1"></a>
 ## [2.0.1](https://github.com/tpucci/react-gondola/compare/2.0.0...2.0.1) (2019-07-28)
 
