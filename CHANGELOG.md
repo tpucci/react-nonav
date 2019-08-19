@@ -1,3 +1,6 @@
+<a name="2.0.4"></a>
+## [2.0.4](https://github.com/tpucci/react-gondola/compare/2.0.3...2.0.4) (2019-08-19)
+
 <a name="2.0.3"></a>
 ## [2.0.3](https://github.com/tpucci/react-gondola/compare/2.0.2...2.0.3) (2019-07-29)
 
