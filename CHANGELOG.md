@@ -1,3 +1,11 @@
+<a name="2.0.5"></a>
+## [2.0.5](https://github.com/tpucci/react-gondola/compare/2.0.4...2.0.5) (2019-08-19)
+
+
+### 🐛 Bug Fixes
+
+* **transition:** fix transition export ([5305bea](https://github.com/tpucci/react-gondola/commit/5305bea))
+
 <a name="2.0.4"></a>
 ## [2.0.4](https://github.com/tpucci/react-gondola/compare/2.0.3...2.0.4) (2019-08-19)
 
