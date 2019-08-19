@@ -21,7 +21,7 @@
   },
   "scripts": {
     "post-install": "patch-package",
-    "build": "tsc",
+    "build": "tsc && cp src/transitions/package.json dist/transitions/package.json",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "predoc:build": "cd example && yarn && cd ..",
     "doc:build": "docz build",

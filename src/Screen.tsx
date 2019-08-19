@@ -80,4 +80,4 @@ class ScreenComponent extends ReactComponent<WithBackContext<ScreenProps>, Scree
 }
 
 // @ts-ignore
-export const Screen = withBackContext(ScreenComponent);
+export const Screen: React.FunctionComponent<ScreenProps> = withBackContext(ScreenComponent);
