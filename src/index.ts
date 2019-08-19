@@ -9,3 +9,7 @@ export { FullScreenPortal } from './FullScreenPortal';
 export { Screen } from './Screen';
 export { Canal } from './Canal';
 export { Navigation } from './Navigation';
+
+import * as transition from './transitions';
+
+export { transition };
