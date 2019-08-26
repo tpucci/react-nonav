@@ -12,10 +12,11 @@ In order to use transitions between two screens, simply add the `Transitioner` k
 
 ```ts
 import React from 'react';
-import { Canal, Screen } from 'react-gondola';
-import { SildeLeft } from 'react-gondola/transitions';
+import { Canal, Screen, transitions } from 'react-gondola';
 import { FirstName } from './FirstName';
 import { LastName } from './LastName';
+
+const { SlideLeft } = transitions;
 
 const SignInCanal = () => (
   <Canal>
@@ -27,18 +28,18 @@ const SignInCanal = () => (
 
 ## Available transitioners
 
-|                             Transitioner                              | Import                                                     |                      transition                      |
-| :-------------------------------------------------------------------: | ---------------------------------------------------------- | :--------------------------------------------------: |
-|                              `SildeLeft`                              | `import { SildeLeft } from "react-gondola/transitions";`   |   ![Slide Left transition](./assets/slideLeft.gif)   |
-|                               `SildeUp`                               | `import { SildeUp } from "react-gondola/transitions";`     |     ![Slide Up transition](./assets/slideUp.gif)     |
-|                              `ConvexUp`                               | `import { ConvexUp } from "react-gondola/transitions";`    |                                                      |
-| `RotateCrazy` (⚠️ experimental: this might be removed without notice) | `import { RotateCrazy } from "react-gondola/transitions";` | ![Rotate Crazy transition](./assets/rotateCrazy.gif) |
+|                             Transitioner                              |                      transition                      |
+| :-------------------------------------------------------------------: | :--------------------------------------------------: |
+|                              `SildeLeft`                              |   ![Slide Left transition](./assets/slideLeft.gif)   |
+|                               `SildeUp`                               |     ![Slide Up transition](./assets/slideUp.gif)     |
+|                              `ConvexUp`                               |                                                      |
+| `RotateCrazy` (⚠️ experimental: this might be removed without notice) | ![Rotate Crazy transition](./assets/rotateCrazy.gif) |
 
 ## Create your own transitioner
 
 You can create your own transitioner if the one availables does not fit your needs ! Get some inspiration by looking at `SlideLeft` source code and get started !
 
-1. Your transitioner need to extend `TransitionComponent` (imported from `react-gondola/transitions`).
+1. Your transitioner need to extend `TransitionComponent`.
 2. Your transitioner will receive a `directionForward` prop. If true, your transitioner need to play the transition forward. Else, it need to play the transition backward.
 3. (Optionnal but recommended) If you use jest, you can test your component using `describeTransitioner` from `react-gondola/transitions/describeTransitioner`
 

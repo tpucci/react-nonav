@@ -3,6 +3,8 @@ node_modules
 
 # Build
 dist
+.rts2_cache_cjs
+.rts2_cache_esm
 
 # Coverage
 coverage

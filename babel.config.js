@@ -1,4 +1,10 @@
-module.exports = {
-  presets: ['module:metro-react-native-babel-preset'],
-  plugins: [['@babel/plugin-proposal-decorators', { legacy: true }]],
+module.exports = api => {
+  const isTest = api.env('test');
+
+  if (isTest) {
+    return {
+      presets: ['module:metro-react-native-babel-preset'],
+    };
+  }
+  return {};
 };
