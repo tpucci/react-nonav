@@ -6,7 +6,6 @@ cache:
     - example/node_modules
 install:
   - yarn
-  - yarn post-install
   - cd example && yarn && cd ..
 jobs:
   include:
