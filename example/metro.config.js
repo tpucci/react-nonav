@@ -23,6 +23,10 @@ module.exports = {
       // See https://github.com/facebook/metro/issues/7#issuecomment-464668678.
       react: path.resolve(__dirname, '../node_modules/react'),
       'react-native': path.resolve(__dirname, 'node_modules/react-native'),
+      'react-native-gesture-handler': path.resolve(
+        __dirname,
+        '../node_modules/react-native-gesture-handler'
+      ),
     },
   },
   transformer: {
