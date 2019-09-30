@@ -57,7 +57,7 @@
     "metro-react-native-babel-preset": "^0.55.0",
     "prettier": "^1.16.4",
     "react": "16.8.6",
-    "react-dom": "16.9.0",
+    "react-dom": "16.10.1",
     "react-github-btn": "^1.0.5",
     "react-native": "0.59.9",
     "react-native-reanimated": "^1.1.0",
