@@ -1,12 +1,17 @@
 import React, { Children } from 'react';
 import { StyleSheet, Dimensions } from 'react-native';
 import Animated, { Easing } from 'react-native-reanimated';
+import { PanGestureHandler, State } from 'react-native-gesture-handler';
 
 import { TransitionComponent } from './Transition';
 
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
+const SCREEN_WIDTH = width / 2;
+
+const TOSS_SEC = 0.2;
 
 const {
+  add,
   block,
   call,
   Clock,
@@ -18,6 +23,13 @@ const {
   stopClock,
   timing,
   Value,
+  event,
+  lessThan,
+  eq,
+  sub,
+  neq,
+  defined,
+  spring,
 } = Animated;
 
 function runTiming(
@@ -70,12 +82,83 @@ export class SlideLeft extends TransitionComponent {
     hidden: !this.props.directionForward,
   };
 
+  dragX = new Value(0);
+  gestureState = new Value(-1);
+  dragVX = new Value(0);
+
+  onGestureEvent = event([
+    {
+      nativeEvent: {
+        translationX: this.dragX,
+        velocityX: this.dragVX,
+        state: this.gestureState,
+      },
+    },
+  ]);
+
+  transX = new Value(0);
   clock = new Clock();
+  prevDragX = new Value(0);
+
+  snapPoint = cond(
+    lessThan(add(this.transX, multiply(TOSS_SEC, this.dragVX)), SCREEN_WIDTH),
+    0,
+    SCREEN_WIDTH
+  );
+
+  animationState = {
+    finished: new Value(0),
+    velocity: this.dragVX,
+    position: new Value(0),
+    time: new Value(0),
+  };
+
+  config = {
+    damping: 12,
+    mass: 1,
+    stiffness: 150,
+    overshootClamping: false,
+    restSpeedThreshold: 0.001,
+    restDisplacementThreshold: 0.001,
+    toValue: this.snapPoint,
+  };
+
+  newTransX = cond(
+    eq(this.gestureState, State.ACTIVE),
+    [
+      stopClock(this.clock),
+      set(this.transX, add(this.transX, sub(this.dragX, this.prevDragX))),
+      set(this.prevDragX, this.dragX),
+      this.transX,
+    ],
+    cond(neq(this.gestureState, -1), [
+      set(this.prevDragX, 0),
+      set(
+        this.transX,
+        cond(
+          defined(this.transX),
+          [
+            cond(clockRunning(this.clock), 0, [
+              set(this.animationState.finished, 0),
+              set(this.animationState.velocity, this.dragVX),
+              set(this.animationState.position, this.transX),
+              startClock(this.clock),
+            ]),
+            spring(this.clock, this.animationState, this.config),
+            cond(this.animationState.finished, stopClock(this.clock)),
+            this.animationState.position,
+          ],
+          0
+        )
+      ),
+    ])
+  );
+
   progress: Animated.Value<number> = new Value(this.props.directionForward ? 0 : 1);
   animation: Animated.Value<number> = new Value(this.props.directionForward ? 0 : 1);
 
   // istanbul ignore next
-  transX = runTiming(this.clock, this.progress, this.animation, () => {
+  _transX = runTiming(this.clock, this.progress, this.animation, () => {
     // react-native-reanimated is not correctly mocked
     // istanbul ignore next
     // @ts-ignore
@@ -93,16 +176,22 @@ export class SlideLeft extends TransitionComponent {
 
   render() {
     return (
-      <Animated.View
-        style={[
-          StyleSheet.absoluteFill,
-          {
-            transform: [{ translateX: multiply(this.transX, SCREEN_WIDTH) }],
-          },
-        ]}
+      <PanGestureHandler
+        maxPointers={1}
+        onGestureEvent={this.onGestureEvent}
+        onHandlerStateChange={this.onGestureEvent}
       >
-        {!this.state.hidden && Children.only(this.props.children)}
-      </Animated.View>
+        <Animated.View
+          style={[
+            StyleSheet.absoluteFill,
+            {
+              transform: [{ translateX: this.newTransX }],
+            },
+          ]}
+        >
+          {!this.state.hidden && Children.only(this.props.children)}
+        </Animated.View>
+      </PanGestureHandler>
     );
   }
 }

@@ -43,7 +43,7 @@ export class Instagram extends Component<Props, State> {
             user: this.user,
           }}
         />
-        <Screen
+        {/* <Screen
           name="sneakPeek"
           Component={PostSneakPeek}
           Transitioner={ConvexUp}
@@ -56,7 +56,7 @@ export class Instagram extends Component<Props, State> {
             user: this.user,
             post: this.state.selectedPost,
           }}
-        />
+        /> */}
         <Screen
           name="post"
           Component={PostPage}
@@ -73,7 +73,7 @@ export class Instagram extends Component<Props, State> {
             },
           }}
         />
-        <Screen
+        {/* <Screen
           name="nextProfile"
           Component={Instagram}
           Transitioner={SlideUp}
@@ -84,7 +84,7 @@ export class Instagram extends Component<Props, State> {
           props={{
             user: this.state.selectedUser,
           }}
-        />
+        /> */}
       </Canal>
     );
   }
