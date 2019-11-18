@@ -6,7 +6,7 @@ export class Welcome extends Component {
     return (
       <View style={{ flex: 1, justifyContent: 'center', padding: 16 }}>
         <Text style={{ fontSize: 32, fontWeight: '500', textAlign: 'center', marginBottom: 16 }}>
-          Welcome in React Gondola !
+          Welcome in React Nonav !
         </Text>
         <Text style={{ marginTop: 16 }}>
           Choose an example in the tab bar to explore this example app.

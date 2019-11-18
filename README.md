@@ -1,4 +1,4 @@
-<h1 align="center">React Gondola</h1>
+<h1 align="center">React Nonav</h1>
 
 <p align="center">React Native declarative and reactive navigation.</p>
 
@@ -16,7 +16,7 @@
 
 This repo focuses on grouping screens by business conversion tunnels called **canals**. Why did I call it `react-nonav`? Just because I though of this package when I was visiting Venice... and I kind of hope that using this package will feel like navigating in Venice 📸
 
-**When you use React Gondola**, you define several screens and you have the possibility to control their visibility with YOUR state machine. You define the rules of WHEN some screens should appear; `react-nonav` takes care of the rest.
+**When you use React Nonav**, you define several screens and you have the possibility to control their visibility with YOUR state machine. You define the rules of WHEN some screens should appear; `react-nonav` takes care of the rest.
 
 ## 👍 TLDR; Use this package if:
 
@@ -29,7 +29,7 @@ This repo focuses on grouping screens by business conversion tunnels called **ca
 - you want to navigate imperatively.
 - you need to use Native navigation (react-nonav's navigation is powered by JS code only).
 
-## Docs
+## Docs [![Netlify Status](https://api.netlify.com/api/v1/badges/a0a567d1-8c40-4c59-831c-0b137a3b176c/deploy-status)](https://app.netlify.com/sites/react-nonav/deploys)
 
 The docs are here: https://react-nonav.netlify.com/
 Powered by the incredible [docz](https://www.docz.site/).
