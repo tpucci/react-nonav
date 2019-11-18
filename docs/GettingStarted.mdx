@@ -7,7 +7,7 @@ route: /getting-started
 
 ## Installation
 
-React-gondola needs the following dependencies; if you do not have those installed, you need to install them with the correspondig command:
+React-nonav needs the following dependencies; if you do not have those installed, you need to install them with the correspondig command:
 
 |     Dependencie name      |     Yarn Installation command      |    NPM Installation command     |
 | :-----------------------: | :--------------------------------: | :-----------------------------: |
@@ -16,13 +16,13 @@ React-gondola needs the following dependencies; if you do not have those install
 
 Then, follow any post-installation instruction of `react-native-reanimated`. See [`react-native-reanimated` Installation Instructions](https://github.com/kmagiera/react-native-reanimated#installation).
 
-Then, install React-Gondola with:
+Then, install React-Nonav with:
 
-`yarn add react-gondola`
+`yarn add react-nonav`
 
 or
 
-`npm i react-gondola`
+`npm i react-nonav`
 
 ## Basic Usage
 
@@ -32,7 +32,7 @@ In order to create a canal, use the `Canal` and `Screen` components. Your screen
 
 ```ts
 import React from 'react';
-import { Canal, Screen } from 'react-gondola';
+import { Canal, Screen } from 'react-nonav';
 import { FirstName } from './FirstName';
 import { LastName } from './LastName';
 
@@ -52,7 +52,7 @@ If you want to add full screen page, pass the `isFullScreen` flag prop to your `
 
 ```ts
 import React from 'react';
-import { Canal, Screen } from 'react-gondola';
+import { Canal, Screen } from 'react-nonav';
 import { FirstName } from './FirstName';
 import { LastName } from './LastName';
 
@@ -69,7 +69,7 @@ In order to render the full screen page, add the `FullScreenPortal` at the top l
 ```ts
 import React, { Component } from 'react';
 import { MyCanal } from './canals/MyCanal';
-import { FullScreenPortal } from 'react-gondola';
+import { FullScreenPortal } from 'react-nonav';
 
 export default class App extends Component {
   render() {
@@ -88,7 +88,7 @@ Back events are also managed in a declarative way. Use the `onBack` callback pro
 
 ```ts
 import React from 'react';
-import { Canal, Screen } from 'react-gondola';
+import { Canal, Screen } from 'react-nonav';
 import { FirstName } from './FirstName';
 import { LastName } from './LastName';
 
@@ -123,4 +123,4 @@ import { Warning } from 'components/Warning';
   - Deepest visible screen.
 </Info>
 
-You are ready to use React-Gondola 🎸.
+You are ready to use React-Nonav 🎸.

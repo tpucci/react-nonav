@@ -28,8 +28,8 @@
     "isolatedModules": true,
     "moduleResolution": "node",
     "paths": {
-      "react-gondola": ["../../src"],
-      "react-gondola/*": ["../../src/*"],
+      "react-nonav": ["../../src"],
+      "react-nonav/*": ["../../src/*"],
       "react": ["../node_modules/react"],
       "react-native": ["../node_modules/react-native"],
       "react-native-reanimated": ["../node_modules/react-native-reanimated"]

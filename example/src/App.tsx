@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text, Platform } from 'react-native';
-import { Navigation } from 'react-gondola';
-import { FullScreenPortal, Canal, Screen } from 'react-gondola';
+import { Navigation } from 'react-nonav';
+import { FullScreenPortal, Canal, Screen } from 'react-nonav';
 import { Instagram } from './canals/Instagram';
 import { Welcome } from './Welcome';
 

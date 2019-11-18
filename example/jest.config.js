@@ -6,8 +6,8 @@ module.exports = {
   rootDir: '..',
   testPathIgnorePatterns: ['/node_modules/', '<rootDir>/src/'],
   moduleNameMapper: {
-    '^react-gondola$': '<rootDir>/src/',
-    '^react-gondola/transitions$': '<rootDir>/src/transitions',
+    '^react-nonav$': '<rootDir>/src/',
+    '^react-nonav/transitions$': '<rootDir>/src/transitions',
   },
   setupFilesAfterEnv: ['<rootDir>/jest/setup.js'],
 };

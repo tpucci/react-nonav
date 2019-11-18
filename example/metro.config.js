@@ -16,7 +16,7 @@ module.exports = {
   resolver: {
     blacklistRE: blacklist([new RegExp(`${rootPath}/node_modules/react-native/.*`)]),
     extraNodeModules: {
-      'react-gondola': path.resolve(__dirname, '../src'),
+      'react-nonav': path.resolve(__dirname, '../src'),
       // Important, those are all the dependencies
       // asked by the "../src" but which
       // are not present in the ROOT/node_modules

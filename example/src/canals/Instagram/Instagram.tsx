@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { ProfilePage } from './ProfilePage';
 import { PostPage } from './PostPage';
 import { PostSneakPeek } from './PostSneakPeek';
-import { Screen, Canal } from 'react-gondola';
-import { ConvexUp, SlideLeft, SlideUp } from 'react-gondola/transitions';
+import { Screen, Canal } from 'react-nonav';
+import { ConvexUp, SlideLeft, SlideUp } from 'react-nonav/transitions';
 import { getRandomUser } from './getRandomUser';
 
 interface State {
