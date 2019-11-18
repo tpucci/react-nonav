@@ -1,3 +1,11 @@
+<a name="2.0.6"></a>
+## [2.0.6](https://github.com/tpucci/react-nonav/compare/2.0.5...2.0.6) (2019-11-18)
+
+
+### 🐛 Bug Fixes
+
+* **buildscript:** generate cjs and esm modules ([616e510](https://github.com/tpucci/react-nonav/commit/616e510))
+
 <a name="2.0.5"></a>
 ## [2.0.5](https://github.com/tpucci/react-nonav/compare/2.0.4...2.0.5) (2019-08-19)
 
