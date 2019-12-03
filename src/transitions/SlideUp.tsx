@@ -101,6 +101,7 @@ export class SlideUp extends TransitionComponent {
             transform: [{ translateY: multiply(this.transY, SCREEN_HEIGHT) }],
           },
         ]}
+        pointerEvents="box-none"
       >
         {!this.state.hidden && Children.only(this.props.children)}
       </Animated.View>

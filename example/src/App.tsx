@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, StatusBar, Text} from 'react-native';
+import {StyleSheet, StatusBar} from 'react-native';
 import {FullScreenPortal, Canal, Screen, transition} from 'react-nonav';
 import {Home} from './canals/home/Home';
 import {Player} from './canals/player/Player';
@@ -16,16 +16,16 @@ const styles = StyleSheet.create({
 console.disableYellowBox = true;
 
 export const App = observer(() => (
-  <>
+  <FullScreenPortal>
     <StatusBar barStyle="light-content" />
     <Canal style={styles.appContainer}>
       <Screen name="Home" Component={Home} visible />
       <Screen
         name="Player"
-        Transitioner={transition.SlideLeft}
+        Transitioner={transition.SlideUp}
         Component={Player}
         visible={PlayerModule.isMoviePlaying}
       />
     </Canal>
-  </>
+  </FullScreenPortal>
 ));

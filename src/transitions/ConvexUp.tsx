@@ -95,7 +95,7 @@ export class ConvexUp extends TransitionComponent {
 
   render() {
     return (
-      <View style={[StyleSheet.absoluteFill]} pointerEvents={this.state.hidden ? 'none' : 'auto'}>
+      <View style={[StyleSheet.absoluteFill]} pointerEvents="box-none">
         <Animated.View
           style={[StyleSheet.absoluteFill, { opacity: sub(new Value(1), this.trans) }]}
         >
@@ -111,6 +111,7 @@ export class ConvexUp extends TransitionComponent {
           pointerEvents="box-none"
         >
           <Animated.View
+            pointerEvents="box-none"
             style={{
               opacity: sub(new Value(1), this.trans),
               transform: [

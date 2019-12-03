@@ -2,7 +2,7 @@
 
 exports[`hides its child if direction is backward 1`] = `
 <View
-  pointerEvents="none"
+  pointerEvents="box-none"
   style={
     Array [
       Object {
@@ -71,6 +71,7 @@ exports[`hides its child if direction is backward 1`] = `
   >
     <View
       collapsable={false}
+      pointerEvents="box-none"
       style={Object {}}
     />
   </View>
@@ -79,7 +80,7 @@ exports[`hides its child if direction is backward 1`] = `
 
 exports[`shows its child if direction changed to forward 1`] = `
 <View
-  pointerEvents="auto"
+  pointerEvents="box-none"
   style={
     Array [
       Object {
@@ -148,6 +149,7 @@ exports[`shows its child if direction changed to forward 1`] = `
   >
     <View
       collapsable={false}
+      pointerEvents="box-none"
       style={Object {}}
     >
       <Text
@@ -162,7 +164,7 @@ exports[`shows its child if direction changed to forward 1`] = `
 
 exports[`shows its child if direction is forward 1`] = `
 <View
-  pointerEvents="auto"
+  pointerEvents="box-none"
   style={
     Array [
       Object {
@@ -231,6 +233,7 @@ exports[`shows its child if direction is forward 1`] = `
   >
     <View
       collapsable={false}
+      pointerEvents="box-none"
       style={Object {}}
     >
       <Text
@@ -245,7 +248,7 @@ exports[`shows its child if direction is forward 1`] = `
 
 exports[`snapshots component when direction changed to backward 1`] = `
 <View
-  pointerEvents="auto"
+  pointerEvents="box-none"
   style={
     Array [
       Object {
@@ -314,6 +317,7 @@ exports[`snapshots component when direction changed to backward 1`] = `
   >
     <View
       collapsable={false}
+      pointerEvents="box-none"
       style={Object {}}
     >
       <Text

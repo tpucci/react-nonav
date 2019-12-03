@@ -6,7 +6,6 @@ import {TabBar} from '../../atoms/TabBar';
 
 import {HomeScreen} from './screens/HomeScreen';
 import {DownloadScreen} from './screens/DownloadScreen';
-import {FadeTransitioner} from '../../atoms/FadeTransitioner';
 
 export const Home = () => {
   const [navigationScreen, setNavigationState] = useState('Home');
@@ -18,13 +17,13 @@ export const Home = () => {
           name="Home"
           Component={HomeScreen}
           visible={navigationScreen === 'Home'}
-          Transitioner={FadeTransitioner}
+          Transitioner={transition.Fade}
         />
         <Screen
           name="Downloads"
           Component={DownloadScreen}
           visible={navigationScreen === 'Downloads'}
-          Transitioner={FadeTransitioner}
+          Transitioner={transition.Fade}
         />
       </Canal>
       <TabBar

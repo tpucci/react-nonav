@@ -1,6 +1,5 @@
 import React from 'react';
-import {Canal, Screen} from 'react-nonav';
-import {FadeTransitioner} from '../../atoms/FadeTransitioner';
+import {Canal, Screen, transition} from 'react-nonav';
 import {RemoteControlScreen} from './screens/RemoteControlScreen';
 
 export const PlayerCanal = () => {
@@ -10,7 +9,7 @@ export const PlayerCanal = () => {
         visible
         name="RemoteControl"
         Component={RemoteControlScreen}
-        Transitioner={FadeTransitioner}
+        Transitioner={transition.Fade}
       />
     </Canal>
   );

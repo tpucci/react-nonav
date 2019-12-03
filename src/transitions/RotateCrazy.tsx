@@ -93,7 +93,7 @@ export class RotateCrazy extends TransitionComponent {
   render() {
     return (
       <Animated.View
-        pointerEvents={this.state.hidden ? 'none' : 'auto'}
+        pointerEvents="box-none"
         style={[
           StyleSheet.absoluteFill,
           {

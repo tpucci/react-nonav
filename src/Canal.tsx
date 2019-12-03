@@ -82,7 +82,9 @@ class CanalComponent extends Component<WithBackContext<Props>> {
           back$: this.back$,
         }}
       >
-        <View style={this.props.style}>{children}</View>
+        <View style={this.props.style} pointerEvents="box-none">
+          {children}
+        </View>
       </BackContext.Provider>
     );
   }

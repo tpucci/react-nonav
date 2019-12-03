@@ -8,6 +8,7 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
+    "test:ci": "jest --runInBand",
     "lint": "eslint ."
   },
   "dependencies": {

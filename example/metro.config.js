@@ -19,6 +19,7 @@ module.exports = {
   resolver: {
     blacklistRE: blacklist([
       new RegExp(`${rootPath}/node_modules/react-native/.*`),
+      new RegExp(`${rootPath}/node_modules/react-native-reanimated/.*`),
     ]),
     extraNodeModules: {
       'react-nonav': path.resolve(__dirname, '../src'),

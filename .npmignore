@@ -16,3 +16,7 @@ jest
 
 # Doc
 .docz
+
+# TSDX Code gen
+.rts2_cache_cjs
+.rts2_cache_esm

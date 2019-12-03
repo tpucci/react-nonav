@@ -2,6 +2,7 @@
 
 exports[`Canal renders its children 1`] = `
 <View
+  pointerEvents="box-none"
   style={
     Object {
       "bottom": 0,
@@ -47,6 +48,7 @@ exports[`Canal renders its children 1`] = `
 
 exports[`Canal renders its only child 1`] = `
 <View
+  pointerEvents="box-none"
   style={
     Object {
       "bottom": 0,
@@ -77,6 +79,7 @@ exports[`Canal renders its only child 1`] = `
 
 exports[`Canal renders only non-fullscreen children 1`] = `
 <View
+  pointerEvents="box-none"
   style={
     Object {
       "bottom": 0,

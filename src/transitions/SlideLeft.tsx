@@ -100,6 +100,7 @@ export class SlideLeft extends TransitionComponent {
             transform: [{ translateX: multiply(this.transX, SCREEN_WIDTH) }],
           },
         ]}
+        pointerEvents="box-none"
       >
         {!this.state.hidden && Children.only(this.props.children)}
       </Animated.View>

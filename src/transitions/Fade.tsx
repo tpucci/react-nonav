@@ -1,8 +1,8 @@
-import React, {Children} from 'react';
-import {StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
-import Animated, {Easing} from 'react-native-reanimated';
+import React, { Children } from 'react';
+import { StyleSheet } from 'react-native';
+import Animated, { Easing } from 'react-native-reanimated';
 
-import {Navigation, transition} from 'react-nonav';
+import { TransitionComponent } from './Transition';
 
 const {
   block,
@@ -22,7 +22,7 @@ function runTiming(
   clock: Animated.Clock,
   value: Animated.Value<number>,
   dest: Animated.Value<number>,
-  updateVisibility: () => any,
+  updateVisibility: () => any
 ) {
   const state = {
     finished: new Value(0),
@@ -52,63 +52,54 @@ function runTiming(
         set(state.frameTime, 0),
         set(config.toValue, dest),
         startClock(clock),
-      ],
+      ]
     ),
     // we run the step here that is going to update position
     timing(clock, state, config),
     // if the animation is over we stop the clock
     cond(state.finished, stopClock(clock)),
-    cond(state.finished, [
-      call([state.finished], updateVisibility),
-      stopClock(clock),
-    ]),
+    cond(state.finished, [call([state.finished], updateVisibility), stopClock(clock)]),
     // we made the block return the updated position
     state.position,
   ]);
 }
 
-export class FadeTransitioner extends transition.TransitionComponent {
+export class Fade extends TransitionComponent {
   state = {
     hidden: !this.props.directionForward,
   };
 
   clock = new Clock();
-  progress: Animated.Value<number> = new Value(
-    this.props.directionForward ? 0 : 1,
-  );
-  animation: Animated.Value<number> = new Value(
-    this.props.directionForward ? 0 : 1,
-  );
+  progress: Animated.Value<number> = new Value(this.props.directionForward ? 0 : 1);
+  animation: Animated.Value<number> = new Value(this.props.directionForward ? 0 : 1);
   // istanbul ignore next
   trans = runTiming(this.clock, this.progress, this.animation, () => {
     // react-native-reanimated is not correctly mocked
     // istanbul ignore next
     // @ts-ignore
-    if (
-      process.env.NODE_ENV !== 'test' &&
-      this.state.hidden !== !this.props.directionForward
-    ) {
-      this.setState({hidden: !this.props.directionForward});
+    if (process.env.NODE_ENV !== 'test' && this.state.hidden !== !this.props.directionForward) {
+      this.setState({ hidden: !this.props.directionForward });
     }
   });
 
   componentDidUpdate() {
     this.animation.setValue(this.props.directionForward ? 0 : 1);
     if (this.state.hidden && this.props.directionForward) {
-      this.setState({hidden: false});
+      this.setState({ hidden: false });
     }
   }
 
   render() {
     return (
       <Animated.View
-        pointerEvents={this.state.hidden ? 'none' : 'auto'}
+        pointerEvents="box-none"
         style={[
           StyleSheet.absoluteFill,
           {
             opacity: sub(new Value(1), this.trans),
           },
-        ]}>
+        ]}
+      >
         {!this.state.hidden && Children.only(this.props.children)}
       </Animated.View>
     );
