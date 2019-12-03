@@ -12,20 +12,20 @@ const rootPath = path.resolve(__dirname, '..');
 
 module.exports = {
   projectRoot: path.resolve(__dirname),
-  watchFolders: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../node_modules')],
+  watchFolders: [
+    path.resolve(__dirname, '../src'),
+    path.resolve(__dirname, '../node_modules'),
+  ],
   resolver: {
-    blacklistRE: blacklist([new RegExp(`${rootPath}/node_modules/react-native/.*`)]),
+    blacklistRE: blacklist([
+      new RegExp(`${rootPath}/node_modules/react-native/.*`),
+    ]),
     extraNodeModules: {
       'react-nonav': path.resolve(__dirname, '../src'),
-      // Important, those are all the dependencies
-      // asked by the "../src" but which
-      // are not present in the ROOT/node_modules
-      // See https://github.com/facebook/metro/issues/7#issuecomment-464668678.
-      react: path.resolve(__dirname, '../node_modules/react'),
       'react-native': path.resolve(__dirname, 'node_modules/react-native'),
-      '@babel/plugin-proposal-decorators': path.resolve(
+      'react-native-reanimated': path.resolve(
         __dirname,
-        '../node_modules/@babel/plugin-proposal-decorators'
+        'node_modules/react-native-reanimated',
       ),
     },
   },

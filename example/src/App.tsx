@@ -1,82 +1,31 @@
-import React, { Component } from 'react';
-import { View, TouchableOpacity, Text, Platform } from 'react-native';
-import { Navigation } from 'react-nonav';
-import { FullScreenPortal, Canal, Screen } from 'react-nonav';
-import { Instagram } from './canals/Instagram';
-import { Welcome } from './Welcome';
+import React from 'react';
+import {StyleSheet, StatusBar, Text} from 'react-native';
+import {FullScreenPortal, Canal, Screen, transition} from 'react-nonav';
+import {Home} from './canals/home/Home';
+import {Player} from './canals/player/Player';
+import {observer} from 'mobx-react';
+import {PlayerModule} from './module/PlayerModule';
 
-interface State {
-  example: null | 'Instagram' | 'Welcome';
-}
+const styles = StyleSheet.create({
+  appContainer: {
+    backgroundColor: '#111111',
+    flex: 1,
+  },
+});
 
-const EXAMPLES = { Welcome, Instagram };
+console.disableYellowBox = true;
 
-export default class App extends Component<{}, State> {
-  state: State = {
-    example: 'Welcome',
-  };
-
-  render() {
-    return (
-      <>
-        <FullScreenPortal>
-          <Canal style={{ flex: 1 }}>
-            {Object.keys(EXAMPLES).map(example => (
-              <Screen
-                key={example}
-                name={example}
-                // @ts-ignore
-                Component={EXAMPLES[example]}
-                visible={this.state.example === example}
-                onBack={() => {
-                  this.setState({ example: 'Welcome' });
-                }}
-              />
-            ))}
-          </Canal>
-          <View
-            style={{
-              height: 48,
-              justifyContent: 'space-around',
-              flexDirection: 'row',
-              shadowColor: '#000',
-              shadowOffset: {
-                width: 0,
-                height: 2,
-              },
-              shadowOpacity: 0.25,
-              shadowRadius: 3.84,
-              backgroundColor: 'white',
-            }}
-          >
-            {Object.keys(EXAMPLES).map(example => (
-              <TouchableOpacity
-                key={example}
-                onPress={() => {
-                  // @ts-ignore
-                  this.setState({ example });
-                }}
-                style={{
-                  justifyContent: 'center',
-                  borderTopWidth: 2,
-                  paddingBottom: 2,
-                  borderTopColor: this.state.example === example ? 'blue' : 'transparent',
-                }}
-              >
-                <Text>{example}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        </FullScreenPortal>
-        <TouchableOpacity
-          style={{ position: 'absolute', top: Platform.OS === 'ios' ? 20 : 0, left: 0 }}
-          onPress={Navigation.instance.back}
-        >
-          <View style={{ backgroundColor: 'black', borderBottomRightRadius: 4 }}>
-            <Text style={{ color: 'white', margin: 4 }}>Go Back</Text>
-          </View>
-        </TouchableOpacity>
-      </>
-    );
-  }
-}
+export const App = observer(() => (
+  <>
+    <StatusBar barStyle="light-content" />
+    <Canal style={styles.appContainer}>
+      <Screen name="Home" Component={Home} visible />
+      <Screen
+        name="Player"
+        Transitioner={transition.SlideLeft}
+        Component={Player}
+        visible={PlayerModule.isMoviePlaying}
+      />
+    </Canal>
+  </>
+));

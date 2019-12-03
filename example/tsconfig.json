@@ -1,47 +1,22 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "outDir": "dist",
-    "module": "commonjs",
-    "jsx": "react",
-    "strict": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictBindCallApply": true,
-    "strictPropertyInitialization": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "baseUrl": "./src",
     "esModuleInterop": true,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "noEmit": true,
-    "allowJs": true,
-    "lib": ["es6"],
-    "types": ["react-native"],
     "isolatedModules": true,
+    "jsx": "react",
+    "lib": ["es6"],
     "moduleResolution": "node",
-    "paths": {
-      "react-nonav": ["../../src"],
-      "react-nonav/*": ["../../src/*"],
-      "react": ["../node_modules/react"],
-      "react-native": ["../node_modules/react-native"],
-      "react-native-reanimated": ["../node_modules/react-native-reanimated"]
-    }
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "target": "esnext"
   },
-  "include": ["./src"],
   "exclude": [
-    "../node_modules",
     "node_modules",
     "babel.config.js",
     "metro.config.js",
-    "jest.config.js",
-    "**/__tests__/*"
+    "jest.config.js"
   ]
 }
