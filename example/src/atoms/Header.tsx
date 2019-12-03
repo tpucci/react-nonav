@@ -7,12 +7,13 @@ export const Header = (props: {
   onPress: () => unknown;
   title: string;
   subtitle: string;
+  imageUri: string;
 }) => (
   <View style={{height: 250, paddingBottom: 10}}>
     <Image
       style={StyleSheet.absoluteFill}
       source={{
-        uri: 'https://unsplash.it/400/400?image=1',
+        uri: props.imageUri,
         priority: Image.priority.normal,
       }}
       resizeMode={Image.resizeMode.cover}

@@ -132,7 +132,6 @@ export class PlayerTransitioner extends transition.TransitionComponent {
           <View
             style={{
               height: 60,
-              backgroundColor: '#000000',
               justifyContent: 'center',
             }}>
             <Animated.View
@@ -149,7 +148,13 @@ export class PlayerTransitioner extends transition.TransitionComponent {
               </TouchableOpacity>
             </Animated.View>
           </View>
-          {!this.state.hidden && Children.only(this.props.children)}
+          <Animated.View
+            style={{
+              flex: 1,
+              opacity: sub(1, this.trans),
+            }}>
+            {!this.state.hidden && Children.only(this.props.children)}
+          </Animated.View>
         </Animated.View>
       </Animated.View>
     );

@@ -5,7 +5,11 @@ import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {PlayerModule} from '../module/PlayerModule';
 
-export const MovieCard = () => (
+export const MovieCard = (props: {
+  imageUri: string;
+  episode: string;
+  progress: number;
+}) => (
   <View
     style={{
       backgroundColor: '#111111',
@@ -32,9 +36,7 @@ export const MovieCard = () => (
       <Image
         style={StyleSheet.absoluteFill}
         source={{
-          uri: `https://unsplash.it/100/150?image=${Math.floor(
-            Math.random() * 15,
-          )}`,
+          uri: props.imageUri,
           priority: Image.priority.normal,
         }}
         resizeMode={Image.resizeMode.cover}
@@ -53,14 +55,14 @@ export const MovieCard = () => (
               marginLeft: 10,
               paddingVertical: 10,
             }}>
-            S1:E14
+            {props.episode}
           </Text>
           <View style={{backgroundColor: '#444444', height: 4}}>
             <View
               style={{
                 flex: 1,
                 backgroundColor: '#e30612',
-                width: `${Math.random() * 100}%`,
+                width: `${props.progress * 100}%`,
               }}
             />
           </View>

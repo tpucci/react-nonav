@@ -6,6 +6,7 @@ import {TabBar} from '../../atoms/TabBar';
 
 import {HomeScreen} from './screens/HomeScreen';
 import {DownloadScreen} from './screens/DownloadScreen';
+import {SearchModule} from '../../module/SearchModule';
 
 export const Home = () => {
   const [navigationScreen, setNavigationState] = useState('Home');
@@ -40,7 +41,7 @@ export const Home = () => {
             iconName: 'magnifier',
             title: 'Rechercher',
             selected: false,
-            onPress: () => {},
+            onPress: SearchModule.search,
           },
           {
             iconName: 'arrow-down-circle',

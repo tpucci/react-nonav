@@ -18,6 +18,7 @@ const TabBarItem = (props: TabBarItemProps) => {
         alignItems: 'center',
         paddingVertical: 8,
         justifyContent: 'center',
+        width: 80,
       }}>
       <Icon name={props.iconName} size={12} color={color} />
       <Text

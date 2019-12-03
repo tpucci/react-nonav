@@ -5,6 +5,7 @@ import {Home} from './canals/home/Home';
 import {Player} from './canals/player/Player';
 import {observer} from 'mobx-react';
 import {PlayerModule} from './module/PlayerModule';
+import {Search} from './canals/search/Search';
 
 const styles = StyleSheet.create({
   appContainer: {
@@ -26,6 +27,7 @@ export const App = observer(() => (
         Component={Player}
         visible={PlayerModule.isMoviePlaying}
       />
+      <Search />
     </Canal>
   </FullScreenPortal>
 ));
