@@ -9,6 +9,7 @@ import {DownloadScreen} from './screens/DownloadScreen';
 import {SearchModule} from '../../module/SearchModule';
 import {HomeModule} from '../../module/HomeModule';
 import {observer} from 'mobx-react';
+import {BurgerMenuScreen} from './screens/BurgerMenuScreen';
 
 export const Home = observer(() => (
   <View style={StyleSheet.absoluteFill}>
@@ -24,6 +25,15 @@ export const Home = observer(() => (
         Component={DownloadScreen}
         visible={HomeModule.isFilteringDownloaded}
         Transitioner={transition.Fade}
+      />
+      <Screen
+        name="BurgerMenu"
+        key="BurgerMenu"
+        Component={BurgerMenuScreen}
+        visible={HomeModule.isBurgerMenuOpen}
+        Transitioner={transition.BurgerMenuLeft}
+        isFullScreen
+        onBack={HomeModule.closeBurgerMenu}
       />
     </Canal>
     <TabBar

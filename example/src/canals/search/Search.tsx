@@ -10,6 +10,7 @@ export const Search = observer(() => {
       <Screen
         isFullScreen
         name="Search"
+        key="Search"
         visible={SearchModule.isSearching}
         Component={SearchScreen}
         Transitioner={transition.FadeDown}

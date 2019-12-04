@@ -1,8 +1,16 @@
 import React from 'react';
-import {View, FlatList, Text} from 'react-native';
+import {
+  View,
+  FlatList,
+  Text,
+  TouchableOpacity,
+  SafeAreaView,
+} from 'react-native';
 import {Header} from '../../../atoms/Header';
 import {MovieCard} from '../../../atoms/MovieCard';
 import {MoviesModule} from '../../../module/MoviesModule';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import {HomeModule} from '../../../module/HomeModule';
 
 const data = [
   {
@@ -28,12 +36,21 @@ export const HomeScreen = () => {
       <FlatList
         contentContainerStyle={{paddingBottom: 60}}
         ListHeaderComponent={
-          <Header
-            onPress={() => {}}
-            title={headerMovie.title}
-            subtitle="Nouveaux épisodes disponibles"
-            imageUri={headerMovie.imageUri}
-          />
+          <View style={{position: 'relative'}}>
+            <Header
+              onPress={() => {}}
+              title={headerMovie.title}
+              subtitle="Nouveaux épisodes disponibles"
+              imageUri={headerMovie.imageUri}
+            />
+            <SafeAreaView style={{position: 'absolute'}}>
+              <TouchableOpacity
+                onPress={HomeModule.openBurgerMenu}
+                style={{margin: 10}}>
+                <Icon name="menu" size={24} color="#FFFFFF" />
+              </TouchableOpacity>
+            </SafeAreaView>
+          </View>
         }
         data={data}
         keyExtractor={item => item.title}
