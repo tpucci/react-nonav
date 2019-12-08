@@ -18,7 +18,7 @@ console.disableYellowBox = true;
 
 export const App = observer(() => (
   <FullScreenPortal>
-    <StatusBar barStyle="light-content" />
+    <StatusBar barStyle="light-content" backgroundColor="#111111" />
     <Canal style={styles.appContainer}>
       <Screen name="Home" Component={Home} visible />
       <Screen

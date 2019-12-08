@@ -15,6 +15,7 @@ export const Player = observer(() => {
           visible={!PlayerModule.isPlayerMinimized}
           Component={PlayerCanal}
           Transitioner={PlayerTransitioner}
+          onBack={PlayerModule.toggleIsPlayerMinimized}
         />
       </Canal>
     </View>

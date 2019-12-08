@@ -129,7 +129,8 @@ export class PlayerTransitioner extends transition.TransitionComponent {
               ),
             },
           ]}>
-          <View
+          <TouchableOpacity
+            onPress={PlayerModule.toggleIsPlayerMinimized}
             style={{
               height: 60,
               justifyContent: 'center',
@@ -141,17 +142,14 @@ export class PlayerTransitioner extends transition.TransitionComponent {
                 ],
                 alignSelf: 'center',
               }}>
-              <TouchableOpacity
-                onPress={PlayerModule.toggleIsPlayerMinimized}
-                hitSlop={{top: 30, bottom: 30, right: 30, left: 30}}>
-                <Icon name="arrow-down" size={12} color="#FFFFFF" />
-              </TouchableOpacity>
+              <Icon name="arrow-down" size={12} color="#FFFFFF" />
             </Animated.View>
-          </View>
+          </TouchableOpacity>
           <Animated.View
             style={{
               flex: 1,
               opacity: sub(1, this.trans),
+              overflow: 'hidden',
             }}>
             {!this.state.hidden && Children.only(this.props.children)}
           </Animated.View>

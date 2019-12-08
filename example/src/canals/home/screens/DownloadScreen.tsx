@@ -1,8 +1,10 @@
 import React from 'react';
 import {View, FlatList, Text} from 'react-native';
+import {observer} from 'mobx-react';
 import {Header} from '../../../atoms/Header';
 import {MovieCard} from '../../../atoms/MovieCard';
 import {MoviesModule} from '../../../module/MoviesModule';
+import {PlayerModule} from '../../../module/PlayerModule';
 
 const data = [
   {
@@ -11,7 +13,7 @@ const data = [
   },
 ];
 
-export const DownloadScreen = () => {
+export const DownloadScreen = observer(() => {
   const headerMovie = MoviesModule.movies.filter(movie => movie.downloaded)[0];
   return (
     <View>
@@ -19,7 +21,7 @@ export const DownloadScreen = () => {
         contentContainerStyle={{paddingBottom: 60}}
         ListHeaderComponent={
           <Header
-            onPress={() => {}}
+            onPress={() => PlayerModule.playMovie(headerMovie)}
             title={headerMovie.title}
             subtitle="10 épisodes téléchargés"
             imageUri={headerMovie.imageUri}
@@ -49,13 +51,7 @@ export const DownloadScreen = () => {
                   paddingBottom: 10,
                 }}
                 horizontal
-                renderItem={({item}) => (
-                  <MovieCard
-                    imageUri={item.imageUri}
-                    episode={item.episode}
-                    progress={item.progress}
-                  />
-                )}
+                renderItem={({item}) => <MovieCard movie={item} />}
               />
             </>
           );
@@ -63,4 +59,4 @@ export const DownloadScreen = () => {
       />
     </View>
   );
-};
+});

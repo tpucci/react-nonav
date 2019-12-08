@@ -6,11 +6,14 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import {observer} from 'mobx-react';
 import {Header} from '../../../atoms/Header';
 import {MovieCard} from '../../../atoms/MovieCard';
 import {MoviesModule} from '../../../module/MoviesModule';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import {HomeModule} from '../../../module/HomeModule';
+import {SearchModule} from '../../../module/SearchModule';
+import {PlayerModule} from '../../../module/PlayerModule';
 
 const data = [
   {
@@ -25,11 +28,15 @@ const data = [
     title: 'Téléchargements',
     dataFilter: movie => movie.downloaded,
   },
+  {
+    title: 'Découvrir',
+    dataFilter: movie => movie.progress === 0,
+  },
 ];
 
-export const HomeScreen = () => {
+export const HomeScreen = observer(() => {
   const headerMovie = MoviesModule.movies.filter(
-    movie => !movie.downloaded && !movie.myList,
+    movie => movie.available && !movie.myList,
   )[0];
   return (
     <View>
@@ -38,17 +45,25 @@ export const HomeScreen = () => {
         ListHeaderComponent={
           <View style={{position: 'relative'}}>
             <Header
-              onPress={() => {}}
+              onPress={() => PlayerModule.playMovie(headerMovie)}
               title={headerMovie.title}
               subtitle="Nouveaux épisodes disponibles"
               imageUri={headerMovie.imageUri}
             />
-            <SafeAreaView style={{position: 'absolute'}}>
-              <TouchableOpacity
-                onPress={HomeModule.openBurgerMenu}
-                style={{margin: 10}}>
-                <Icon name="menu" size={24} color="#FFFFFF" />
-              </TouchableOpacity>
+            <SafeAreaView style={{position: 'absolute', width: '100%'}}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  margin: 10,
+                }}>
+                <TouchableOpacity onPress={HomeModule.openBurgerMenu}>
+                  <Icon name="menu" size={24} color="#FFFFFF" />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={SearchModule.search}>
+                  <Icon name="magnifier" size={24} color="#FFFFFF" />
+                </TouchableOpacity>
+              </View>
             </SafeAreaView>
           </View>
         }
@@ -76,13 +91,7 @@ export const HomeScreen = () => {
                   paddingBottom: 10,
                 }}
                 horizontal
-                renderItem={({item}) => (
-                  <MovieCard
-                    imageUri={item.imageUri}
-                    episode={item.episode}
-                    progress={item.progress}
-                  />
-                )}
+                renderItem={({item}) => <MovieCard movie={item} />}
               />
             </>
           );
@@ -90,4 +99,4 @@ export const HomeScreen = () => {
       />
     </View>
   );
-};
+});

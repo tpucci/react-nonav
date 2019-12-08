@@ -1,8 +1,8 @@
-import {observable, computed} from 'mobx';
+import {observable, computed, autorun} from 'mobx';
 
 class PlayerModule_ {
   @observable
-  movie: string | null = null;
+  movie: any | null = null;
 
   @observable
   isPlayerMinimized = false;
@@ -16,13 +16,19 @@ class PlayerModule_ {
     this.isPlayerMinimized = !this.isPlayerMinimized;
   };
 
-  playMovie = () => {
-    this.movie = 'a';
+  playMovie = (movie: any) => {
+    this.movie = movie;
   };
 
   stopMovie = () => {
     this.movie = null;
   };
+
+  automaticallyMaximizePlayerOnMoviePlay = autorun(() => {
+    if (this.movie) {
+      this.isPlayerMinimized = false;
+    }
+  });
 }
 
 export const PlayerModule = new PlayerModule_();

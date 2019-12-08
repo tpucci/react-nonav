@@ -20,18 +20,22 @@ export const Header = (props: {
     />
     <LinearGradient
       colors={['#00000088', '#00000000']}
-      style={{
-        ...StyleSheet.absoluteFill,
-        height: 25,
-      }}
+      style={[
+        StyleSheet.absoluteFill,
+        {
+          height: 25,
+        },
+      ]}
     />
     <LinearGradient
       colors={['#11111100', '#111111']}
-      style={{
-        ...StyleSheet.absoluteFill,
-        justifyContent: 'flex-end',
-        paddingVertical: 15,
-      }}>
+      style={[
+        StyleSheet.absoluteFill,
+        {
+          justifyContent: 'flex-end',
+          paddingVertical: 15,
+        },
+      ]}>
       <Text
         style={{
           fontSize: 24,

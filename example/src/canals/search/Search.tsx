@@ -14,6 +14,7 @@ export const Search = observer(() => {
         visible={SearchModule.isSearching}
         Component={SearchScreen}
         Transitioner={transition.FadeDown}
+        onBack={SearchModule.cancel}
       />
     </Canal>
   );

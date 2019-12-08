@@ -1,6 +1,13 @@
-import {observable} from 'mobx';
+import {observable, autorun} from 'mobx';
+import {ConnectivityModule} from './ConnectivityModule';
 
 class HomeModule_ {
+  automatilcallyFilterDownloads = autorun(() => {
+    if (!ConnectivityModule.isConnected) {
+      this.filterDownloaded();
+    }
+  });
+
   @observable
   isFilteringDownloaded = false;
 

@@ -34,7 +34,6 @@ export class FullScreenDelegate {
           fullScreenStack.concat(fullScreenStackMap[canalId]),
         []
       )
-    ),
-    tap(o => console.warn(o))
+    )
   );
 }
