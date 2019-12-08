@@ -9,22 +9,9 @@ export const PlayerCanal = () => {
   return (
     <Canal style={{flex: 1}}>
       <Screen
-        visible={
-          PlayerModule.isMoviePlaying &&
-          !ConnectivityModule.isConnectedToChromeCast
-        }
+        visible={PlayerModule.isMoviePlaying}
         name="OnScreenPlayer"
         Component={OnScreenPlayerScreen}
-        props={{movie: PlayerModule.movie}}
-        Transitioner={transition.Fade}
-      />
-      <Screen
-        visible={
-          PlayerModule.isMoviePlaying &&
-          ConnectivityModule.isConnectedToChromeCast
-        }
-        name="RemoteControl"
-        Component={RemoteControlScreen}
         props={{movie: PlayerModule.movie}}
         Transitioner={transition.Fade}
       />

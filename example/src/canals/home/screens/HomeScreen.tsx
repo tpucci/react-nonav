@@ -50,21 +50,6 @@ export const HomeScreen = observer(() => {
               subtitle="Nouveaux épisodes disponibles"
               imageUri={headerMovie.imageUri}
             />
-            <SafeAreaView style={{position: 'absolute', width: '100%'}}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  margin: 10,
-                }}>
-                <TouchableOpacity onPress={HomeModule.openBurgerMenu}>
-                  <Icon name="menu" size={24} color="#FFFFFF" />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={SearchModule.search}>
-                  <Icon name="magnifier" size={24} color="#FFFFFF" />
-                </TouchableOpacity>
-              </View>
-            </SafeAreaView>
           </View>
         }
         data={data}
