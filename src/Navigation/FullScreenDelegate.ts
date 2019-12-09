@@ -1,5 +1,5 @@
 import { Subject, Observable } from 'rxjs';
-import { map, scan, tap } from 'rxjs/operators';
+import { map, scan } from 'rxjs/operators';
 import { ReactElement } from 'react';
 import { ScreenProps, Screen } from '../Screen';
 
