@@ -47,7 +47,7 @@
     "conventional-changelog-cz-emoji": "^2.0.0",
     "coveralls": "^3.0.4",
     "cz-emoji": "^1.1.2",
-    "docz": "^1.2.0",
+    "docz": "^2.1.1",
     "docz-theme-default": "^1.2.0",
     "eslint": "^6.0.1",
     "eslint-config-prettier": "^6.0.0",
