@@ -1,3 +1,30 @@
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/tpucci/react-nonav/compare/2.0.6...2.1.0) (2019-12-09)
+
+
+### ♻️ Code Refactoring
+
+* **Home:** move downloaded filter in HomeModule ([5ee1e47](https://github.com/tpucci/react-nonav/commit/5ee1e47))
+* **naming:** replace gondola with nonav ([e77a3f0](https://github.com/tpucci/react-nonav/commit/e77a3f0))
+
+
+### ✨ Features
+
+* **BurgerMenuLeft:** add transition ([c0ed67a](https://github.com/tpucci/react-nonav/commit/c0ed67a))
+* **example:** improve example ([22ed7d6](https://github.com/tpucci/react-nonav/commit/22ed7d6))
+* **FadeDown:** add transition ([9cd6424](https://github.com/tpucci/react-nonav/commit/9cd6424))
+
+
+### 🐛 Bug Fixes
+
+* **FullScreenDelegate:** fix unused import ([0df71d0](https://github.com/tpucci/react-nonav/commit/0df71d0))
+* **transition:** fix ([2a50831](https://github.com/tpucci/react-nonav/commit/2a50831))
+
+
+### 📝 Documentation
+
+* **Netflux:** add example ([02d2d27](https://github.com/tpucci/react-nonav/commit/02d2d27))
+
 <a name="2.0.6"></a>
 ## [2.0.6](https://github.com/tpucci/react-nonav/compare/2.0.5...2.0.6) (2019-11-18)
 
