@@ -964,10 +964,10 @@
     eslint-plugin-react-native "3.6.0"
     prettier "1.16.4"
 
-"@react-native-community/netinfo@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@react-native-community/netinfo/-/netinfo-5.0.0.tgz#c8708558c9a116c138a43bed4bb0b4af85f111bc"
-  integrity sha512-MDvQ+jh9P1S8/CvxLyDqWFNc31oL5a2UkVtOyGFslLmxbO3Q4h/xFPM+b2NJ97GvQAsdhL18EpOWVu1AXodeFw==
+"@react-native-community/netinfo@^5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@react-native-community/netinfo/-/netinfo-5.0.1.tgz#e3486374d7319bf7f9027648fd6fb5715c0b168f"
+  integrity sha512-GgKlSeoLeEwZuKn1SOlk6GxrZAIgMQmncSOReUq3un5SRbBqlhzd42QV1aKSV9qo0rgevp2JqPpxT/Xxkfs4pg==
 
 "@types/babel__core@^7.1.0":
   version "7.1.3"
