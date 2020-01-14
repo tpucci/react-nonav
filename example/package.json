@@ -18,7 +18,7 @@
     "@types/react-native": "^0.60.25",
     "@types/react-test-renderer": "^16.9.1",
     "mobx": "^5.15.2",
-    "mobx-react": "^5.0.0",
+    "mobx-react": "^6.1.5",
     "react": "16.9.0",
     "react-native": "0.61.5",
     "react-native-fast-image": "^7.0.2",
