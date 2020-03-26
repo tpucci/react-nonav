@@ -4605,9 +4605,9 @@ cyclist@~0.2.2:
   integrity sha1-GzN5LhHpFKL9bW7WRHRkRE5fpkA=
 
 cz-emoji@^1.1.2:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/cz-emoji/-/cz-emoji-1.2.0.tgz#b83c72ce45c1dc35a5f639b40ab10b4d2f39369b"
-  integrity sha512-NskAWwmMiiDV45mlmEuqBd67pZ0qVU91z7Nqg+PonbktEgdHSHk8yu26iR80Hk790aOszOkDYVu64vGtyJdERw==
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/cz-emoji/-/cz-emoji-1.2.1.tgz#94400b07d5399295328fe71e29a1026c3a160771"
+  integrity sha512-3OZvxnYJRraxUslFO2RN0ECO7YeWvgOTcZJcQoIZhmMzZMUgFs5TJXOI+iSFU/lNPhROivtJkf9dcXXMgy9HQA==
   dependencies:
     cli-truncate "^1.0.0"
     fuse.js "^3.4.5"
