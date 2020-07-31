@@ -30,7 +30,7 @@
     "typescript": "^3.7.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.7",
+    "@babel/core": "^7.11.0",
     "@babel/plugin-proposal-decorators": "^7.7.4",
     "@react-native-community/eslint-config": "^0.0.5",
     "babel-jest": "^24.9.0",
