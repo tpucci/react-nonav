@@ -1,0 +1,108 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: release-it
+    versions:
+    - 14.2.2
+    - 14.3.0
+    - 14.4.0
+    - 14.4.1
+    - 14.5.0
+    - 14.5.1
+  - dependency-name: "@types/react-native"
+    versions:
+    - 0.63.46
+    - 0.63.47
+    - 0.63.48
+    - 0.63.49
+    - 0.63.50
+    - 0.63.51
+    - 0.63.52
+    - 0.64.0
+    - 0.64.1
+    - 0.64.2
+  - dependency-name: react-native
+    versions:
+    - 0.63.4
+  - dependency-name: metro-react-native-babel-preset
+    versions:
+    - 0.65.0
+    - 0.65.1
+    - 0.65.2
+  - dependency-name: react-native-web
+    versions:
+    - 0.14.10
+    - 0.14.11
+    - 0.14.12
+  - dependency-name: react-dom
+    versions:
+    - 17.0.1
+- package-ecosystem: npm
+  directory: "/example"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: eslint
+    versions:
+    - 7.18.0
+    - 7.19.0
+    - 7.20.0
+    - 7.21.0
+    - 7.22.0
+    - 7.23.0
+    - 7.24.0
+  - dependency-name: "@babel/core"
+    versions:
+    - 7.12.10
+    - 7.12.13
+    - 7.12.16
+    - 7.12.17
+    - 7.13.1
+    - 7.13.10
+    - 7.13.13
+    - 7.13.14
+    - 7.13.15
+    - 7.13.8
+  - dependency-name: "@types/react-native"
+    versions:
+    - 0.63.46
+    - 0.63.47
+    - 0.63.48
+    - 0.63.49
+    - 0.63.50
+    - 0.63.51
+    - 0.63.52
+    - 0.64.0
+    - 0.64.1
+    - 0.64.2
+  - dependency-name: "@types/jest"
+    versions:
+    - 26.0.20
+    - 26.0.21
+    - 26.0.22
+  - dependency-name: metro-react-native-babel-preset
+    versions:
+    - 0.65.0
+    - 0.65.1
+    - 0.65.2
+  - dependency-name: "@babel/plugin-proposal-decorators"
+    versions:
+    - 7.12.12
+    - 7.12.13
+    - 7.13.0
+    - 7.13.5
+  - dependency-name: "@react-native-community/netinfo"
+    versions:
+    - 5.9.10
+  - dependency-name: react-native-reanimated
+    versions:
+    - 1.13.2
+  - dependency-name: handlebars
+    versions:
+    - 4.7.6
