@@ -34,7 +34,7 @@
     "@babel/plugin-proposal-decorators": "^7.7.4",
     "@react-native-community/eslint-config": "^0.0.5",
     "babel-jest": "^24.9.0",
-    "eslint": "^6.7.2",
+    "eslint": "^7.32.0",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.56.0",
     "react-test-renderer": "16.12.0"
